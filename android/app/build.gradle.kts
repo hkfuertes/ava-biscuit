@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.serialization)
-    alias(libs.plugins.google.protobuf)
 }
 
 android {
@@ -93,22 +92,17 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.lifecycle.service)
-    implementation(libs.gson)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.litert)
     implementation(libs.protobuf.kotlin)
     implementation(libs.androidx.datastore)
-    implementation("androidx.media3:media3-exoplayer:1.8.0")
-    implementation("androidx.media3:media3-common:1.8.0")
+    implementation(libs.androidx.media3.exoplayer)
     
     
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
 }
-
-apply(plugin = "com.google.protobuf")
 
 val headlessSmokeScript = rootProject.file("scripts/smoke-headless.sh")
 

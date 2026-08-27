@@ -23,7 +23,6 @@ import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.exoplayer.DefaultLoadControl
 import androidx.media3.exoplayer.ExoPlayer
 import androidx.media3.exoplayer.source.DefaultMediaSourceFactory
-import com.example.ava.esphome.Disconnected
 import com.example.ava.esphome.EspHomeState
 import com.example.ava.esphome.Stopped
 import com.example.ava.esphome.voicesatellite.AndroidSystemAudioAdapter
@@ -41,7 +40,6 @@ import com.example.ava.nsd.registerVoiceSatelliteNsd
 import com.example.ava.players.AudioPlayer
 import com.example.ava.players.TtsPlayer
 import com.example.ava.receivers.AvaControlReceiver
-import com.example.ava.settings.ExperimentalSettingsStore
 import com.example.ava.settings.MicrophoneSettingsStore
 import com.example.ava.settings.PlayerSettingsStore
 import com.example.ava.settings.VoiceSatelliteSettings
@@ -82,7 +80,6 @@ class VoiceSatelliteService : LifecycleService() {
     private val satelliteSettingsStore by lazy { VoiceSatelliteSettingsStore(applicationContext.voiceSatelliteSettingsStore) }
     private val microphoneSettingsStore by lazy { MicrophoneSettingsStore(applicationContext.microphoneSettingsStore) }
     private val playerSettingsStore by lazy { PlayerSettingsStore(applicationContext.playerSettingsStore) }
-    private val experimentalSettingsStore by lazy { ExperimentalSettingsStore(applicationContext) }
 
     internal val _voiceSatellite = MutableStateFlow<VoiceSatellite?>(null)
     val voiceSatelliteState = _voiceSatellite.flatMapLatest { it?.state ?: flowOf(Stopped) }
@@ -156,14 +153,6 @@ class VoiceSatelliteService : LifecycleService() {
         initializing.set(false)
     }
 
-    fun restartVoiceSatellite() {
-        lifecycleScope.launch {
-            stopVoiceSatellite()
-            delay(500)
-            startVoiceSatellite()
-        }
-    }
-
     override fun onTaskRemoved(rootIntent: Intent?) {
         super.onTaskRemoved(rootIntent)
         val userStopped = getSharedPreferences("ava_prefs", MODE_PRIVATE)
@@ -193,7 +182,7 @@ class VoiceSatelliteService : LifecycleService() {
         )
         val player = VoiceSatellitePlayer(
             ttsPlayer = TtsPlayer(createAudioPlayer()),
-            mediaPlayer = createAudioPlayer(AudioManager.AUDIOFOCUS_GAIN),
+            mediaPlayer = createAudioPlayer(),
             wakeSoundPlayer = createAudioPlayer(),
             volume = playerSettings.volume,
             muted = playerSettings.muted,
@@ -203,8 +192,7 @@ class VoiceSatelliteService : LifecycleService() {
             timerFinishedSound = playerSettingsStore.timerFinishedSound,
             stopSound = playerSettingsStore.stopSound,
             enableStopSound = playerSettingsStore.enableStopSound,
-            continuousPromptSound = playerSettingsStore.continuousPromptSound,
-            enableContinuousConversation = playerSettingsStore.enableContinuousConversation
+            continuousPromptSound = playerSettingsStore.continuousPromptSound
         )
 
         actionButtonBridge.setIndependent(playerSettings.actionButtonIndependent)
@@ -234,15 +222,13 @@ class VoiceSatelliteService : LifecycleService() {
             audioInput = audioInput,
             player = player,
             settingsStore = satelliteSettingsStore,
-            experimentalSettingsStore = experimentalSettingsStore,
             playerSettingsStore = playerSettingsStore,
             context = this
         )
     }
 
-    private fun createAudioPlayer(focusGain: Int = AudioManager.AUDIOFOCUS_GAIN_TRANSIENT_MAY_DUCK): AudioPlayer {
-        val audioManager = getSystemService(AUDIO_SERVICE) as AudioManager
-        return AudioPlayer(audioManager, focusGain) {
+    private fun createAudioPlayer(): AudioPlayer {
+        return AudioPlayer {
             ExoPlayer.Builder(this)
                 .setMediaSourceFactory(DefaultMediaSourceFactory(DefaultDataSource.Factory(this)))
                 .setLoadControl(DefaultLoadControl.Builder().setBufferDurationsMs(500, 2000, 100, 100).build())
@@ -353,15 +339,8 @@ class VoiceSatelliteService : LifecycleService() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) stopForeground(STOP_FOREGROUND_REMOVE) else stopForeground(true)
     }
 
-    fun triggerManualWake() = _voiceSatellite.value?.triggerManualWake()
     fun toggleManualAssist() = _voiceSatellite.value?.toggleManualAssist()
-    fun getState(): EspHomeState = _voiceSatellite.value?.state?.value ?: Disconnected
-    fun onScreenTouch(isTouching: Boolean) = _voiceSatellite.value?.onScreenTouch(isTouching)
     fun setActionButtonPressed(pressed: Boolean) = actionButtonBridge.onPhysicalButton(pressed)
-    suspend fun callHaService(service: String, entityId: String) = _voiceSatellite.value?.callHaServicePublic(service, entityId)
-    fun getQuickEntityStates(): Map<String, String> = _voiceSatellite.value?.getQuickEntityStateCache() ?: emptyMap()
-    fun getQuickEntityUnits(): Map<String, String> = _voiceSatellite.value?.getQuickEntityUnitCache() ?: emptyMap()
-    suspend fun resubscribeQuickEntities() = _voiceSatellite.value?.subscribeQuickEntities()
 
     companion object {
         const val TAG = "VoiceSatelliteService"
