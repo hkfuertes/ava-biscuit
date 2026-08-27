@@ -1,0 +1,1338 @@
+{
+  "version": 1,
+  "format": "openwakeword-community-v1",
+  "note": "Auto-generated from fwartner/home-assistant-wakewords-collection (en/*.onnx). Models already in Ava openwakeword/index.json are excluded.",
+  "models": [
+    {
+      "id": "ae-ttuddae",
+      "file": "ae-ttuddae.onnx",
+      "spoken": "Ae-ttuddae",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ae-ttuddae",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ae-ttuddae/ae-ttuddae.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "alice",
+      "file": "Alice.onnx",
+      "spoken": "Alice",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/Alice",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/Alice/Alice.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "andromeda",
+      "file": "andromeda.onnx",
+      "spoken": "Andromeda",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/andromeda",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/andromeda/andromeda.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "barclay",
+      "file": "Barclay.onnx",
+      "spoken": "Barclay",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/barclay",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/barclay/Barclay.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "bartolo",
+      "file": "Bartolo.onnx",
+      "spoken": "Bartolo",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/bartolo",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/bartolo/Bartolo.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "choo_choo_homie",
+      "file": "choo_choo_homie.onnx",
+      "spoken": "Choo Choo Homie",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/choo_choo_homie",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/choo_choo_homie/choo_choo_homie.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "darth_vader",
+      "file": "Darth_Vader.onnx",
+      "spoken": "Darth Vader",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/darth_vader",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/darth_vader/Darth_Vader.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "do_you_read_me__hal",
+      "file": "do_you_read_me__hal.onnx",
+      "spoken": "Do You Read Me Hal",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/do_you_read_me__hal",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/do_you_read_me__hal/do_you_read_me__hal.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "dumbledore",
+      "file": "Dumbledore.onnx",
+      "spoken": "Dumbledore",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/Dumbledore",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/Dumbledore/Dumbledore.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "edna",
+      "file": "edna.onnx",
+      "spoken": "Edna",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/edna",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/edna/edna.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "em__oi",
+      "file": "em__oi.onnx",
+      "spoken": "Em Oi",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/em__oi",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/em__oi/em__oi.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "glados",
+      "file": "glados.onnx",
+      "spoken": "Glados",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/glados",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/glados/glados.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hal",
+      "file": "hal_v1.onnx",
+      "spoken": "Hal",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hal",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hal/hal_v1.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey__hal",
+      "file": "hey__hal.onnx",
+      "spoken": "Hey Hal",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey__hal",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey__hal/hey__hal.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_alba",
+      "file": "hey_alba.onnx",
+      "spoken": "Hey Alba",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_alba",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_alba/hey_alba.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_anna",
+      "file": "hey_anna.onnx",
+      "spoken": "Hey Anna",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_anna",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_anna/hey_anna.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_barabas",
+      "file": "hey_barabas.onnx",
+      "spoken": "Hey Barabas",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_barabas",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_barabas/hey_barabas.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_billy",
+      "file": "hey_billy.onnx",
+      "spoken": "Hey Billy",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_billy",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_billy/hey_billy.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_chatterbox",
+      "file": "hey_chatterbox.onnx",
+      "spoken": "Hey Chatterbox",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_chatterbox",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_chatterbox/hey_chatterbox.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_chewbacca",
+      "file": "Hey_Chewbacca.onnx",
+      "spoken": "Hey Chewbacca",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_chewbacca",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_chewbacca/Hey_Chewbacca.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_cj",
+      "file": "Hey_CJ.onnx",
+      "spoken": "Hey Cj",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_cj",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_cj/Hey_CJ.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_dick_head",
+      "file": "hey_dick_head.onnx",
+      "spoken": "Hey Dick Head",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_dick_head",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_dick_head/hey_dick_head.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_esp",
+      "file": "hey_esp.onnx",
+      "spoken": "Hey Esp",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_esp",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_esp/hey_esp.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_frenck",
+      "file": "hey_frenck.onnx",
+      "spoken": "Hey Frenck",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_frenck",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_frenck/hey_frenck.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_friday",
+      "file": "hey_Friday!.onnx",
+      "spoken": "Hey Friday",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_friday",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_friday/hey_Friday%21.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_gerty",
+      "file": "hey_GERTY.onnx",
+      "spoken": "Hey Gerty",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_GERTY",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_GERTY/hey_GERTY.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_guillermo",
+      "file": "hey_guillermo.onnx",
+      "spoken": "Hey Guillermo",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_guillermo",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_guillermo/hey_guillermo.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_home_free",
+      "file": "hey_home_free.onnx",
+      "spoken": "Hey Home Free",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_home_free",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_home_free/hey_home_free.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_homer",
+      "file": "Hey_Homer.onnx",
+      "spoken": "Hey Homer",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_homer",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_homer/Hey_Homer.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_honey",
+      "file": "Hey_Honey.onnx",
+      "spoken": "Hey Honey",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_honey",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_honey/Hey_Honey.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_house",
+      "file": "hey_house.onnx",
+      "spoken": "Hey House",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_house",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_house/hey_house.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_kitt",
+      "file": "hey_kitt.onnx",
+      "spoken": "Hey Kitt",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_kitt",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_kitt/hey_kitt.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_konstantin",
+      "file": "hey_konstantin.onnx",
+      "spoken": "Hey Konstantin",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_konstantin",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_konstantin/hey_konstantin.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_kratos",
+      "file": "Hey_Kreitos.onnx",
+      "spoken": "Hey Kratos",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_kratos",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_kratos/Hey_Kreitos.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_lara",
+      "file": "lara.onnx",
+      "spoken": "Hey Lara",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/Hey%20Lara",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/Hey%20Lara/lara.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_lisa",
+      "file": "hey_lisa.onnx",
+      "spoken": "Hey Lisa",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_lisa",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_lisa/hey_lisa.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_marvin",
+      "file": "hey_Marvin.onnx",
+      "spoken": "Hey Marvin",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_Marvin",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_Marvin/hey_Marvin.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_mcqueen",
+      "file": "Hey_McQueen.onnx",
+      "spoken": "Hey Mcqueen",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_mcqueen",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_mcqueen/Hey_McQueen.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_megan",
+      "file": "hey_megan.onnx",
+      "spoken": "Hey Megan",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_megan",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_megan/hey_megan.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_miriel",
+      "file": "hey_miriel.onnx",
+      "spoken": "Hey Miriel",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_miriel",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_miriel/hey_miriel.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_ozzy",
+      "file": "hey_ozzy.onnx",
+      "spoken": "Hey Ozzy",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_ozzy",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_ozzy/hey_ozzy.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_potato",
+      "file": "hey_potato.onnx",
+      "spoken": "Hey Potato",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_potato",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_potato/hey_potato.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_rick",
+      "file": "hey_rick.onnx",
+      "spoken": "Hey Rick",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_rick",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_rick/hey_rick.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_santa",
+      "file": "hey_santa.onnx",
+      "spoken": "Hey Santa",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_santa",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_santa/hey_santa.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_skelly",
+      "file": "Hey_Skelly.onnx",
+      "spoken": "Hey Skelly",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_skelly",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_skelly/Hey_Skelly.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_snips",
+      "file": "hey_snips.onnx",
+      "spoken": "Hey Snips",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_snips",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_snips/hey_snips.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_spock",
+      "file": "hey_spock.onnx",
+      "spoken": "Hey Spock",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_spock",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_spock/hey_spock.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_wire_tap",
+      "file": "hey_wire_tap.onnx",
+      "spoken": "Hey Wire Tap",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_wire_tap",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_wire_tap/hey_wire_tap.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hey_zelda",
+      "file": "hey_zelda.onnx",
+      "spoken": "Hey Zelda",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hey_zelda",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hey_zelda/hey_zelda.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hi_xiaowen",
+      "file": "hi_xiaowen_v1.onnx",
+      "spoken": "Hi Xiaowen",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hi_xiaowen",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hi_xiaowen/hi_xiaowen_v1.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "hola_casita",
+      "file": "Hola_casita.onnx",
+      "spoken": "Hola Casita",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/hola_casita",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/hola_casita/Hola_casita.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "janet",
+      "file": "Janet.onnx",
+      "spoken": "Janet",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/janet",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/janet/Janet.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "jarvis",
+      "file": "djar_vis.onnx",
+      "spoken": "Jarvis",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/jarvis",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/jarvis/djar_vis.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "johnny_five",
+      "file": "johnny_five.onnx",
+      "spoken": "Johnny Five",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/johnny_five",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/johnny_five/johnny_five.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "jupiter",
+      "file": "jupiter-40-30-1300.onnx",
+      "spoken": "Jupiter",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/jupiter",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/jupiter/jupiter-40-30-1300.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "kelsey",
+      "file": "kelsey.onnx",
+      "spoken": "Kelsey",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/kelsey",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/kelsey/kelsey.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "lisa",
+      "file": "Lisa.onnx",
+      "spoken": "Lisa",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/lisa",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/lisa/Lisa.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "marvin",
+      "file": "Maar_Vin.onnx",
+      "spoken": "Marvin",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/marvin",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/marvin/Maar_Vin.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "mirror_mirror_on_the_wall",
+      "file": "mirror_mirror.onnx",
+      "spoken": "Mirror Mirror On The Wall",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/mirror_mirror_on_the_wall",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/mirror_mirror_on_the_wall/mirror_mirror.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "mr_anderson",
+      "file": "Mr._Anderson.onnx",
+      "spoken": "Mr Anderson",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/mr_anderson",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/mr_anderson/Mr._Anderson.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "mr_smith",
+      "file": "mr_smith.onnx",
+      "spoken": "Mr Smith",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/mr_smith",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/mr_smith/mr_smith.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "mr_wick",
+      "file": "Mr._Wick.onnx",
+      "spoken": "Mr Wick",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/mr_wick",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/mr_wick/Mr._Wick.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "nafanya",
+      "file": "nafanya.onnx",
+      "spoken": "Nafanya",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/ru/nafanya",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/ru/nafanya/nafanya.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      },
+      "lang": "ru"
+    },
+    {
+      "id": "nihao_mia",
+      "file": "nihao_mia_v1.onnx",
+      "spoken": "Nihao Mia",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/nihao_mia",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/nihao_mia/nihao_mia_v1.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "nihao_wenwen",
+      "file": "nihao_wenwen.onnx",
+      "spoken": "Nihao Wenwen",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/nihao_wenwen",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/nihao_wenwen/nihao_wenwen.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "oi_fuckwhit",
+      "file": "oi_fuckwhit_v1.onnx",
+      "spoken": "Oi Fuckwhit",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/oi_fuckwhit",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/oi_fuckwhit/oi_fuckwhit_v1.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_bender",
+      "file": "ok_bender.onnx",
+      "spoken": "Ok Bender",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_bender",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_bender/ok_bender.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_boss",
+      "file": "ok_boss.onnx",
+      "spoken": "Ok Boss",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_boss",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_boss/ok_boss.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_casita",
+      "file": "ok_casita.onnx",
+      "spoken": "Ok Casita",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_casita",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_casita/ok_casita.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_home",
+      "file": "ok_home.onnx",
+      "spoken": "Ok Home",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_home",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_home/ok_home.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_neo",
+      "file": "ok_neo.onnx",
+      "spoken": "Ok Neo",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_neo",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_neo/ok_neo.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_paulus",
+      "file": "ok_paulus.onnx",
+      "spoken": "Ok Paulus",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_paulus",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_paulus/ok_paulus.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_tau",
+      "file": "ok_tau.onnx",
+      "spoken": "Ok Tau",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_tau",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_tau/ok_tau.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_trevor",
+      "file": "ok_trevor.onnx",
+      "spoken": "Ok Trevor",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_trevor",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_trevor/ok_trevor.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ok_wire_tap",
+      "file": "ok_wire_tap.onnx",
+      "spoken": "Ok Wire Tap",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ok_wire_tap",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ok_wire_tap/ok_wire_tap.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "pandora",
+      "file": "Pandora.onnx",
+      "spoken": "Pandora",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/pandora",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/pandora/Pandora.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "polly",
+      "file": "polly.onnx",
+      "spoken": "Polly",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/polly",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/polly/polly.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "queen_of_lights",
+      "file": "Queen_of_lights.onnx",
+      "spoken": "Queen Of Lights",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/Queen_of_lights",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/Queen_of_lights/Queen_of_lights.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "r2d2",
+      "file": "r2d2.onnx",
+      "spoken": "R2d2",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/r2d2",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/r2d2/r2d2.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ronaldo",
+      "file": "Ronaldo.onnx",
+      "spoken": "Ronaldo",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ronaldo",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ronaldo/Ronaldo.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "rubber_duck",
+      "file": "rubber_duck.onnx",
+      "spoken": "Rubber Duck",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/rubber_duck",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/rubber_duck/rubber_duck.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "santana",
+      "file": "Santana.onnx",
+      "spoken": "Santana",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/santana",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/santana/Santana.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "scarlett",
+      "file": "Scarlett.onnx",
+      "spoken": "Scarlett",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/scarlett",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/scarlett/Scarlett.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "scooby",
+      "file": "Scooby.onnx",
+      "spoken": "Scooby",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/scooby",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/scooby/Scooby.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "sheila",
+      "file": "sheila_v1.onnx",
+      "spoken": "Sheila",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/sheila",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/sheila/sheila_v1.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "skynet",
+      "file": "Skynet.onnx",
+      "spoken": "Skynet",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/skynet",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/skynet/Skynet.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "tars",
+      "file": "TARS.onnx",
+      "spoken": "Tars",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/TARS",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/TARS/TARS.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "terminator",
+      "file": "Terminator.onnx",
+      "spoken": "Terminator",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/terminator",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/terminator/Terminator.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "ultra_house",
+      "file": "ultra_house.onnx",
+      "spoken": "Ultra House",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/ultra_house",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/ultra_house/ultra_house.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "veronica",
+      "file": "veronica.onnx",
+      "spoken": "Veronica",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/veronica",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/veronica/veronica.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "wall-e",
+      "file": "wall-e.onnx",
+      "spoken": "Wall-e",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/wall-e",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/wall-e/wall-e.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "wheatley",
+      "file": "wheatley.onnx",
+      "spoken": "Wheatley",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/wheatley",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/wheatley/wheatley.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "winston",
+      "file": "Winston.onnx",
+      "spoken": "Winston",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/winston",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/winston/Winston.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "yo_bitch",
+      "file": "yo_bitch.onnx",
+      "spoken": "Yo Bitch",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/yo_bitch",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/yo_bitch/yo_bitch.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    },
+    {
+      "id": "yo_homie",
+      "file": "yo_homie.onnx",
+      "spoken": "Yo Homie",
+      "author": "fwartner community",
+      "source_url": "https://github.com/fwartner/home-assistant-wakewords-collection/tree/main/en/yo_homie",
+      "download_url": "https://github.com/fwartner/home-assistant-wakewords-collection/raw/main/en/yo_homie/yo_homie.onnx",
+      "license": "MIT",
+      "license_url": "https://github.com/fwartner/home-assistant-wakewords-collection/blob/main/LICENSE",
+      "openwakeword": {
+        "threshold": 0.5,
+        "required_hits": 1
+      }
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Ava</string>
+
+    <!-- Entity names (appliance allowlist) -->
+    <string name="entity_light_sensor">Ambient Light</string>
+    <string name="entity_mute_microphone">Mute Microphone</string>
+    <string name="entity_microphone_volume">Microphone Volume</string>
+    <string name="entity_media_player">Media Player</string>
+    <string name="entity_wake_sound">Wake Sound</string>
+
+    <!-- Voice satellite state -->
+    <string name="satellite_state_stopped">Stopped</string>
+    <string name="satellite_state_disconnected">Disconnected</string>
+    <string name="satellite_state_idle">Idle</string>
+    <string name="satellite_state_listening">Listening</string>
+    <string name="satellite_state_processing">Processing</string>
+    <string name="satellite_state_responding">Responding</string>
+    <string name="satellite_state_server_error">Server error: %1$s</string>
+</resources>

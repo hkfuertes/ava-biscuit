@@ -1,0 +1,3298 @@
+{
+  "version": 1,
+  "format": "microwakeword-community-v1",
+  "note": "Auto-generated from TaterTotterson/microWakeWords V3. Models already bundled in Ava are excluded.",
+  "download_base": "https://github.com/TaterTotterson/microWakeWords/raw/main/microWakeWordsV3",
+  "models": [
+    {
+      "id": "ah_lehks_sah",
+      "file": "ah_lehks_sah.tflite",
+      "spoken": "Ah Lehks Sah",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ah_lehks_sah.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "aintone",
+      "file": "aintone.tflite",
+      "spoken": "Aintone",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/aintone.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "aleesa",
+      "file": "aleesa.tflite",
+      "spoken": "Aleesa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/aleesa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "alfred_french",
+      "file": "alfred_french.tflite",
+      "spoken": "Alfred French",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/alfred_french.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "angel",
+      "file": "angel.tflite",
+      "spoken": "Angel",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/angel.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "annika",
+      "file": "annika.tflite",
+      "spoken": "Annika",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/annika.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "arale",
+      "file": "arale.tflite",
+      "spoken": "Arale",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/arale.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ares",
+      "file": "ares.tflite",
+      "spoken": "Ares",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ares.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "aristotle",
+      "file": "aristotle.tflite",
+      "spoken": "Aristotle",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/aristotle.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "artamis",
+      "file": "artamis.tflite",
+      "spoken": "Artamis",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/artamis.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ass_truh",
+      "file": "ass_truh.tflite",
+      "spoken": "Ass Truh",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ass_truh.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "atlas",
+      "file": "atlas.tflite",
+      "spoken": "Atlas",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/atlas.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "bch_cu",
+      "file": "bch_cu.tflite",
+      "spoken": "Bch Cu",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/bch_cu.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "bowregard",
+      "file": "bowregard.tflite",
+      "spoken": "Bowregard",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/bowregard.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "brad",
+      "file": "brad.tflite",
+      "spoken": "Brad",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/brad.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "casita",
+      "file": "casita.tflite",
+      "spoken": "Casita",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/casita.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "cassiope_french",
+      "file": "cassiope_french.tflite",
+      "spoken": "Cassiope French",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/cassiope_french.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ciao_luigi",
+      "file": "ciao_luigi.tflite",
+      "spoken": "Ciao Luigi",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ciao_luigi.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "clancy",
+      "file": "clancy.tflite",
+      "spoken": "Clancy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/clancy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "claws",
+      "file": "claws.tflite",
+      "spoken": "Claws",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/claws.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "dad",
+      "file": "dad.tflite",
+      "spoken": "Dad",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/dad.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "daddy",
+      "file": "daddy.tflite",
+      "spoken": "Daddy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/daddy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "dale_ambrosio",
+      "file": "dale_ambrosio.tflite",
+      "spoken": "Dale Ambrosio",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/dale_ambrosio.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "diggaa",
+      "file": "diggaa.tflite",
+      "spoken": "Diggaa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/diggaa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "dscheims",
+      "file": "dscheims.tflite",
+      "spoken": "Dscheims",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/dscheims.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "edgar",
+      "file": "edgar.tflite",
+      "spoken": "Edgar",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/edgar.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "eegon",
+      "file": "eegon.tflite",
+      "spoken": "Eegon",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/eegon.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ey_diggaa",
+      "file": "ey_diggaa.tflite",
+      "spoken": "Ey Diggaa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ey_diggaa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "finnegan",
+      "file": "finnegan.tflite",
+      "spoken": "Finnegan",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/finnegan.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "fofie",
+      "file": "fofie.tflite",
+      "spoken": "Fofie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/fofie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "foxy",
+      "file": "foxy.tflite",
+      "spoken": "Foxy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/foxy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "freeren",
+      "file": "freeren.tflite",
+      "spoken": "Freeren",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/freeren.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "frieren",
+      "file": "frieren.tflite",
+      "spoken": "Frieren",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/frieren.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "gideon",
+      "file": "gideon.tflite",
+      "spoken": "Gideon",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/gideon.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "gohllum",
+      "file": "gohllum.tflite",
+      "spoken": "Gohllum",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/gohllum.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "goo_glee",
+      "file": "goo_glee.tflite",
+      "spoken": "Goo Glee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/goo_glee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hannah",
+      "file": "hannah.tflite",
+      "spoken": "Hannah",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hannah.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "harper",
+      "file": "harper.tflite",
+      "spoken": "Harper",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/harper.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "harrison",
+      "file": "harrison.tflite",
+      "spoken": "Harrison",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/harrison.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hay_healix",
+      "file": "hay_healix.tflite",
+      "spoken": "Hay Healix",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hay_healix.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "healix",
+      "file": "healix.tflite",
+      "spoken": "Healix",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/healix.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_callisto",
+      "file": "hello_callisto.tflite",
+      "spoken": "Hello Callisto",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_callisto.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_computer",
+      "file": "hello_computer.tflite",
+      "spoken": "Hello Computer",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_computer.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_hal",
+      "file": "hello_hal.tflite",
+      "spoken": "Hello Hal",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_hal.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_jarvis",
+      "file": "hello_jarvis.tflite",
+      "spoken": "Hello Jarvis",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_jarvis.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_nest",
+      "file": "hello_nest.tflite",
+      "spoken": "Hello Nest",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_nest.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hello_winston",
+      "file": "hello_winston.tflite",
+      "spoken": "Hello Winston",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hello_winston.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "help_me_now",
+      "file": "help_me_now.tflite",
+      "spoken": "Help Me Now",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/help_me_now.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "help_me_please",
+      "file": "help_me_please.tflite",
+      "spoken": "Help Me Please",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/help_me_please.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_ahuh_rora",
+      "file": "hey_ahuh_rora.tflite",
+      "spoken": "Hey Ahuh Rora",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_ahuh_rora.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_alfred",
+      "file": "hey_alfred.tflite",
+      "spoken": "Hey Alfred",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_alfred.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_alice",
+      "file": "hey_alice.tflite",
+      "spoken": "Hey Alice",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_alice.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_anees",
+      "file": "hey_anees.tflite",
+      "spoken": "Hey Anees",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_anees.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_angela",
+      "file": "hey_angela.tflite",
+      "spoken": "Hey Angela",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_angela.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_anna",
+      "file": "hey_anna.tflite",
+      "spoken": "Hey Anna",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_anna.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_antonio",
+      "file": "hey_antonio.tflite",
+      "spoken": "Hey Antonio",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_antonio.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_artemis",
+      "file": "hey_artemis.tflite",
+      "spoken": "Hey Artemis",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_artemis.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_athena",
+      "file": "hey_athena.tflite",
+      "spoken": "Hey Athena",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_athena.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_atlas",
+      "file": "hey_atlas.tflite",
+      "spoken": "Hey Atlas",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_atlas.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_aura",
+      "file": "hey_aura.tflite",
+      "spoken": "Hey Aura",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_aura.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_aurohra",
+      "file": "hey_aurohra.tflite",
+      "spoken": "Hey Aurohra",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_aurohra.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_aurora",
+      "file": "hey_aurora.tflite",
+      "spoken": "Hey Aurora",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_aurora.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_ava",
+      "file": "hey_ava.tflite",
+      "spoken": "Hey Ava",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_ava.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_baymax",
+      "file": "hey_baymax.tflite",
+      "spoken": "Hey Baymax",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_baymax.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_bella",
+      "file": "hey_bella.tflite",
+      "spoken": "Hey Bella",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_bella.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_belluhsar",
+      "file": "hey_belluhsar.tflite",
+      "spoken": "Hey Belluhsar",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_belluhsar.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_brad",
+      "file": "hey_brad.tflite",
+      "spoken": "Hey Brad",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_brad.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_bud",
+      "file": "hey_bud.tflite",
+      "spoken": "Hey Bud",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_bud.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_buddy",
+      "file": "hey_buddy.tflite",
+      "spoken": "Hey Buddy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_buddy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_butternut",
+      "file": "hey_butternut.tflite",
+      "spoken": "Hey Butternut",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_butternut.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_case",
+      "file": "hey_case.tflite",
+      "spoken": "Hey Case",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_case.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_cave",
+      "file": "hey_cave.tflite",
+      "spoken": "Hey Cave",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_cave.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_clancy",
+      "file": "hey_clancy.tflite",
+      "spoken": "Hey Clancy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_clancy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_claude",
+      "file": "hey_claude.tflite",
+      "spoken": "Hey Claude",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_claude.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_clippy",
+      "file": "hey_clippy.tflite",
+      "spoken": "Hey Clippy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_clippy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_cloud",
+      "file": "hey_cloud.tflite",
+      "spoken": "Hey Cloud",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_cloud.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_coco",
+      "file": "hey_coco.tflite",
+      "spoken": "Hey Coco",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_coco.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_code_ah",
+      "file": "hey_code_ah.tflite",
+      "spoken": "Hey Code Ah",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_code_ah.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_codsworth",
+      "file": "hey_codsworth.tflite",
+      "spoken": "Hey Codsworth",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_codsworth.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_computer",
+      "file": "hey_computer.tflite",
+      "spoken": "Hey Computer",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_computer.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_cortahnah",
+      "file": "hey_cortahnah.tflite",
+      "spoken": "Hey Cortahnah",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_cortahnah.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_creepy",
+      "file": "hey_creepy.tflite",
+      "spoken": "Hey Creepy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_creepy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_cumulus",
+      "file": "hey_cumulus.tflite",
+      "spoken": "Hey Cumulus",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_cumulus.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_curtis",
+      "file": "hey_curtis.tflite",
+      "spoken": "Hey Curtis",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_curtis.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_deh_rick",
+      "file": "hey_deh_rick.tflite",
+      "spoken": "Hey Deh Rick",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_deh_rick.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_derek",
+      "file": "hey_derek.tflite",
+      "spoken": "Hey Derek",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_derek.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_diggaa",
+      "file": "hey_diggaa.tflite",
+      "spoken": "Hey Diggaa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_diggaa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_dingus",
+      "file": "hey_dingus.tflite",
+      "spoken": "Hey Dingus",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_dingus.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_dude",
+      "file": "hey_dude.tflite",
+      "spoken": "Hey Dude",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_dude.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_finnegan",
+      "file": "hey_finnegan.tflite",
+      "spoken": "Hey Finnegan",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_finnegan.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_fofie",
+      "file": "hey_fofie.tflite",
+      "spoken": "Hey Fofie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_fofie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_genie",
+      "file": "hey_genie.tflite",
+      "spoken": "Hey Genie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_genie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_glados",
+      "file": "hey_glados.tflite",
+      "spoken": "Hey Glados",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_glados.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_gort",
+      "file": "hey_gort.tflite",
+      "spoken": "Hey Gort",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_gort.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_grover",
+      "file": "hey_grover.tflite",
+      "spoken": "Hey Grover",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_grover.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_gulch_wizard",
+      "file": "hey_gulch_wizard.tflite",
+      "spoken": "Hey Gulch Wizard",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_gulch_wizard.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_gwen",
+      "file": "hey_gwen.tflite",
+      "spoken": "Hey Gwen",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_gwen.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_harvey",
+      "file": "hey_harvey.tflite",
+      "spoken": "Hey Harvey",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_harvey.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_healix",
+      "file": "hey_healix.tflite",
+      "spoken": "Hey Healix",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_healix.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_hex",
+      "file": "hey_hex.tflite",
+      "spoken": "Hey Hex",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_hex.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_hoogoh",
+      "file": "hey_hoogoh.tflite",
+      "spoken": "Hey Hoogoh",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_hoogoh.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_jeff",
+      "file": "hey_jeff.tflite",
+      "spoken": "Hey Jeff",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_jeff.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_juniper",
+      "file": "hey_juniper.tflite",
+      "spoken": "Hey Juniper",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_juniper.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_katie",
+      "file": "hey_katie.tflite",
+      "spoken": "Hey Katie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_katie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_koda",
+      "file": "hey_koda.tflite",
+      "spoken": "Hey Koda",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_koda.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_kris",
+      "file": "hey_kris.tflite",
+      "spoken": "Hey Kris",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_kris.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_krti",
+      "file": "hey_krti.tflite",
+      "spoken": "Hey Krti",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_krti.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_lilee",
+      "file": "hey_lilee.tflite",
+      "spoken": "Hey Lilee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_lilee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_liva",
+      "file": "hey_liva.tflite",
+      "spoken": "Hey Liva",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_liva.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_looeegee",
+      "file": "hey_looeegee.tflite",
+      "spoken": "Hey Looeegee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_looeegee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_lulu",
+      "file": "hey_lulu.tflite",
+      "spoken": "Hey Lulu",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_lulu.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mahnik",
+      "file": "hey_mahnik.tflite",
+      "spoken": "Hey Mahnik",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mahnik.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_marvin",
+      "file": "hey_marvin.tflite",
+      "spoken": "Hey Marvin",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_marvin.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mate",
+      "file": "hey_mate.tflite",
+      "spoken": "Hey Mate",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mate.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mav",
+      "file": "hey_mav.tflite",
+      "spoken": "Hey Mav",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mav.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mike",
+      "file": "hey_mike.tflite",
+      "spoken": "Hey Mike",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mike.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_miku",
+      "file": "hey_miku.tflite",
+      "spoken": "Hey Miku",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_miku.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mira",
+      "file": "hey_mira.tflite",
+      "spoken": "Hey Mira",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mira.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mirror",
+      "file": "hey_mirror.tflite",
+      "spoken": "Hey Mirror",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mirror.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_miwa",
+      "file": "hey_miwa.tflite",
+      "spoken": "Hey Miwa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_miwa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_mokee",
+      "file": "hey_mokee.tflite",
+      "spoken": "Hey Mokee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_mokee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_molly",
+      "file": "hey_molly.tflite",
+      "spoken": "Hey Molly",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_molly.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_moneypenny",
+      "file": "hey_moneypenny.tflite",
+      "spoken": "Hey Moneypenny",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_moneypenny.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_monica",
+      "file": "hey_monica.tflite",
+      "spoken": "Hey Monica",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_monica.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_nell",
+      "file": "hey_nell.tflite",
+      "spoken": "Hey Nell",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_nell.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_nest",
+      "file": "hey_nest.tflite",
+      "spoken": "Hey Nest",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_nest.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_nova",
+      "file": "hey_nova.tflite",
+      "spoken": "Hey Nova",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_nova.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_nusa",
+      "file": "hey_nusa.tflite",
+      "spoken": "Hey Nusa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_nusa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_ollie",
+      "file": "hey_ollie.tflite",
+      "spoken": "Hey Ollie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_ollie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_olly",
+      "file": "hey_olly.tflite",
+      "spoken": "Hey Olly",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_olly.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_orry",
+      "file": "hey_orry.tflite",
+      "spoken": "Hey Orry",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_orry.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_patrick",
+      "file": "hey_patrick.tflite",
+      "spoken": "Hey Patrick",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_patrick.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_picard",
+      "file": "hey_picard.tflite",
+      "spoken": "Hey Picard",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_picard.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_pip",
+      "file": "hey_pip.tflite",
+      "spoken": "Hey Pip",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_pip.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_reachy",
+      "file": "hey_reachy.tflite",
+      "spoken": "Hey Reachy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_reachy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_rem",
+      "file": "hey_rem.tflite",
+      "spoken": "Hey Rem",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_rem.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_rob",
+      "file": "hey_rob.tflite",
+      "spoken": "Hey Rob",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_rob.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_rocky",
+      "file": "hey_rocky.tflite",
+      "spoken": "Hey Rocky",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_rocky.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_rozbot",
+      "file": "hey_rozbot.tflite",
+      "spoken": "Hey Rozbot",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_rozbot.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_saku",
+      "file": "hey_saku.tflite",
+      "spoken": "Hey Saku",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_saku.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_sarah",
+      "file": "hey_sarah.tflite",
+      "spoken": "Hey Sarah",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_sarah.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_shelly",
+      "file": "hey_shelly.tflite",
+      "spoken": "Hey Shelly",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_shelly.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_skipper",
+      "file": "hey_skipper.tflite",
+      "spoken": "Hey Skipper",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_skipper.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_skynet",
+      "file": "hey_skynet.tflite",
+      "spoken": "Hey Skynet",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_skynet.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_slick",
+      "file": "hey_slick.tflite",
+      "spoken": "Hey Slick",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_slick.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_smartto",
+      "file": "hey_smartto.tflite",
+      "spoken": "Hey Smartto",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_smartto.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_stupid",
+      "file": "hey_stupid.tflite",
+      "spoken": "Hey Stupid",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_stupid.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_system",
+      "file": "hey_system.tflite",
+      "spoken": "Hey System",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_system.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_tars",
+      "file": "hey_tars.tflite",
+      "spoken": "Hey Tars",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_tars.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_tater",
+      "file": "hey_tater.tflite",
+      "spoken": "Hey Tater",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_tater.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_teto",
+      "file": "hey_teto.tflite",
+      "spoken": "Hey Teto",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_teto.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_tim_dawg",
+      "file": "hey_tim_dawg.tflite",
+      "spoken": "Hey Tim Dawg",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_tim_dawg.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_tom_servo",
+      "file": "hey_tom_servo.tflite",
+      "spoken": "Hey Tom Servo",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_tom_servo.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_totty",
+      "file": "hey_totty.tflite",
+      "spoken": "Hey Totty",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_totty.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_trump",
+      "file": "hey_trump.tflite",
+      "spoken": "Hey Trump",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_trump.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_uniblab",
+      "file": "hey_uniblab.tflite",
+      "spoken": "Hey Uniblab",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_uniblab.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_vision",
+      "file": "hey_vision.tflite",
+      "spoken": "Hey Vision",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_vision.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_wallee",
+      "file": "hey_wallee.tflite",
+      "spoken": "Hey Wallee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_wallee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_winston",
+      "file": "hey_winston.tflite",
+      "spoken": "Hey Winston",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_winston.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_yellena",
+      "file": "hey_yellena.tflite",
+      "spoken": "Hey Yellena",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_yellena.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hey_yo",
+      "file": "hey_yo.tflite",
+      "spoken": "Hey Yo",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hey_yo.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hi_atlas",
+      "file": "hi_atlas.tflite",
+      "spoken": "Hi Atlas",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hi_atlas.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "hi_tokio",
+      "file": "hi_tokio.tflite",
+      "spoken": "Hi Tokio",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/hi_tokio.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "i_need_help",
+      "file": "i_need_help.tflite",
+      "spoken": "I Need Help",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/i_need_help.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "james",
+      "file": "james.tflite",
+      "spoken": "James",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/james.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "jarviss",
+      "file": "jarviss.tflite",
+      "spoken": "Jarviss",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/jarviss.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "kalina",
+      "file": "kalina.tflite",
+      "spoken": "Kalina",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/kalina.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "kiria_fofie",
+      "file": "kiria_fofie.tflite",
+      "spoken": "Kiria Fofie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/kiria_fofie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "kodi_or_cody_kohdee",
+      "file": "kodi_or_cody_kohdee.tflite",
+      "spoken": "Kodi Or Cody Kohdee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/kodi_or_cody_kohdee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lecksa",
+      "file": "lecksa.tflite",
+      "spoken": "Lecksa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lecksa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lena",
+      "file": "lena.tflite",
+      "spoken": "Lena",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lena.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lexa_fr",
+      "file": "lexa_fr.tflite",
+      "spoken": "Lexa Fr",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lexa_fr.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lorelai",
+      "file": "lorelai.tflite",
+      "spoken": "Lorelai",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lorelai.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lorelia",
+      "file": "lorelia.tflite",
+      "spoken": "Lorelia",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lorelia.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "lulu_oi",
+      "file": "lulu_oi.tflite",
+      "spoken": "Lulu Oi",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/lulu_oi.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "marvin",
+      "file": "marvin.tflite",
+      "spoken": "Marvin",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/marvin.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "meesh_meesh",
+      "file": "meesh_meesh.tflite",
+      "spoken": "Meesh Meesh",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/meesh_meesh.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "miku",
+      "file": "miku.tflite",
+      "spoken": "Miku",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/miku.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "mister_sadin",
+      "file": "mister_sadin.tflite",
+      "spoken": "Mister Sadin",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/mister_sadin.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "mochi",
+      "file": "mochi.tflite",
+      "spoken": "Mochi",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/mochi.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "mom",
+      "file": "mom.tflite",
+      "spoken": "Mom",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/mom.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "mum",
+      "file": "mum.tflite",
+      "spoken": "Mum",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/mum.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "naboo",
+      "file": "naboo.tflite",
+      "spoken": "Naboo",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/naboo.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "nah_boo",
+      "file": "nah_boo.tflite",
+      "spoken": "Nah Boo",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/nah_boo.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "nahfahnya",
+      "file": "nahfahnya.tflite",
+      "spoken": "Nahfahnya",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/nahfahnya.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "neeve",
+      "file": "neeve.tflite",
+      "spoken": "Neeve",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/neeve.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "nell",
+      "file": "nell.tflite",
+      "spoken": "Nell",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/nell.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "nestor",
+      "file": "nestor.tflite",
+      "spoken": "Nestor",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/nestor.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "nestor_franais",
+      "file": "nestor_franais.tflite",
+      "spoken": "Nestor Franais",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/nestor_franais.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ni_hao_xiao_pai",
+      "file": "ni_hao_xiao_pai.tflite",
+      "spoken": "Ni Hao Xiao Pai",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ni_hao_xiao_pai.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "oh_kay_peg_ee",
+      "file": "oh_kay_peg_ee.tflite",
+      "spoken": "Oh Kay Peg Ee",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/oh_kay_peg_ee.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "oh_sairis",
+      "file": "oh_sairis.tflite",
+      "spoken": "Oh Sairis",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/oh_sairis.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ok_computer",
+      "file": "ok_computer.tflite",
+      "spoken": "Ok Computer",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ok_computer.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ok_curt",
+      "file": "ok_curt.tflite",
+      "spoken": "Ok Curt",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ok_curt.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ok_fairy",
+      "file": "ok_fairy.tflite",
+      "spoken": "Ok Fairy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ok_fairy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ok_nexus",
+      "file": "ok_nexus.tflite",
+      "spoken": "Ok Nexus",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ok_nexus.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ok_sandook",
+      "file": "ok_sandook.tflite",
+      "spoken": "Ok Sandook",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ok_sandook.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_angela",
+      "file": "okay_angela.tflite",
+      "spoken": "Okay Angela",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_angela.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_cloud",
+      "file": "okay_cloud.tflite",
+      "spoken": "Okay Cloud",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_cloud.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_derek",
+      "file": "okay_derek.tflite",
+      "spoken": "Okay Derek",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_derek.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_kris",
+      "file": "okay_kris.tflite",
+      "spoken": "Okay Kris",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_kris.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_miku",
+      "file": "okay_miku.tflite",
+      "spoken": "Okay Miku",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_miku.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_ollie",
+      "file": "okay_ollie.tflite",
+      "spoken": "Okay Ollie",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_ollie.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okay_shelly",
+      "file": "okay_shelly.tflite",
+      "spoken": "Okay Shelly",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okay_shelly.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "okej_robot",
+      "file": "okej_robot.tflite",
+      "spoken": "Okej Robot",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/okej_robot.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "pandora",
+      "file": "pandora.tflite",
+      "spoken": "Pandora",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/pandora.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "penelope",
+      "file": "penelope.tflite",
+      "spoken": "Penelope",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/penelope.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "penny",
+      "file": "penny.tflite",
+      "spoken": "Penny",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/penny.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "pewter",
+      "file": "pewter.tflite",
+      "spoken": "Pewter",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/pewter.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "please_help_me",
+      "file": "please_help_me.tflite",
+      "spoken": "Please Help Me",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/please_help_me.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "pypa",
+      "file": "pypa.tflite",
+      "spoken": "Pypa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/pypa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "r2d2_french",
+      "file": "r2d2_french.tflite",
+      "spoken": "R2d2 French",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/r2d2_french.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "ramn_spanish",
+      "file": "ramn_spanish.tflite",
+      "spoken": "Ramn Spanish",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/ramn_spanish.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "samantha",
+      "file": "samantha.tflite",
+      "spoken": "Samantha",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/samantha.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "sayaka",
+      "file": "sayaka.tflite",
+      "spoken": "Sayaka",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/sayaka.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "see_three_pee_oh",
+      "file": "see_three_pee_oh.tflite",
+      "spoken": "See Three Pee Oh",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/see_three_pee_oh.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "seor_sapo",
+      "file": "seor_sapo.tflite",
+      "spoken": "Seor Sapo",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/seor_sapo.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "sherlock",
+      "file": "sherlock.tflite",
+      "spoken": "Sherlock",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/sherlock.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "shut_up",
+      "file": "shut_up.tflite",
+      "spoken": "Shut Up",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/shut_up.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "someone_help_me",
+      "file": "someone_help_me.tflite",
+      "spoken": "Someone Help Me",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/someone_help_me.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "spiritus_domi",
+      "file": "spiritus_domi.tflite",
+      "spoken": "Spiritus Domi",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/spiritus_domi.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "stoppe",
+      "file": "stoppe.tflite",
+      "spoken": "Stoppe",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/stoppe.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "tee_kuhndoe",
+      "file": "tee_kuhndoe.tflite",
+      "spoken": "Tee Kuhndoe",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/tee_kuhndoe.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "thingy",
+      "file": "thingy.tflite",
+      "spoken": "Thingy",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/thingy.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "three_pee_ohh",
+      "file": "three_pee_ohh.tflite",
+      "spoken": "Three Pee Ohh",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/three_pee_ohh.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "tschaeims",
+      "file": "tschaeims.tflite",
+      "spoken": "Tschaeims",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/tschaeims.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "tscheims",
+      "file": "tscheims.tflite",
+      "spoken": "Tscheims",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/tscheims.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "uhleesa",
+      "file": "uhleesa.tflite",
+      "spoken": "Uhleesa",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/uhleesa.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "uniblab",
+      "file": "uniblab.tflite",
+      "spoken": "Uniblab",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/uniblab.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "vance",
+      "file": "vance.tflite",
+      "spoken": "Vance",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/vance.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "vortex",
+      "file": "vortex.tflite",
+      "spoken": "Vortex",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/vortex.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "wakeword",
+      "file": "wakeword.tflite",
+      "spoken": "Wakeword",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/wakeword.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "watson",
+      "file": "watson.tflite",
+      "spoken": "Watson",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/watson.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "yo_marvin",
+      "file": "yo_marvin.tflite",
+      "spoken": "Yo Marvin",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/yo_marvin.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    },
+    {
+      "id": "yo_rico",
+      "file": "yo_rico.tflite",
+      "spoken": "Yo Rico",
+      "author": "TaterTotterson",
+      "source_url": "https://github.com/TaterTotterson/microWakeWords/blob/main/microWakeWordsV3/yo_rico.tflite",
+      "license": "",
+      "micro": {
+        "probability_cutoff": 0.85,
+        "feature_step_size": 10,
+        "sliding_window_size": 5,
+        "tensor_arena_size": 22860
+      }
+    }
+  ]
+}

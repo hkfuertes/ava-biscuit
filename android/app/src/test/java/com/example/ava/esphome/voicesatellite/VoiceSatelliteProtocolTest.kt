@@ -1,0 +1,91 @@
+package com.example.ava.esphome.voicesatellite
+
+import com.example.ava.esphome.Connected
+import com.example.ava.esphome.Disconnected
+import com.example.ava.receivers.AvaControlReceiver
+import com.example.ava.services.VoiceSatelliteService
+import com.example.ava.settings.PlayerSettings
+import com.example.esphomeproto.api.VoiceAssistantFeature
+import android.view.KeyEvent
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertTrue
+import org.junit.Test
+
+class VoiceSatelliteProtocolTest {
+    @Test
+    fun featureFlagsIncludeAnnounceSoHomeAssistantFetchesWakeWordConfig() {
+        val flags = VoiceSatellite.voiceAssistantFeatureFlags
+
+        assertTrue(flags and VoiceAssistantFeature.ANNOUNCE.flag != 0)
+        assertTrue(flags and VoiceAssistantFeature.START_CONVERSATION.flag != 0)
+    }
+
+    @Test
+    fun localWakeWordStartRequestStartsAtStt() {
+        val request = VoiceSatellite.buildStartRequest("okay nabu")
+
+        assertTrue(request.start)
+        assertEquals(0, request.flags)
+        assertEquals("okay nabu", request.wakeWordPhrase)
+    }
+
+    @Test
+    fun manualStartRequestStartsAtStt() {
+        val request = VoiceSatellite.buildStartRequest()
+
+        assertTrue(request.start)
+        assertEquals(0, request.flags)
+        assertEquals("", request.wakeWordPhrase)
+    }
+
+    @Test
+    fun buttonPressStopsOnlyWhileAssistIsRunning() {
+        assertTrue(VoiceSatellite.isAssistRunning(Listening))
+        assertTrue(VoiceSatellite.isAssistRunning(Processing))
+        assertTrue(VoiceSatellite.isAssistRunning(Responding))
+        assertEquals(false, VoiceSatellite.isAssistRunning(Connected))
+        assertEquals(false, VoiceSatellite.isAssistRunning(Disconnected))
+    }
+
+    @Test
+    fun pendingWakeSoundCannotStartPipelineAfterStop() {
+        assertTrue(VoiceSatellite.shouldStartPipeline(2, 2, Listening))
+        assertEquals(false, VoiceSatellite.shouldStartPipeline(2, 3, Listening))
+        assertEquals(false, VoiceSatellite.shouldStartPipeline(2, 2, Connected))
+    }
+
+    @Test
+    fun physicalActionButtonMapsOnlyCmHelpKey() {
+        assertTrue(VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_HELP))
+        assertEquals(false, VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_VOLUME_UP))
+        assertEquals(false, VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_VOLUME_DOWN))
+        assertEquals(false, VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_MENU))
+    }
+
+    @Test
+    fun amazonBiscuitButtonBroadcastMapsOnlyHelpScanCode() {
+        assertEquals(true, AvaControlReceiver.biscuitButtonPressed(AvaControlReceiver.ACTION_BISCUIT_BUTTON_PRESSED))
+        assertEquals(false, AvaControlReceiver.biscuitButtonPressed(AvaControlReceiver.ACTION_BISCUIT_BUTTON_RELEASED))
+        assertTrue(AvaControlReceiver.isBiscuitHelpButton("KEYCODE_HELP", KeyEvent.KEYCODE_HELP, 138))
+        assertEquals(false, AvaControlReceiver.isBiscuitHelpButton("KEYCODE_MENU", KeyEvent.KEYCODE_MENU, 139))
+        assertEquals(false, AvaControlReceiver.isBiscuitHelpButton("KEYCODE_HELP", KeyEvent.KEYCODE_HELP, 139))
+    }
+
+    @Test
+    fun assistRingUsesBiscuitAnimationsForActiveStates() {
+        assertEquals("solid_cyan", BiscuitRingController.animationFor(Listening))
+        assertEquals("alexa_thinking", BiscuitRingController.animationFor(Processing))
+        assertEquals("solid_blue", BiscuitRingController.animationFor(Responding))
+        assertEquals(null, BiscuitRingController.animationFor(Connected))
+    }
+
+    @Test
+    fun bundledSoundDefaultsUseWavs() {
+        val settings = PlayerSettings()
+
+        assertEquals("asset:///sounds/wake_word_triggered.wav", settings.wakeSound)
+        assertEquals("asset:///sounds/timer_finished.wav", settings.timerFinishedSound)
+        assertEquals("asset:///stopWords/stop_sound.wav", settings.stopSound)
+        assertEquals("asset:///sounds/continuous_prompt.wav", settings.continuousPromptSound)
+    }
+}

@@ -1,0 +1,268 @@
+package com.example.ava.esphome.voicesatellite
+
+import android.content.Context
+import android.os.Build
+import android.util.Log
+import com.example.ava.esphome.Connected
+import com.example.ava.esphome.Disconnected
+import com.example.ava.esphome.EspHomeDevice
+import com.example.ava.esphome.EspHomeState
+import com.example.ava.esphome.entities.ButtonEntity
+import com.example.ava.esphome.Stopped
+import com.example.ava.settings.ExperimentalSettingsStore
+import com.example.ava.settings.PlayerSettingsStore
+import com.example.ava.settings.VoiceSatelliteSettingsStore
+import com.example.esphomeproto.api.DeviceInfoResponse
+import com.example.esphomeproto.api.SubscribeVoiceAssistantRequest
+import com.example.esphomeproto.api.VoiceAssistantAnnounceFinished
+import com.example.esphomeproto.api.VoiceAssistantAnnounceRequest
+import com.example.esphomeproto.api.VoiceAssistantAudio
+import com.example.esphomeproto.api.VoiceAssistantConfigurationRequest
+import com.example.esphomeproto.api.VoiceAssistantConfigurationResponse
+import com.example.esphomeproto.api.VoiceAssistantEventResponse
+import com.example.esphomeproto.api.VoiceAssistantFeature
+import com.example.esphomeproto.api.VoiceAssistantRequest
+import com.example.esphomeproto.api.VoiceAssistantResponse
+import com.example.esphomeproto.api.VoiceAssistantSetConfiguration
+import com.example.esphomeproto.api.VoiceAssistantWakeWord
+import com.google.protobuf.MessageLite
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.launch
+import java.util.concurrent.atomic.AtomicInteger
+import kotlin.coroutines.CoroutineContext
+
+class VoiceSatellite(
+    coroutineContext: CoroutineContext,
+    name: String,
+    port: Int,
+    val audioInput: VoiceSatelliteAudioInput,
+    val player: VoiceSatellitePlayer,
+    private val settingsStore: VoiceSatelliteSettingsStore,
+    private val experimentalSettingsStore: ExperimentalSettingsStore,
+    private val playerSettingsStore: PlayerSettingsStore,
+    private val context: Context
+) : EspHomeDevice(
+    coroutineContext,
+    name,
+    port,
+    VoiceSatelliteEntities.buildEntities(
+        audioInput = audioInput,
+        player = player,
+        context = context,
+        playerSettingsStore = playerSettingsStore
+    )
+) {
+    var onConversationText: ((String, String) -> Unit)? = null
+    var onListeningStarted: (() -> Unit)? = null
+    var onProcessingStarted: (() -> Unit)? = null
+    var onStreamingDelta: ((String) -> Unit)? = null
+    var onStreamingFinished: (() -> Unit)? = null
+    var onConversationEnd: (() -> Unit)? = null
+    var onTtsDurationReady: ((Long, String) -> Unit)? = null
+    var onTtsProgressUpdate: ((Long, Long, String) -> Unit)? = null
+
+    private val startGeneration = AtomicInteger()
+    private val sensors = VoiceSatelliteSensors(context, scope, this, experimentalSettingsStore)
+    private val ring = BiscuitRingController(context)
+    private val stateMachine = VoiceSatelliteStateMachine(
+        scope = scope,
+        audioInput = audioInput,
+        player = player,
+        state = _state,
+        onStopSatellite = { stopVoiceSession() },
+        onTtsFinished = { finishVoiceSession() },
+        onConversationText = { role, text -> onConversationText?.invoke(role, text) },
+        onProcessingStarted = { onProcessingStarted?.invoke() },
+        onStreamingDelta = { onStreamingDelta?.invoke(it) },
+        onStreamingFinished = { onStreamingFinished?.invoke() },
+        onSendAudioEnd = { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) },
+        onTtsDurationReady = { duration, text -> onTtsDurationReady?.invoke(duration, text) },
+        onTtsProgressUpdate = { current, total, text -> onTtsProgressUpdate?.invoke(current, total, text) }
+    )
+
+    init {
+        addEntity(ButtonEntity(
+            key = 42,
+            name = "Start/Stop Assist",
+            objectId = "start_assist",
+            icon = "mdi:account-voice"
+        ) { toggleManualAssist() })
+    }
+
+    override fun start() {
+        super.start()
+        ring.start()
+        state.onEach { ring.show(it) }.launchIn(scope)
+        sensors.init()
+        startAudioInput()
+    }
+
+    override suspend fun getDeviceInfo(): DeviceInfoResponse {
+        val settings = settingsStore.get()
+        return DeviceInfoResponse.newBuilder()
+            .setName(name)
+            .setFriendlyName(name)
+            .setMacAddress(settings.macAddress)
+            .setManufacturer(Build.MANUFACTURER ?: "Android")
+            .setModel(Build.MODEL ?: "CM12.1")
+            .setEsphomeVersion("Ava")
+            .setLegacyVoiceAssistantVersion(1)
+            .setVoiceAssistantFeatureFlags(voiceAssistantFeatureFlags)
+            .build()
+    }
+
+    override suspend fun handleMessage(message: MessageLite) {
+        when (message) {
+            is SubscribeVoiceAssistantRequest -> Unit
+            is VoiceAssistantResponse -> handleVoiceAssistantResponse(message)
+            is VoiceAssistantEventResponse -> stateMachine.handleVoiceEvent(message)
+            is VoiceAssistantConfigurationRequest -> sendVoiceAssistantConfiguration()
+            is VoiceAssistantSetConfiguration -> audioInput.setActiveWakeWords(message.activeWakeWordsList)
+            is VoiceAssistantAnnounceRequest -> playAnnouncement(message)
+            else -> super.handleMessage(message)
+        }
+    }
+
+    fun toggleMicMute() = setMicMute(!audioInput.muted.value)
+
+    fun setMicMute(muted: Boolean) {
+        audioInput.setMuted(muted)
+    }
+
+    fun manualWake() = triggerManualWake()
+
+    fun toggleManualAssist() {
+        if (isAssistRunning(state.value)) stopVoiceSession() else triggerManualWake()
+    }
+
+    fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0) {
+        if (audioInput.muted.value) return
+        _state.value = Listening
+        onListeningStarted?.invoke()
+        val generation = startGeneration.incrementAndGet()
+        scope.launch {
+            val startPipeline = {
+                if (shouldStartPipeline(generation, startGeneration.get(), _state.value)) {
+                    scope.launch { sendMessage(buildStartRequest(wakeWordPhrase)) }
+                }
+                Unit
+            }
+            if (wakeWordPhrase == null) {
+                player.playStartListeningSound(startPipeline)
+            } else {
+                player.playWakeSound(wakeWordIndex, startPipeline)
+            }
+        }
+    }
+
+    private fun handleVoiceAssistantResponse(message: VoiceAssistantResponse) {
+        if (message.error) {
+            Log.e(TAG, "Voice assistant start failed")
+            stopVoiceSession()
+            return
+        }
+        audioInput.isStreaming = true
+    }
+
+    fun stopVoiceSession() {
+        startGeneration.incrementAndGet()
+        player.ttsPlayer.stop()
+        finishVoiceSession()
+        scope.launch { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) }
+    }
+
+    private fun finishVoiceSession() {
+        audioInput.isStreaming = false
+        _state.value = Connected
+        onConversationEnd?.invoke()
+    }
+
+    fun onScreenTouch(isTouching: Boolean) = Unit
+    suspend fun callHaServicePublic(service: String, entityId: String) = Unit
+    fun getQuickEntityStateCache(): Map<String, String> = emptyMap()
+    fun getQuickEntityUnitCache(): Map<String, String> = emptyMap()
+    suspend fun subscribeQuickEntities() = Unit
+
+    private fun startAudioInput() {
+        audioInput.start()
+            .onEach { result ->
+                when (result) {
+                    is VoiceSatelliteAudioInput.AudioResult.Audio -> {
+                        sendMessage(VoiceAssistantAudio.newBuilder().setData(result.audio).build())
+                    }
+                    is VoiceSatelliteAudioInput.AudioResult.WakeDetected -> {
+                        val wakeWordIndex = audioInput.activeWakeWords.value.indexOf(result.wakeWordId).coerceAtLeast(0)
+                        triggerManualWake(result.wakeWord, wakeWordIndex)
+                    }
+                    is VoiceSatelliteAudioInput.AudioResult.StopDetected -> player.playStopSound { stopVoiceSession() }
+                }
+            }
+            .catch { e -> Log.e(TAG, "Audio input stopped", e) }
+            .launchIn(scope)
+    }
+
+    private suspend fun sendVoiceAssistantConfiguration() {
+        val response = VoiceAssistantConfigurationResponse.newBuilder()
+            .addAllActiveWakeWords(audioInput.activeWakeWords.value)
+            .setMaxActiveWakeWords(audioInput.availableWakeWords.size)
+            .addAllAvailableWakeWords(audioInput.availableWakeWords.map { wakeWord ->
+                VoiceAssistantWakeWord.newBuilder()
+                    .setId(wakeWord.id)
+                    .setWakeWord(wakeWord.wakeWord.wake_word)
+                    .addAllTrainedLanguages(wakeWord.wakeWord.trained_languages.toList())
+                    .build()
+            })
+            .build()
+        sendMessage(response)
+    }
+
+    private suspend fun playAnnouncement(message: VoiceAssistantAnnounceRequest) {
+        player.ttsPlayer.playAnnouncement(
+            message.mediaId,
+            message.preannounceMediaId.takeIf { it.isNotBlank() }
+        ) {
+            scope.launch {
+                sendMessage(VoiceAssistantAnnounceFinished.newBuilder().setSuccess(true).build())
+                if (message.startConversation) triggerManualWake()
+            }
+        }
+    }
+
+    override suspend fun onDisconnected() {
+        super.onDisconnected()
+        if (_state.value != Stopped) _state.value = Disconnected
+    }
+
+    override fun close() {
+        sensors.stop()
+        ring.close()
+        audioInput.isStreaming = false
+        player.close()
+        super.close()
+    }
+
+    companion object {
+        private const val TAG = "VoiceSatellite"
+
+        internal val voiceAssistantFeatureFlags: Int =
+            VoiceAssistantFeature.VOICE_ASSISTANT.flag or
+                VoiceAssistantFeature.SPEAKER.flag or
+                VoiceAssistantFeature.API_AUDIO.flag or
+                VoiceAssistantFeature.ANNOUNCE.flag or
+                VoiceAssistantFeature.START_CONVERSATION.flag
+
+        internal fun buildStartRequest(wakeWordPhrase: String? = null): VoiceAssistantRequest {
+            return VoiceAssistantRequest.newBuilder()
+                .setStart(true)
+                .setFlags(0)
+                .setWakeWordPhrase(wakeWordPhrase.orEmpty())
+                .build()
+        }
+
+        internal fun isAssistRunning(state: EspHomeState) = state == Listening || state == Processing || state == Responding
+        internal fun shouldStartPipeline(requestGeneration: Int, currentGeneration: Int, state: EspHomeState) =
+            requestGeneration == currentGeneration && state == Listening
+    }
+}

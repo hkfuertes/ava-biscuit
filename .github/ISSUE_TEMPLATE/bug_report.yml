@@ -1,0 +1,97 @@
+name: Bug Report
+description: Report something that is not working as expected in Ava
+title: "[Bug] "
+labels: ["bug", "help wanted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a bug report for Ava.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Pre-flight checks
+      options:
+        - label: I have searched the existing issues and found no duplicate
+          required: true
+        - label: I am running the latest Ava release
+          required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: Bug summary
+      description: One or two sentences describing what is wrong.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      value: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected_actual
+    attributes:
+      label: Expected vs actual behavior
+      description: What you expected, and what actually happened.
+    validations:
+      required: true
+  - type: input
+    id: ava_version
+    attributes:
+      label: Ava version
+      description: Find this in Settings -> About.
+      placeholder: "0.3.1"
+    validations:
+      required: true
+  - type: textarea
+    id: device
+    attributes:
+      label: Device
+      description: Device type, model, Android version, and whether it is rooted. Ava supports Android 5-16.
+      placeholder: |
+        Tablet, Android 9, not rooted
+        Echo Show 5, Android 5, not rooted
+    validations:
+      required: true
+  - type: dropdown
+    id: feature_area
+    attributes:
+      label: Feature area
+      options:
+        - Voice Satellite (wake word, TTS, mic, voiceprint)
+        - Bluetooth Proxy / BLE / Presence Detection
+        - Voice Messages & Calls
+        - Floating Windows (Dream Clock, Simple Clock, Vinyl, Subtitles, Weather Overlay)
+        - Notification Scenes
+        - Screensaver
+        - Browser Display (WebView / GeckoView)
+        - Music / Sendspin / Music Assistant
+        - Quick Entity Panel
+        - Camera / Video / Face Detection
+        - Screen Control (brightness, orientation, keep on)
+        - Sensors (environment, battery, proximity, diagnostic)
+        - Intent Launcher
+        - Mod Store / Mods
+        - Sidebar / Launcher
+        - Settings / UI / Dark Mode
+        - Permissions (Shizuku / Root / Device Admin)
+        - Auto Update
+        - Other
+      default: 18
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant logcat output or crash stacktrace. Paste raw text.
+      render: shell
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional context

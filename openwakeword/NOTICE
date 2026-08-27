@@ -1,0 +1,81 @@
+Third-party wake word models redistributed with Ava
+===================================================
+
+The files in this directory are NOT part of Ava and are NOT covered by Ava's
+license. Each model keeps its own upstream license, reproduced below and in the
+per-model SOURCE.md files.
+
+
+1. openWakeWord shared frontend  --  Apache License 2.0
+-------------------------------------------------------
+    shared/melspectrogram.onnx
+    shared/embedding_model.onnx
+
+    Project : openWakeWord
+              https://github.com/dscripka/openWakeWord
+    Author  : David Scripka
+    License : Apache License, Version 2.0
+              https://www.apache.org/licenses/LICENSE-2.0
+              Full text: licenses/openWakeWord-LICENSE-Apache-2.0.txt
+
+    embedding_model.onnx is a re-implementation of Google's speech_embedding
+    model (https://tfhub.dev/google/speech_embedding/1), also Apache-2.0.
+
+
+2. openWakeWord pre-trained classifiers  --  CC-BY-NC-SA-4.0
+-------------------------------------------------------------
+    models/alexa/alexa.onnx
+    models/hey_jarvis/hey_jarvis.onnx
+    models/hey_mycroft/hey_mycroft.onnx
+    models/hey_rhasspy/hey_rhasspy.onnx
+
+    Project : openWakeWord
+              https://github.com/dscripka/openWakeWord
+    Release : https://github.com/dscripka/openWakeWord/releases/tag/v0.5.1
+    Author  : David Scripka
+    License : Creative Commons Attribution-NonCommercial-ShareAlike 4.0
+              International
+              https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+    Per the openWakeWord project: the pre-trained models are CC-BY-NC-SA-4.0
+    rather than Apache-2.0 because of training data with unknown or restrictive
+    licensing. Attribution is required, commercial use is not permitted, and
+    derivatives must be shared alike. These files are redistributed unmodified.
+
+
+3. Home Assistant Wake Word Collection  --  MIT
+------------------------------------------------
+    models/ok_nabu/ok_nabu.onnx
+    models/hey_home_assistant/hey_home_assistant.onnx
+    models/hey_luna/hey_luna.onnx
+    models/hey_alfred/hey_alfred.onnx
+    models/ok_computer/ok_computer.onnx
+    extras/hey_nabu/hey_nabu.onnx
+    extras/ok_jarvis/ok_jarvis.onnx
+    extras/computer/computer.onnx
+    extras/xiao_ai/xiao_ai.onnx
+    extras/xiao_bu/xiao_bu.onnx
+    extras/xiao_zhi/xiao_zhi.onnx
+
+    Project : Home Assistant Wake Word Collection
+              https://github.com/fwartner/home-assistant-wakewords-collection
+    Authors : Home Assistant community contributors,
+              collected and maintained by Florian Wartner
+    License : MIT License
+              Copyright (c) 2023 Florian Wartner
+              Full text: licenses/fwartner-collection-LICENSE-MIT.txt
+
+    These models were trained with the openWakeWord training notebooks. The
+    collection repository is MIT, but the openWakeWord project's non-commercial
+    position on models trained against its feature datasets may also apply.
+    Treat them as attribution-required and non-commercial.
+
+
+Bundling
+--------
+Only shared/melspectrogram.onnx, shared/embedding_model.onnx and
+models/ok_nabu/ok_nabu.onnx ship inside the APK. Every other classifier is
+fetched on demand so its license can be shown before download.
+
+openWakeWord has no stop model. Ava's stop word is a microWakeWord model and
+carries its own notice under app/src/main/assets/stopWords/.

@@ -1,0 +1,51 @@
+*.iml
+.gradle
+/local.properties
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.cxx
+local.properties
+
+
+# Test directory
+/test/
+
+# Root HTML files
+/*.html
+
+# Local scripts and release notes
+/RELEASE_*.md
+/*.sh
+
+# Bluetooth related code
+app/src/main/java/com/example/ava/bluetooth/
+app/src/main/java/com/example/ava/esphome/voicesatellite/VoiceSatelliteBluetooth.kt
+app/src/main/java/com/example/ava/ui/screens/settings/BluetoothSettingsScreen.kt
+app/src/main/java/com/example/ava/wakelocks/BluetoothWakeLock.kt
+esphomeproto/src/main/java/com/example/esphomeproto/api/BluetoothProxyFeature.kt
+app/src/main/java/com/example/ava/ui/Navigation.kt
+app/src/main/java/com/example/ava/ui/screens/settings/SettingsScreen.kt
+app/src/main/java/com/example/ava/ui/screens/settings/RootSettingsScreen.kt
+app/src/main/java/com/example/ava/ui/components/MdiIconMapper.kt
+app/src/main/java/com/example/ava/esphome/voicesatellite/VoiceSatellite.kt
+
+# Bluetooth related resources
+app/src/main/res/drawable/mdi_bluetooth.xml
+app/src/main/res/drawable/bluetooth_24px.xml
+app/src/main/res/drawable/ic_bluetooth_proxy_24px.xml
+app/src/main/res/drawable/ic_bluetooth_warning.xml
+.idea/
+
+# Local PRDs
+*.prd.md
+
+# Local issues
+/issues/
