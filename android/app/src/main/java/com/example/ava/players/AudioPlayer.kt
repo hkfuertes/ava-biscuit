@@ -1,6 +1,5 @@
 package com.example.ava.players
 
-import android.media.AudioManager
 import android.util.Log
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
@@ -15,77 +14,36 @@ enum class AudioPlayerState {
 
 @UnstableApi
 class AudioPlayer(
-    private val audioManager: AudioManager,
-    val focusGain: Int,
     private val playerBuilder: () -> Player
 ) : AutoCloseable {
     private var _player: Player? = null
     private var isPlayerInit = false
     private var currentListener: Player.Listener? = null
-    private val isClosed = AtomicBoolean(false)
     private val isClosing = AtomicBoolean(false)
 
     private val _state = MutableStateFlow(AudioPlayerState.IDLE)
     val state = _state.asStateFlow()
 
-    val isPlaying: Boolean get() = try { _player?.isPlaying ?: false } catch (e: Exception) { false }
+    val isPlaying: Boolean get() = runCatching { _player?.isPlaying ?: false }.getOrDefault(false)
     val isPaused: Boolean
-        get() = try {
-            _player?.let {
-                !it.isPlaying && it.playbackState != Player.STATE_IDLE && it.playbackState != Player.STATE_ENDED
-            } ?: false
-        } catch (e: Exception) { false }
-    val isStopped
-        get() = try {
-            _player?.let { it.playbackState == Player.STATE_IDLE || it.playbackState == Player.STATE_ENDED } ?: true
-        } catch (e: Exception) { true }
-    
-    
-    val currentPosition: Long get() = try { _player?.currentPosition ?: 0L } catch (e: Exception) { 0L }
-    val duration: Long get() = try { _player?.duration?.let { if (it > 0 && it != Long.MIN_VALUE + 1) it else 0L } ?: 0L } catch (e: Exception) { 0L }
-    
-    
-    fun seekTo(positionMs: Long) {
-        try { _player?.seekTo(positionMs) } catch (e: Exception) { }
-    }
+        get() = runCatching {
+            _player?.let { !it.isPlaying && !isCompletePlaybackState(it.playbackState) } ?: false
+        }.getOrDefault(false)
 
-    private var _volume: Float = 1.0f
+    private var _volume = 1.0f
     var volume
         get() = _volume
         set(value) {
             _volume = value
-            try { _player?.volume = value } catch (e: Exception) { }
+            runCatching { _player?.volume = value }
         }
 
     fun init() {
-        if (isClosed.get()) return
-        
-        val oldPlayer = _player
-        _player = null
-        val oldListener = currentListener
-        currentListener = null
-        oldPlayer?.let { player ->
-            oldListener?.let { listener ->
-                try { player.removeListener(listener) } catch (e: Exception) { }
-            }
-            try {
-                player.stop()
-                player.clearMediaItems()
-            } catch (e: Exception) { }
-            android.os.Handler(android.os.Looper.getMainLooper()).post {
-                try { player.release() } catch (e: Exception) { }
-            }
-        }
-        
-        try {
-            _player = playerBuilder().apply {
-                volume = _volume
-            }
-            
-            isPlayerInit = true
-        } catch (e: Exception) {
-            Log.e(TAG, "Failed to init player", e)
-        }
+        releasePlayer()
+        _player = runCatching { playerBuilder().apply { volume = _volume } }
+            .onFailure { Log.e(TAG, "Failed to init player", it) }
+            .getOrNull()
+        isPlayerInit = _player != null
     }
 
     fun play(mediaUri: String, onCompletion: () -> Unit = {}) {
@@ -93,162 +51,81 @@ class AudioPlayer(
     }
 
     fun play(mediaUris: Iterable<String>, onCompletion: () -> Unit = {}) {
-        if (isClosed.get()) {
-            onCompletion()
-            return
-        }
-        
         if (!isPlayerInit) init()
-        if (_player == null) {
+        val player = _player ?: run {
             Log.e(TAG, "Player is null, cannot play")
             onCompletion()
             return
         }
-
         isPlayerInit = false
-        val player = _player ?: run {
-            onCompletion()
-            return
-        }
 
-        try {
-            
-            currentListener?.let {
-                try { player.removeListener(it) } catch (e: Exception) { }
-            }
-            currentListener = null
+        runCatching {
+            currentListener?.let { player.removeListener(it) }
             player.stop()
             player.clearMediaItems()
-            
+
             val listener = getPlayerListener(onCompletion)
             currentListener = listener
             player.addListener(listener)
-            
-            for (mediaUri in mediaUris) {
-                player.addMediaItem(MediaItem.fromUri(mediaUri))
-            }
+            mediaUris.forEach { player.addMediaItem(MediaItem.fromUri(it)) }
             player.playWhenReady = true
             player.prepare()
-        } catch (e: Exception) {
-            Log.e(TAG, "Error playing media $mediaUris", e)
+        }.onFailure {
+            Log.e(TAG, "Error playing media $mediaUris", it)
             onCompletion()
             safeClose()
         }
     }
 
     fun pause() {
-        try { 
-            if (isPlaying) {
-                _player?.pause()
-            }
-        } catch (e: Exception) { }
+        if (isPlaying) runCatching { _player?.pause() }
     }
 
     fun unpause() {
-        try { 
-            if (isPaused) {
-                _player?.play()
-            }
-        } catch (e: Exception) { }
+        if (isPaused) runCatching { _player?.play() }
     }
 
     fun stop() {
         safeClose()
     }
 
-    
-    var onDurationChanged: ((Long) -> Unit)? = null
-    var onMediaMetadataChanged: ((artworkUri: String?) -> Unit)? = null
-    var onPlaybackEnded: (() -> Unit)? = null
-    var onPlaybackStarted: (() -> Unit)? = null
-    
     private fun getPlayerListener(onCompletion: () -> Unit) = object : Player.Listener {
         private val completionCalled = AtomicBoolean(false)
         private val playbackStarted = AtomicBoolean(false)
-        
-        private fun safeComplete() {
-            if (completionCalled.compareAndSet(false, true)) {
-                onCompletion()
-            }
-        }
 
-        private fun completePlaybackEnded() {
-            if (completionCalled.compareAndSet(false, true)) {
-                try {
-                    onPlaybackEnded?.invoke()
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error invoking onPlaybackEnded", e)
-                }
-                onCompletion()
-            }
+        private fun complete() {
+            if (completionCalled.compareAndSet(false, true)) onCompletion()
         }
 
         override fun onPlaybackStateChanged(playbackState: Int) {
-            if (playbackState == Player.STATE_ENDED) {
-                completePlaybackEnded()
+            if (playbackState == Player.STATE_ENDED ||
+                shouldCompleteOnNotPlaying(playbackState, playbackStarted.get())
+            ) {
+                complete()
                 safeClose()
-            } else if (playbackState == Player.STATE_READY) {
-                
-                try {
-                    val duration = _player?.duration ?: 0L
-                    
-                    if (duration > 0 && duration != Long.MIN_VALUE + 1) {
-                        onDurationChanged?.invoke(duration)
-                    }
-                    
-                    val metadata = _player?.mediaMetadata
-                    val artworkUri = metadata?.artworkUri?.toString()
-                    onMediaMetadataChanged?.invoke(artworkUri)
-                } catch (e: Exception) {
-                    Log.e(TAG, "Error getting metadata", e)
-                }
             }
         }
 
         override fun onPlayerError(error: androidx.media3.common.PlaybackException) {
             Log.e(TAG, "Player error: ${error.message}", error)
-            safeComplete()
+            complete()
             safeClose()
         }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             Log.d(TAG, "onIsPlayingChanged: isPlaying=$isPlaying")
-            try {
-                if (isPlaying) {
-                    playbackStarted.set(true)
-                    _state.value = AudioPlayerState.PLAYING
-                    try {
-                        Log.d(TAG, "Invoking onPlaybackStarted callback")
-                        onPlaybackStarted?.invoke()
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error invoking onPlaybackStarted", e)
-                    }
-                } else if (isPaused)
-                    _state.value = AudioPlayerState.PAUSED
-                else
-                    _state.value = AudioPlayerState.IDLE
-                
-                if (!isPlaying && shouldCompleteOnNotPlaying(_player?.playbackState ?: Player.STATE_IDLE, playbackStarted.get())) {
-                    completePlaybackEnded()
+            if (isPlaying) {
+                playbackStarted.set(true)
+                _state.value = AudioPlayerState.PLAYING
+            } else {
+                _state.value = if (isPaused) AudioPlayerState.PAUSED else AudioPlayerState.IDLE
+                if (shouldCompleteOnNotPlaying(_player?.playbackState ?: Player.STATE_IDLE, playbackStarted.get())) {
+                    complete()
                 }
-            } catch (e: Exception) { }
-        }
-        
-        override fun onMediaItemTransition(mediaItem: androidx.media3.common.MediaItem?, reason: Int) {
-            
-            try {
-                val metadata = _player?.mediaMetadata
-                val artworkUri = metadata?.artworkUri?.toString()
-                
-                onMediaMetadataChanged?.invoke(artworkUri)
-            } catch (e: Exception) {
-                Log.e(TAG, "Error getting metadata on transition", e)
-                
-                onMediaMetadataChanged?.invoke(null)
             }
         }
     }
-    
+
     private fun safeClose() {
         if (isClosing.compareAndSet(false, true)) {
             try {
@@ -259,34 +136,27 @@ class AudioPlayer(
         }
     }
 
-    override fun close() {
-        isPlayerInit = false
-        val playerToRelease = _player
+    private fun releasePlayer() {
+        val oldPlayer = _player
+        val oldListener = currentListener
         _player = null
         currentListener = null
-        _state.value = AudioPlayerState.IDLE
-        
-        if (playerToRelease != null) {
-            try {
-                playerToRelease.stop()
-                playerToRelease.clearMediaItems()
-            } catch (e: Exception) {
-                Log.w(TAG, "Error stopping player", e)
+        oldPlayer?.let { player ->
+            runCatching { oldListener?.let { player.removeListener(it) } }
+            runCatching {
+                player.stop()
+                player.clearMediaItems()
             }
-            
             android.os.Handler(android.os.Looper.getMainLooper()).post {
-                try {
-                    playerToRelease.release()
-                } catch (e: Exception) {
-                    Log.w(TAG, "Error releasing player", e)
-                }
+                runCatching { player.release() }
             }
         }
     }
-    
-    fun destroy() {
-        isClosed.set(true)
-        close()
+
+    override fun close() {
+        isPlayerInit = false
+        _state.value = AudioPlayerState.IDLE
+        releasePlayer()
     }
 
     companion object {

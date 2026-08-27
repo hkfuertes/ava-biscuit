@@ -7,9 +7,8 @@ import com.example.ava.esphome.Connected
 import com.example.ava.esphome.Disconnected
 import com.example.ava.esphome.EspHomeDevice
 import com.example.ava.esphome.EspHomeState
-import com.example.ava.esphome.entities.ButtonEntity
 import com.example.ava.esphome.Stopped
-import com.example.ava.settings.ExperimentalSettingsStore
+import com.example.ava.esphome.entities.ButtonEntity
 import com.example.ava.settings.PlayerSettingsStore
 import com.example.ava.settings.VoiceSatelliteSettingsStore
 import com.example.esphomeproto.api.DeviceInfoResponse
@@ -40,7 +39,6 @@ class VoiceSatellite(
     val audioInput: VoiceSatelliteAudioInput,
     val player: VoiceSatellitePlayer,
     private val settingsStore: VoiceSatelliteSettingsStore,
-    private val experimentalSettingsStore: ExperimentalSettingsStore,
     private val playerSettingsStore: PlayerSettingsStore,
     private val context: Context
 ) : EspHomeDevice(
@@ -54,20 +52,14 @@ class VoiceSatellite(
         playerSettingsStore = playerSettingsStore
     )
 ) {
-    var onConversationText: ((String, String) -> Unit)? = null
-    var onListeningStarted: (() -> Unit)? = null
-    var onProcessingStarted: (() -> Unit)? = null
-    var onStreamingDelta: ((String) -> Unit)? = null
-    var onStreamingFinished: (() -> Unit)? = null
-    var onConversationEnd: (() -> Unit)? = null
-    var onTtsDurationReady: ((Long, String) -> Unit)? = null
-    var onTtsProgressUpdate: ((Long, Long, String) -> Unit)? = null
-
     private val startGeneration = AtomicInteger()
     @Volatile private var pendingStartGeneration = 0
     @Volatile private var pendingStartWakeWordPhrase: String? = null
     @Volatile private var pendingStartWakeWordIndex = 0
-    private val sensors = VoiceSatelliteSensors(context, scope, this, experimentalSettingsStore)
+    @Volatile private var listeningCueReady = false
+    @Volatile private var listeningCueWakeWordPhrase: String? = null
+    @Volatile private var listeningCueWakeWordIndex = 0
+    private val sensors = VoiceSatelliteSensors(context, scope, this)
     private val ring = BiscuitRingController(context)
     private val stateMachine = VoiceSatelliteStateMachine(
         scope = scope,
@@ -76,13 +68,7 @@ class VoiceSatellite(
         state = _state,
         onStopSatellite = { stopVoiceSession() },
         onTtsFinished = { finishVoiceSession() },
-        onConversationText = { role, text -> onConversationText?.invoke(role, text) },
-        onProcessingStarted = { onProcessingStarted?.invoke() },
-        onStreamingDelta = { onStreamingDelta?.invoke(it) },
-        onStreamingFinished = { onStreamingFinished?.invoke() },
-        onSendAudioEnd = { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) },
-        onTtsDurationReady = { duration, text -> onTtsDurationReady?.invoke(duration, text) },
-        onTtsProgressUpdate = { current, total, text -> onTtsProgressUpdate?.invoke(current, total, text) }
+        onListeningStarted = { playListeningCue() }
     )
 
     init {
@@ -137,7 +123,11 @@ class VoiceSatellite(
     fun manualWake() = triggerManualWake()
 
     fun toggleManualAssist() {
-        if (isAssistRunning(state.value)) stopVoiceSession() else triggerManualWake()
+        if (isAssistRunning(state.value) || pendingStartGeneration != 0 || listeningCueReady) {
+            stopVoiceSession()
+        } else {
+            triggerManualWake()
+        }
     }
 
     fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0) {
@@ -160,21 +150,12 @@ class VoiceSatellite(
             Log.d(TAG, "Ignoring stale voice assistant start response")
             return
         }
-        val wakeWordPhrase = pendingStartWakeWordPhrase
-        val wakeWordIndex = pendingStartWakeWordIndex
+        listeningCueReady = true
+        listeningCueWakeWordPhrase = pendingStartWakeWordPhrase
+        listeningCueWakeWordIndex = pendingStartWakeWordIndex
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
-        _state.value = Listening
-        onListeningStarted?.invoke()
-        audioInput.isStreaming = true
-        scope.launch {
-            if (wakeWordPhrase == null) {
-                player.playStartListeningSound()
-            } else {
-                player.playWakeSound(wakeWordIndex)
-            }
-        }
     }
 
     fun stopVoiceSession() {
@@ -182,6 +163,7 @@ class VoiceSatellite(
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
+        clearListeningCue()
         player.ttsPlayer.stop()
         finishVoiceSession()
         scope.launch { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) }
@@ -191,16 +173,26 @@ class VoiceSatellite(
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
+        clearListeningCue()
         audioInput.isStreaming = false
         _state.value = Connected
-        onConversationEnd?.invoke()
     }
 
-    fun onScreenTouch(isTouching: Boolean) = Unit
-    suspend fun callHaServicePublic(service: String, entityId: String) = Unit
-    fun getQuickEntityStateCache(): Map<String, String> = emptyMap()
-    fun getQuickEntityUnitCache(): Map<String, String> = emptyMap()
-    suspend fun subscribeQuickEntities() = Unit
+    private fun playListeningCue() {
+        if (!listeningCueReady) return
+        val wakeWordPhrase = listeningCueWakeWordPhrase
+        val wakeWordIndex = listeningCueWakeWordIndex
+        clearListeningCue()
+        scope.launch {
+            if (wakeWordPhrase == null) player.playStartListeningSound() else player.playWakeSound(wakeWordIndex)
+        }
+    }
+
+    private fun clearListeningCue() {
+        listeningCueReady = false
+        listeningCueWakeWordPhrase = null
+        listeningCueWakeWordIndex = 0
+    }
 
     private fun startAudioInput() {
         audioInput.start()

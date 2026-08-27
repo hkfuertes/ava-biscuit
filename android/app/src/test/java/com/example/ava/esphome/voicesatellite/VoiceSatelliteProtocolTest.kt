@@ -82,6 +82,13 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
+    fun ttsStreamEndFinishesOnlyWhileResponding() {
+        assertTrue(VoiceSatelliteStateMachine.shouldFinishOnTtsStreamEnd(Responding))
+        assertEquals(false, VoiceSatelliteStateMachine.shouldFinishOnTtsStreamEnd(Listening))
+        assertEquals(false, VoiceSatelliteStateMachine.shouldFinishOnTtsStreamEnd(Connected))
+    }
+
+    @Test
     fun audioPlayerCompletesOnlyAfterPlaybackActuallyStarted() {
         assertTrue(AudioPlayer.isCompletePlaybackState(Player.STATE_IDLE))
         assertTrue(AudioPlayer.shouldCompleteOnNotPlaying(Player.STATE_IDLE, playbackStarted = true))

@@ -1,5 +1,8 @@
 package com.example.ava.microwakeword
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class WakeWord(
     val type: String,
     val wake_word: String,
@@ -11,6 +14,7 @@ data class WakeWord(
     val micro: Micro,
 )
 
+@Serializable
 data class Micro(
     val probability_cutoff: Float,
     val feature_step_size: Int,

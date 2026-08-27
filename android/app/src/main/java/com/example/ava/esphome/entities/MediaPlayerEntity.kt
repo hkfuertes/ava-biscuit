@@ -35,21 +35,11 @@ class MediaPlayerEntity(
                 if (message.key == key) {
                     if (message.hasMediaUrl) {
                         player.mediaPlayer.play(message.mediaUrl)
-                        player.onMediaPlay?.invoke(message.mediaUrl)
                     } else if (message.hasCommand) {
                         when (message.command) {
-                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_PAUSE -> {
-                                player.mediaPlayer.pause()
-                                player.onMediaPause?.invoke()
-                            }
-                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_PLAY -> {
-                                player.mediaPlayer.unpause()
-                                player.onMediaResume?.invoke()
-                            }
-                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_STOP -> {
-                                player.mediaPlayer.stop()
-                                player.onMediaStop?.invoke()
-                            }
+                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_PAUSE -> player.mediaPlayer.pause()
+                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_PLAY -> player.mediaPlayer.unpause()
+                            MediaPlayerCommand.MEDIA_PLAYER_COMMAND_STOP -> player.mediaPlayer.stop()
                             MediaPlayerCommand.MEDIA_PLAYER_COMMAND_MUTE -> player.setMuted(true)
                             MediaPlayerCommand.MEDIA_PLAYER_COMMAND_UNMUTE -> player.setMuted(false)
                             else -> {}

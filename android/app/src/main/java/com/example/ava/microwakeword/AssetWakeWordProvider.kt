@@ -2,47 +2,34 @@ package com.example.ava.microwakeword
 
 import android.content.res.AssetManager
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import java.io.FileInputStream
+import kotlinx.serialization.json.Json
 import java.nio.ByteBuffer
-import java.nio.channels.FileChannel
 
 class AssetWakeWordProvider(val assets: AssetManager, val path: String = DEFAULT_WAKE_WORD_PATH) :
     WakeWordProvider {
-    override fun getWakeWords(): List<WakeWordWithId> {
-        val gson = Gson()
-        val wakeWords = buildList {
-            val assetsList = assets.list(path)
-            if (assetsList == null)
-                return emptyList()
+    private val json = Json { ignoreUnknownKeys = true }
 
+    override fun getWakeWords(): List<WakeWordWithId> {
+        val assetsList = assets.list(path) ?: return emptyList()
+        return buildList {
             for (asset in assetsList) {
-                if (!asset.endsWith(".json"))
-                    continue
+                if (!asset.endsWith(".json")) continue
 
                 runCatching {
-                    val json =
-                        assets.open("$path/$asset").bufferedReader().use { it.readText() }
-                    val wakeWord: WakeWord =
-                        gson.fromJson(json, object : TypeToken<WakeWord>() {}.type)
-                    add(WakeWordWithId(asset.substring(0, asset.lastIndexOf(".json")), wakeWord))
+                    val contents = assets.open("$path/$asset").bufferedReader().use { it.readText() }
+                    add(WakeWordWithId(asset.removeSuffix(".json"), json.decodeFromString<WakeWord>(contents)))
                 }.onFailure {
                     Log.e(TAG, "Error loading wake word: $asset", it)
                 }
             }
         }
-        return wakeWords
     }
 
     override fun loadWakeWordModel(model: String): ByteBuffer {
-        assets.open("$path/$model").use { inputStream ->
-            val bytes = inputStream.readBytes()
-            val buffer = ByteBuffer.allocateDirect(bytes.size)
-            buffer.put(bytes)
-            
-            buffer.rewind()
-            return buffer
+        val bytes = assets.open("$path/$model").use { it.readBytes() }
+        return ByteBuffer.allocateDirect(bytes.size).apply {
+            put(bytes)
+            rewind()
         }
     }
 
