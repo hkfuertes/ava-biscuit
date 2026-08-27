@@ -2,11 +2,13 @@ package com.example.ava.esphome.voicesatellite
 
 import com.example.ava.esphome.Connected
 import com.example.ava.esphome.Disconnected
+import com.example.ava.players.AudioPlayer
 import com.example.ava.receivers.AvaControlReceiver
 import com.example.ava.services.VoiceSatelliteService
 import com.example.ava.settings.PlayerSettings
 import com.example.esphomeproto.api.VoiceAssistantFeature
 import android.view.KeyEvent
+import androidx.media3.common.Player
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -48,10 +50,10 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
-    fun pendingWakeSoundCannotStartPipelineAfterStop() {
-        assertTrue(VoiceSatellite.shouldStartPipeline(2, 2, Listening))
-        assertEquals(false, VoiceSatellite.shouldStartPipeline(2, 3, Listening))
-        assertEquals(false, VoiceSatellite.shouldStartPipeline(2, 2, Connected))
+    fun startResponseIsAcceptedOnlyForCurrentPendingStart() {
+        assertTrue(VoiceSatellite.shouldAcceptStartResponse(2, 2))
+        assertEquals(false, VoiceSatellite.shouldAcceptStartResponse(0, 2))
+        assertEquals(false, VoiceSatellite.shouldAcceptStartResponse(2, 3))
     }
 
     @Test
@@ -77,6 +79,15 @@ class VoiceSatelliteProtocolTest {
         assertEquals("alexa_thinking", BiscuitRingController.animationFor(Processing))
         assertEquals("solid_blue", BiscuitRingController.animationFor(Responding))
         assertEquals(null, BiscuitRingController.animationFor(Connected))
+    }
+
+    @Test
+    fun audioPlayerCompletesOnlyAfterPlaybackActuallyStarted() {
+        assertTrue(AudioPlayer.isCompletePlaybackState(Player.STATE_IDLE))
+        assertTrue(AudioPlayer.shouldCompleteOnNotPlaying(Player.STATE_IDLE, playbackStarted = true))
+        assertEquals(false, AudioPlayer.shouldCompleteOnNotPlaying(Player.STATE_IDLE, playbackStarted = false))
+        assertEquals(false, AudioPlayer.shouldCompleteOnNotPlaying(Player.STATE_BUFFERING, playbackStarted = true))
+        assertEquals(false, AudioPlayer.shouldCompleteOnNotPlaying(Player.STATE_READY, playbackStarted = true))
     }
 
     @Test

@@ -75,6 +75,8 @@ class VoiceSatelliteStateMachine(
                 wakeTimeoutJob = null
                 silenceTimeoutJob?.cancel()
                 silenceTimeoutJob = null
+                pendingTtsDuration = 0L
+                currentTtsText = ""
                 silenceDetector.reset()
                 isWaking = false
                 haVadStarted = false

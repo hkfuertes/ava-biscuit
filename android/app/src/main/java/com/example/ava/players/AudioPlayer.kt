@@ -62,7 +62,12 @@ class AudioPlayer(
         
         val oldPlayer = _player
         _player = null
+        val oldListener = currentListener
+        currentListener = null
         oldPlayer?.let { player ->
+            oldListener?.let { listener ->
+                try { player.removeListener(listener) } catch (e: Exception) { }
+            }
             try {
                 player.stop()
                 player.clearMediaItems()
@@ -77,9 +82,6 @@ class AudioPlayer(
                 volume = _volume
             }
             
-            currentListener?.let { listener ->
-                _player?.addListener(listener)
-            }
             isPlayerInit = true
         } catch (e: Exception) {
             Log.e(TAG, "Failed to init player", e)
@@ -111,11 +113,12 @@ class AudioPlayer(
 
         try {
             
-            player.stop()
-            player.clearMediaItems()
-            currentListener?.let { 
+            currentListener?.let {
                 try { player.removeListener(it) } catch (e: Exception) { }
             }
+            currentListener = null
+            player.stop()
+            player.clearMediaItems()
             
             val listener = getPlayerListener(onCompletion)
             currentListener = listener
@@ -161,22 +164,28 @@ class AudioPlayer(
     
     private fun getPlayerListener(onCompletion: () -> Unit) = object : Player.Listener {
         private val completionCalled = AtomicBoolean(false)
+        private val playbackStarted = AtomicBoolean(false)
         
         private fun safeComplete() {
             if (completionCalled.compareAndSet(false, true)) {
                 onCompletion()
             }
         }
-        
-        override fun onPlaybackStateChanged(playbackState: Int) {
-            if (playbackState == Player.STATE_ENDED) {
-                
+
+        private fun completePlaybackEnded() {
+            if (completionCalled.compareAndSet(false, true)) {
                 try {
                     onPlaybackEnded?.invoke()
                 } catch (e: Exception) {
                     Log.e(TAG, "Error invoking onPlaybackEnded", e)
                 }
-                safeComplete()
+                onCompletion()
+            }
+        }
+
+        override fun onPlaybackStateChanged(playbackState: Int) {
+            if (playbackState == Player.STATE_ENDED) {
+                completePlaybackEnded()
                 safeClose()
             } else if (playbackState == Player.STATE_READY) {
                 
@@ -206,6 +215,7 @@ class AudioPlayer(
             Log.d(TAG, "onIsPlayingChanged: isPlaying=$isPlaying")
             try {
                 if (isPlaying) {
+                    playbackStarted.set(true)
                     _state.value = AudioPlayerState.PLAYING
                     try {
                         Log.d(TAG, "Invoking onPlaybackStarted callback")
@@ -218,12 +228,8 @@ class AudioPlayer(
                 else
                     _state.value = AudioPlayerState.IDLE
                 
-                if (!isPlaying && _state.value == AudioPlayerState.IDLE) {
-                    try {
-                        onPlaybackEnded?.invoke()
-                    } catch (e: Exception) {
-                        Log.e(TAG, "Error invoking onPlaybackEnded fallback", e)
-                    }
+                if (!isPlaying && shouldCompleteOnNotPlaying(_player?.playbackState ?: Player.STATE_IDLE, playbackStarted.get())) {
+                    completePlaybackEnded()
                 }
             } catch (e: Exception) { }
         }
@@ -285,5 +291,11 @@ class AudioPlayer(
 
     companion object {
         private const val TAG = "AudioPlayer"
+
+        internal fun isCompletePlaybackState(playbackState: Int): Boolean =
+            playbackState == Player.STATE_IDLE || playbackState == Player.STATE_ENDED
+
+        internal fun shouldCompleteOnNotPlaying(playbackState: Int, playbackStarted: Boolean): Boolean =
+            playbackStarted && isCompletePlaybackState(playbackState)
     }
 }
