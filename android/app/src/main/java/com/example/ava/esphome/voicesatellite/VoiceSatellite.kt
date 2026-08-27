@@ -64,6 +64,9 @@ class VoiceSatellite(
     var onTtsProgressUpdate: ((Long, Long, String) -> Unit)? = null
 
     private val startGeneration = AtomicInteger()
+    @Volatile private var pendingStartGeneration = 0
+    @Volatile private var pendingStartWakeWordPhrase: String? = null
+    @Volatile private var pendingStartWakeWordIndex = 0
     private val sensors = VoiceSatelliteSensors(context, scope, this, experimentalSettingsStore)
     private val ring = BiscuitRingController(context)
     private val stateMachine = VoiceSatelliteStateMachine(
@@ -139,22 +142,11 @@ class VoiceSatellite(
 
     fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0) {
         if (audioInput.muted.value) return
-        _state.value = Listening
-        onListeningStarted?.invoke()
         val generation = startGeneration.incrementAndGet()
-        scope.launch {
-            val startPipeline = {
-                if (shouldStartPipeline(generation, startGeneration.get(), _state.value)) {
-                    scope.launch { sendMessage(buildStartRequest(wakeWordPhrase)) }
-                }
-                Unit
-            }
-            if (wakeWordPhrase == null) {
-                player.playStartListeningSound(startPipeline)
-            } else {
-                player.playWakeSound(wakeWordIndex, startPipeline)
-            }
-        }
+        pendingStartGeneration = generation
+        pendingStartWakeWordPhrase = wakeWordPhrase
+        pendingStartWakeWordIndex = wakeWordIndex
+        scope.launch { sendMessage(buildStartRequest(wakeWordPhrase)) }
     }
 
     private fun handleVoiceAssistantResponse(message: VoiceAssistantResponse) {
@@ -163,17 +155,42 @@ class VoiceSatellite(
             stopVoiceSession()
             return
         }
+        val generation = pendingStartGeneration
+        if (!shouldAcceptStartResponse(generation, startGeneration.get())) {
+            Log.d(TAG, "Ignoring stale voice assistant start response")
+            return
+        }
+        val wakeWordPhrase = pendingStartWakeWordPhrase
+        val wakeWordIndex = pendingStartWakeWordIndex
+        pendingStartGeneration = 0
+        pendingStartWakeWordPhrase = null
+        pendingStartWakeWordIndex = 0
+        _state.value = Listening
+        onListeningStarted?.invoke()
         audioInput.isStreaming = true
+        scope.launch {
+            if (wakeWordPhrase == null) {
+                player.playStartListeningSound()
+            } else {
+                player.playWakeSound(wakeWordIndex)
+            }
+        }
     }
 
     fun stopVoiceSession() {
         startGeneration.incrementAndGet()
+        pendingStartGeneration = 0
+        pendingStartWakeWordPhrase = null
+        pendingStartWakeWordIndex = 0
         player.ttsPlayer.stop()
         finishVoiceSession()
         scope.launch { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) }
     }
 
     private fun finishVoiceSession() {
+        pendingStartGeneration = 0
+        pendingStartWakeWordPhrase = null
+        pendingStartWakeWordIndex = 0
         audioInput.isStreaming = false
         _state.value = Connected
         onConversationEnd?.invoke()
@@ -262,7 +279,7 @@ class VoiceSatellite(
         }
 
         internal fun isAssistRunning(state: EspHomeState) = state == Listening || state == Processing || state == Responding
-        internal fun shouldStartPipeline(requestGeneration: Int, currentGeneration: Int, state: EspHomeState) =
-            requestGeneration == currentGeneration && state == Listening
+        internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
+            pendingGeneration != 0 && pendingGeneration == currentGeneration
     }
 }
