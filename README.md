@@ -53,16 +53,18 @@ Then add the discovered ESPHome device in Home Assistant.
 
 ## Wake-word file staging
 
-Bundled wake words ship inside the APK. If you need to inspect or manually stage future downloaded Micro Wake Word files, use a shared-storage staging folder; it does not require `adb root`:
+Bundled wake words ship inside the APK. Ava also reads extra Micro Wake Word files from `/sdcard/wakeWords`; this does not require `adb root`:
 
 ```sh
-adb shell mkdir -p /sdcard/wakeWords/downloaded
-adb push my_wake_word.json /sdcard/wakeWords/downloaded/
-adb push my_wake_word.tflite /sdcard/wakeWords/downloaded/
-adb shell ls -l /sdcard/wakeWords/downloaded
+adb shell mkdir -p /sdcard/wakeWords
+adb push my_wake_word.json /sdcard/wakeWords/
+adb push my_wake_word.tflite /sdcard/wakeWords/
+adb shell ls -l /sdcard/wakeWords
+adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
+adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
 
-Current releases load bundled wake-word assets; this directory is the reserved no-root staging location for future downloaded wake words.
+Keep matching `.json` and `.tflite` files together in that flat directory. Restart Ava after pushing files so Home Assistant sees the new wake words.
 
 ## Build notes
 
