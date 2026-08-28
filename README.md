@@ -15,7 +15,7 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
   - microphone mute switch
   - microphone volume number
   - wake sound switch
-  - action button independent-mode switch
+  - action button independent-mode switch (Configuration entity)
   - action button pressed binary sensor
   - ambient light sensor
   - Start/Stop Assist button
@@ -50,6 +50,21 @@ adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.V
 After the first manual start, Ava starts again on boot and after app updates.
 
 Then add the discovered ESPHome device in Home Assistant.
+
+## Wake-word file staging
+
+Bundled wake words ship inside the APK. Ava also reads extra Micro Wake Word files from `/sdcard/wakeWords`; this does not require `adb root`:
+
+```sh
+adb shell mkdir -p /sdcard/wakeWords
+adb push my_wake_word.json /sdcard/wakeWords/
+adb push my_wake_word.tflite /sdcard/wakeWords/
+adb shell ls -l /sdcard/wakeWords
+adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
+adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
+```
+
+Keep matching `.json` and `.tflite` files together in that flat directory. Restart Ava after pushing files so Home Assistant sees the new wake words, shown with `(external)` in the dropdown.
 
 ## Build notes
 

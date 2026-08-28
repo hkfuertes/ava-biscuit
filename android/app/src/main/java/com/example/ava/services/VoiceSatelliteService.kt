@@ -33,6 +33,8 @@ import com.example.ava.esphome.voicesatellite.VoiceSatelliteAudioInput
 import com.example.ava.esphome.voicesatellite.VoiceSatellitePlayer
 import com.example.ava.esphome.voicesatellite.VoiceStateListener
 import com.example.ava.microwakeword.AssetWakeWordProvider
+import com.example.ava.microwakeword.CompositeWakeWordProvider
+import com.example.ava.microwakeword.FileWakeWordProvider
 import com.example.ava.notifications.createVoiceSatelliteServiceNotification
 import com.example.ava.notifications.createVoiceSatelliteServiceNotificationChannel
 import com.example.ava.nsd.NsdRegistration
@@ -64,6 +66,7 @@ import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
+import java.io.File
 import java.util.concurrent.atomic.AtomicBoolean
 import java.util.concurrent.atomic.AtomicReference
 
@@ -176,7 +179,10 @@ class VoiceSatelliteService : LifecycleService() {
         val audioInput = VoiceSatelliteAudioInput(
             activeWakeWords = microphoneSettings.wakeWords.ifEmpty { listOf(microphoneSettings.wakeWord) },
             activeStopWords = listOf(microphoneSettings.stopWord),
-            wakeWordProvider = AssetWakeWordProvider(assets),
+            wakeWordProvider = CompositeWakeWordProvider(
+                AssetWakeWordProvider(assets),
+                FileWakeWordProvider(File(SDCARD_WAKE_WORDS_DIR))
+            ),
             stopWordProvider = AssetWakeWordProvider(assets, "stopWords"),
             muted = microphoneSettings.muted
         )
@@ -345,6 +351,7 @@ class VoiceSatelliteService : LifecycleService() {
     companion object {
         const val TAG = "VoiceSatelliteService"
         private const val NOTIFICATION_ID = 2
+        private const val SDCARD_WAKE_WORDS_DIR = "/sdcard/wakeWords"
         private val actionKeyCodes = setOf(KeyEvent.KEYCODE_HELP)
         private var instance: VoiceSatelliteService? = null
         internal fun isActionButtonKeyCode(keyCode: Int) = keyCode in actionKeyCodes
