@@ -16,9 +16,10 @@ class VoiceSatelliteStateMachine(
     private val audioInput: VoiceSatelliteAudioInput,
     private val player: VoiceSatellitePlayer,
     private val state: MutableStateFlow<EspHomeState>,
-    private val onStopSatellite: suspend () -> Unit,
+    private val onStopSatellite: suspend (String) -> Unit,
     private val onTtsFinished: suspend () -> Unit,
     private val onIntentEnd: (VoiceAssistantIntentEndData) -> Unit = {},
+    private val onStatus: (String) -> Unit = {},
     private val onListeningStarted: (() -> Unit)? = null,
 ) {
     private var currentTtsText = ""
@@ -29,13 +30,16 @@ class VoiceSatelliteStateMachine(
             VoiceAssistantEvent.VOICE_ASSISTANT_ERROR -> {
                 val code = voiceEvent.dataList.firstOrNull { it.name == "code" }?.value ?: "unknown"
                 val message = voiceEvent.dataList.firstOrNull { it.name == "message" }?.value ?: ""
+                val status = statusForPipelineError(code)
                 Log.e(TAG, "PIPELINE_ERROR: code=$code, message=$message, state=${state.value}")
+                onStatus(status)
                 audioInput.isStreaming = false
-                scope.launch { onStopSatellite() }
+                scope.launch { onStopSatellite(status) }
             }
 
             VoiceAssistantEvent.VOICE_ASSISTANT_RUN_START -> {
                 Log.d(TAG, "RUN_START received")
+                onStatus("running")
                 currentTtsText = ""
                 player.ttsPlayer.runStart { scope.launch { onTtsFinished() } }
                 audioInput.isStreaming = true
@@ -43,6 +47,7 @@ class VoiceSatelliteStateMachine(
 
             VoiceAssistantEvent.VOICE_ASSISTANT_STT_START -> {
                 Log.d(TAG, "STT_START received, listening")
+                onStatus("listening")
                 if (state.value == Connected) {
                     state.value = Listening
                     onListeningStarted?.invoke()
@@ -55,22 +60,24 @@ class VoiceSatelliteStateMachine(
 
             VoiceAssistantEvent.VOICE_ASSISTANT_STT_VAD_END -> {
                 Log.d(TAG, "STT_VAD_END received, switching to Processing")
+                onStatus("processing")
                 audioInput.isStreaming = false
                 state.value = Processing
             }
 
             VoiceAssistantEvent.VOICE_ASSISTANT_STT_END -> {
                 val sttText = voiceEvent.dataList.firstOrNull { it.name == "text" }?.value
-                Log.d(TAG, "STT_END received, text: $sttText")
+                Log.d(TAG, "STT_END received, hasText=${!sttText.isNullOrBlank()}")
                 audioInput.isStreaming = false
 
                 if (isPipelineTextError(sttText)) {
-                    Log.w(TAG, "STT returned error, stopping session: $sttText")
-                    scope.launch { onStopSatellite() }
+                    Log.w(TAG, "STT returned error, stopping session")
+                    scope.launch { onStopSatellite("pipeline-error") }
                     return
                 }
 
                 if (state.value == Listening) state.value = Processing
+                onStatus("processing")
             }
 
             VoiceAssistantEvent.VOICE_ASSISTANT_INTENT_END -> {
@@ -81,12 +88,13 @@ class VoiceSatelliteStateMachine(
 
             VoiceAssistantEvent.VOICE_ASSISTANT_TTS_START -> {
                 Log.d(TAG, "TTS_START received, stopping audio input")
+                onStatus("tts")
                 audioInput.isStreaming = false
 
                 val ttsText = voiceEvent.dataList.firstOrNull { it.name == "text" }?.value
                 if (isPipelineTextError(ttsText)) {
                     Log.w(TAG, "TTS is about error, stopping session")
-                    scope.launch { onStopSatellite() }
+                    scope.launch { onStopSatellite("pipeline-error") }
                     return
                 }
 
@@ -114,8 +122,8 @@ class VoiceSatelliteStateMachine(
                 audioInput.isStreaming = false
 
                 when (state.value) {
-                    is Listening, is Processing -> scope.launch { onStopSatellite() }
-                    is Responding -> if (!wasTtsPlayed) scope.launch { onStopSatellite() }
+                    is Listening, is Processing -> scope.launch { onStopSatellite("idle") }
+                    is Responding -> if (!wasTtsPlayed) scope.launch { onStopSatellite("idle") }
                     else -> Unit
                 }
             }
@@ -154,5 +162,7 @@ class VoiceSatelliteStateMachine(
         }
 
         internal fun shouldFinishOnTtsStreamEnd(state: EspHomeState) = state == Responding
+        internal fun statusForPipelineError(code: String) =
+            if (code == "stt-no-text-recognized") "stt-no-text" else "pipeline-error"
     }
 }

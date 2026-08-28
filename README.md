@@ -15,11 +15,14 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
   - microphone mute switch
   - microphone volume number
   - wake sound switch
+  - continuous conversation switch (Configuration entity)
   - action button independent-mode switch (Configuration entity)
   - action button pressed binary sensor
   - ambient light sensor
   - Start/Stop Assist button
+  - Assist status diagnostic text sensor
 - Maps the physical Biscuit action button to Start/Stop Assist, or to `action_button_pressed` when independent mode is enabled.
+- Supports continuous conversation when Home Assistant asks to continue.
 - Drives the Biscuit LED ring from real Assist states.
 - Keeps playback on ExoPlayer/Media3; FLAC support depends on the ROM exposing a working FLAC MediaCodec.
 
@@ -36,7 +39,7 @@ To build the debug APK locally first:
 ```sh
 cd android
 ./gradlew :app:assembleDebug
-adb install -r app/build/outputs/apk/debug/Ava-0.3.1-debug.apk
+adb install -r app/build/outputs/apk/debug/Ava-*-debug.apk
 ```
 
 ## First start
@@ -65,6 +68,22 @@ adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.V
 ```
 
 Keep matching `.json` and `.tflite` files together in that flat directory. Restart Ava after pushing files so Home Assistant sees the new wake words, shown with `(external)` in the dropdown.
+
+## Sound file staging
+
+Bundled WAV sounds ship inside the APK. Ava also checks `/sdcard/sounds` for same-name `.wav` overrides before falling back to bundled sounds:
+
+```sh
+adb shell mkdir -p /sdcard/sounds
+adb push wake_word_triggered.wav /sdcard/sounds/
+adb push stop_sound.wav /sdcard/sounds/
+adb push timer_finished.wav /sdcard/sounds/
+adb push continuous_prompt.wav /sdcard/sounds/
+adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
+adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
+```
+
+Only flat `.wav` filenames are used. Other formats and nested paths are ignored.
 
 ## Build notes
 

@@ -7,6 +7,7 @@ import com.example.ava.esphome.entities.MediaPlayerEntity
 import com.example.ava.esphome.entities.NumberEntity
 import com.example.ava.esphome.entities.SensorEntity
 import com.example.ava.esphome.entities.SwitchEntity
+import com.example.ava.esphome.entities.TextSensorEntity
 
 object ApplianceEntityAllowlist {
     val allowedObjectIds = setOf(
@@ -15,6 +16,7 @@ object ApplianceEntityAllowlist {
         "media_player",
         "play_wake_sound",
         "continuous_conversation",
+        "assist_status",
         "start_assist",
         "action_button_independent",
         "action_button_pressed",
@@ -30,6 +32,7 @@ object ApplianceEntityAllowlist {
         is NumberEntity -> entity.objectId
         is SensorEntity -> entity.objectId
         is SwitchEntity -> entity.objectId
+        is TextSensorEntity -> entity.objectId
         else -> ""
     }
 }
