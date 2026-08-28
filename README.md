@@ -86,4 +86,6 @@ The `Build APK` workflow is manual-only (`workflow_dispatch`). It builds a relea
 
 This fork is derived from [knoop7/Ava](https://github.com/knoop7/Ava), which itself is based on the original [brownard/Ava](https://github.com/brownard/Ava).
 
+Thanks to [View Assist Companion App](https://github.com/msp1974/ViewAssistCompanionApp) for useful reference implementations around Assist satellite behavior, custom files, and continuous conversation.
+
 Powered by [ESPHome](https://esphome.io/).

@@ -6,7 +6,10 @@ import com.example.ava.players.AudioPlayer
 import com.example.ava.receivers.AvaControlReceiver
 import com.example.ava.services.VoiceSatelliteService
 import com.example.ava.settings.PlayerSettings
+import com.example.esphomeproto.api.VoiceAssistantEvent
+import com.example.esphomeproto.api.VoiceAssistantEventResponse
 import com.example.esphomeproto.api.VoiceAssistantFeature
+import com.example.esphomeproto.api.voiceAssistantEventData
 import android.view.KeyEvent
 import androidx.media3.common.Player
 import org.junit.Assert.assertEquals
@@ -38,6 +41,43 @@ class VoiceSatelliteProtocolTest {
         assertTrue(request.start)
         assertEquals(0, request.flags)
         assertEquals("", request.wakeWordPhrase)
+    }
+
+    @Test
+    fun continuousStartRequestCarriesConversationId() {
+        val request = VoiceSatellite.buildStartRequest(conversationId = "conversation-1")
+
+        assertTrue(request.start)
+        assertEquals("conversation-1", request.conversationId)
+    }
+
+    @Test
+    fun intentEndDataCarriesConversationLoopDecision() {
+        val event = VoiceAssistantEventResponse.newBuilder()
+            .setEventType(VoiceAssistantEvent.VOICE_ASSISTANT_INTENT_END)
+            .addData(voiceAssistantEventData {
+                name = "conversation_id"
+                value = "conversation-1"
+            })
+            .addData(voiceAssistantEventData {
+                name = "continue_conversation"
+                value = "1"
+            })
+            .build()
+
+        val data = VoiceSatelliteStateMachine.intentEndDataFrom(event)
+
+        assertEquals("conversation-1", data.conversationId)
+        assertTrue(data.continueConversation)
+    }
+
+    @Test
+    fun continuousConversationNeedsSettingHaRequestConversationAndUnmutedMic() {
+        assertTrue(VoiceSatellite.shouldContinueConversation(true, true, "conversation-1", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(false, true, "conversation-1", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(true, false, "conversation-1", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(true, true, "", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(true, true, "conversation-1", muted = true))
     }
 
     @Test

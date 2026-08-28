@@ -9,6 +9,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
 
+data class VoiceAssistantIntentEndData(val conversationId: String, val continueConversation: Boolean)
+
 class VoiceSatelliteStateMachine(
     private val scope: CoroutineScope,
     private val audioInput: VoiceSatelliteAudioInput,
@@ -16,6 +18,7 @@ class VoiceSatelliteStateMachine(
     private val state: MutableStateFlow<EspHomeState>,
     private val onStopSatellite: suspend () -> Unit,
     private val onTtsFinished: suspend () -> Unit,
+    private val onIntentEnd: (VoiceAssistantIntentEndData) -> Unit = {},
     private val onListeningStarted: (() -> Unit)? = null,
 ) {
     private var currentTtsText = ""
@@ -68,6 +71,12 @@ class VoiceSatelliteStateMachine(
                 }
 
                 if (state.value == Listening) state.value = Processing
+            }
+
+            VoiceAssistantEvent.VOICE_ASSISTANT_INTENT_END -> {
+                val data = intentEndDataFrom(voiceEvent)
+                Log.d(TAG, "INTENT_END received, continueConversation=${data.continueConversation}")
+                onIntentEnd(data)
             }
 
             VoiceAssistantEvent.VOICE_ASSISTANT_TTS_START -> {
@@ -131,6 +140,18 @@ class VoiceSatelliteStateMachine(
 
     companion object {
         private const val TAG = "VoiceSatelliteStateMachine"
+
+        internal fun intentEndDataFrom(voiceEvent: VoiceAssistantEventResponse): VoiceAssistantIntentEndData {
+            var conversationId = ""
+            var continueConversation = false
+            voiceEvent.dataList.forEach { data ->
+                when (data.name) {
+                    "conversation_id" -> conversationId = data.value
+                    "continue_conversation" -> continueConversation = data.value == "1"
+                }
+            }
+            return VoiceAssistantIntentEndData(conversationId, continueConversation)
+        }
 
         internal fun shouldFinishOnTtsStreamEnd(state: EspHomeState) = state == Responding
     }
