@@ -53,17 +53,16 @@ Then add the discovered ESPHome device in Home Assistant.
 
 ## Wake-word file staging
 
-Bundled wake words ship inside the APK. If you need to inspect or manually stage future downloaded Micro Wake Word files, use the app-private downloaded location:
+Bundled wake words ship inside the APK. If you need to inspect or manually stage future downloaded Micro Wake Word files, use a shared-storage staging folder; it does not require `adb root`:
 
 ```sh
-adb shell run-as net.mfuertes.biscuit.ava mkdir -p files/wakeWords/downloaded
-adb root
-adb push my_wake_word.json /data/data/net.mfuertes.biscuit.ava/files/wakeWords/downloaded/
-adb push my_wake_word.tflite /data/data/net.mfuertes.biscuit.ava/files/wakeWords/downloaded/
-adb shell run-as net.mfuertes.biscuit.ava ls -l files/wakeWords/downloaded
+adb shell mkdir -p /sdcard/wakeWords/downloaded
+adb push my_wake_word.json /sdcard/wakeWords/downloaded/
+adb push my_wake_word.tflite /sdcard/wakeWords/downloaded/
+adb shell ls -l /sdcard/wakeWords/downloaded
 ```
 
-Current releases load bundled wake-word assets; this directory is the reserved location for downloaded wake words.
+Current releases load bundled wake-word assets; this directory is the reserved no-root staging location for future downloaded wake words.
 
 ## Build notes
 
