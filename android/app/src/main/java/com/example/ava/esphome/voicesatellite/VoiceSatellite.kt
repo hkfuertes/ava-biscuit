@@ -63,6 +63,7 @@ class VoiceSatellite(
     @Volatile private var lastConversationId = ""
     @Volatile private var continueConversationRequested = false
     @Volatile private var continuationTurn = false
+    @Volatile private var continuousConversationEnabled = false
     @Volatile private var listeningCueReady = false
     @Volatile private var listeningCueWakeWordPhrase: String? = null
     @Volatile private var listeningCueWakeWordIndex = 0
@@ -86,7 +87,7 @@ class VoiceSatellite(
         onTtsFinished = { finishVoiceResponse() },
         onIntentEnd = { handleIntentEnd(it) },
         onStatus = { assistStatus.updateState(it) },
-        shouldStopOnText = { shouldStopContinuationOnText(continuationTurn, it) },
+        shouldStopOnText = { shouldStopContinuationOnText(continuousConversationEnabled || continuationTurn, it) },
         onListeningStarted = { playListeningCue() }
     )
 
@@ -108,6 +109,9 @@ class VoiceSatellite(
             scheduleAssistWatchdog(it)
         }.launchIn(scope)
         sensors.init()
+        playerSettingsStore.enableContinuousConversation
+            .onEach { continuousConversationEnabled = it }
+            .launchIn(scope)
         startAudioInput()
     }
 
@@ -344,8 +348,8 @@ class VoiceSatellite(
         internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
         internal fun shouldContinueConversation(enabled: Boolean, requested: Boolean, conversationId: String, muted: Boolean) =
             enabled && requested && conversationId.isNotBlank() && !muted
-        internal fun shouldStopContinuationOnText(isContinuationTurn: Boolean, text: String?) =
-            isContinuationTurn && normalizeStopPhrase(text) in setOf("para", "cancelar", "olvidalo")
+        internal fun shouldStopContinuationOnText(isContinuationEnabled: Boolean, text: String?) =
+            isContinuationEnabled && normalizeStopPhrase(text) in setOf("para", "cancelar", "olvidalo", "stop", "never mind")
         internal fun watchdogTimeoutMs(state: EspHomeState): Long? = when (state) {
             Listening -> 45_000L
             Processing -> 60_000L
