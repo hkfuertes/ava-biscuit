@@ -25,7 +25,7 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
 
 ## Install
 
-Build and install the debug APK:
+Build, install, and start once:
 
 ```sh
 cd android
@@ -33,6 +33,8 @@ cd android
 adb install -r app/build/outputs/apk/debug/Ava-0.3.1-debug.apk
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
+
+A fresh install does not start by itself. After the first manual start, Ava starts again on boot and after app updates.
 
 Then add the discovered ESPHome device in Home Assistant.
 
