@@ -1,82 +1,74 @@
-<img width="2555" height="1011" alt="Ava Pro Pixel-Art Banner" src="https://github.com/user-attachments/assets/3a0adaa7-5803-4ede-b32e-c5bc082820a8" />
+# Ava Biscuit
 
-# Ava Pro · Home Assistant's Android Companion
+Headless Home Assistant voice appliance for the Amazon Echo Dot Biscuit running CM12.1 / Android 5.1.
 
-[![DeepWiki](https://img.shields.io/badge/DeepWiki-AI_Docs-003366?style=for-the-badge&labelColor=002244&logoColor=white)](https://deepwiki.com/knoop7/Ava)
-![GitHub Downloads](https://img.shields.io/github/downloads/knoop7/ava/total?style=for-the-badge&logo=github&color=0D1117&labelColor=21262d&logoColor=white&label=DOWNLOADS)
-[![Buy Me a Coffee](https://img.shields.io/badge/Buy%20Me%20a%20Coffee-ffdd00?style=for-the-badge&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/knoop7)
+This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit hardware. It is meant to run as a background service with no launcher UI.
 
-For more practical guides, visit the [Wiki](https://github.com/knoop7/Ava/wiki).
+## What it does
 
+- Exposes a Home Assistant Assist satellite over the ESPHome native API.
+- Uses the Biscuit microphone and speaker for Assist audio.
+- Supports local wake words from bundled Micro Wake Word assets.
+- Exposes retained Home Assistant entities:
+  - Assist satellite
+  - media player
+  - microphone mute switch
+  - microphone volume number
+  - wake sound switch
+  - action button independent-mode switch
+  - action button pressed binary sensor
+  - ambient light sensor
+  - Start/Stop Assist button
+- Maps the physical Biscuit action button to Start/Stop Assist, or to `action_button_pressed` when independent mode is enabled.
+- Drives the Biscuit LED ring from real Assist states.
+- Keeps playback on ExoPlayer/Media3; FLAC support depends on the ROM exposing a working FLAC MediaCodec.
 
-native Android platform built specifically for Home Assistant. A single, lightweight installation on existing devices replaces standalone ESP32 Bluetooth proxy, dedicated satellite voice receiver, intercom hardware.
+## Install
 
-**It connects via the standard ESPHome API Officially certified secure millisecond-level protocol. No MQTT, no HACS, and no custom integration required.**
+Install the APK with ADB. This applies to both locally built APKs and APKs downloaded from GitHub Actions.
 
----
+```sh
+adb install -r path/to/Ava.apk
+```
 
+To build the debug APK locally first:
 
-### Features
+```sh
+cd android
+./gradlew :app:assembleDebug
+adb install -r app/build/outputs/apk/debug/Ava-0.3.1-debug.apk
+```
 
-* **It won't dominate your screen:** Ava Pro runs as a background service. Voice feedback, clock, weather, media controls, and quick switches appear as floating overlays above any app you're currently using. They're disposable, and you retain control of your device.
+## First start
 
-* **It won't overheat your device:** The core engine is written in native C++, not wrapped in a browser container. Even on a wall-mounted tablet, idle CPU usage is near zero. Multiple devices that have been running on the wall for years have shown no overheating issues.
+A fresh install does not start by itself. Start the service once with ADB:
 
-* **It's compatible with virtually any device:** Supports Android 5.0 to 16. It runs on old Fire tablets, retired phones, car infotainment systems, smart mirrors, and single-board computers. The complete APK size is under 20 MB because all external dependencies that could be replaced with native code have been rewritten natively.
+```sh
+adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
+```
 
-* **All functions can be disabled:** Device's Bluetooth chip too weak? Simply disable the Bluetooth proxy. Don't need intercom? One-click deactivation. Just want a pure voice satellite? Cut it down to voice only. Each module is completely decoupled, enabling only the functions your device can handle.
+After the first manual start, Ava starts again on boot and after app updates.
 
----
+Then add the discovered ESPHome device in Home Assistant.
 
-### Capabilities
+## Build notes
 
-* **Voice** — C++ inference pipeline. Custom wake words, dual wake support. Acoustic echo cancellation (wake works while music plays). Local voiceprint recognition (<120ms, distinguishes family members, filters TV audio). Ambient sound detection (glass break, baby cry, doorbell, alarm, siren). All processed on-device.
+Known-good local environment:
 
-* **Bluetooth** — ESPHome BLE proxy. IRK private address resolution. RSSI distance filtering with away-delay presence. Screen-off scanning. Extends Bluetooth coverage to every room where a device is placed. No ESP32 required.
+```sh
+export ANDROID_HOME=/home/hkfuertes/Android/Sdk
+export ANDROID_SDK_ROOT=/home/hkfuertes/Android/Sdk
+export JAVA_HOME=/home/hkfuertes/.local/share/mise/installs/java/17.0.2
+cd android
+./gradlew :app:testDebugUnitTest :app:compileDebugKotlin :app:assembleDebug
+```
 
-* **Audio** — LAN room-to-room intercom and voice messaging. Sendspin multi-room sync with Music Assistant, 5.4-level lossless. Audio continues uninterrupted across overlay transitions.
+## GitHub Actions
 
-* **Display** — Multi-layer overlays in one process. Floating panels, animated notification scenes, Stream Deck–style quick entities, Dawn magazine screensaver with Smart AOD and Pixel Shift. Optional Home Launcher mode.
+The `Build APK` workflow is manual-only (`workflow_dispatch`). It builds a release APK signed with the Android debug certificate and uploads it as the `ava-release-debug-signed-apk` artifact.
 
-* **Camera** — Native binary direct pipeline. Zero-latency, no HTTP bridge, no frame buffering. Snapshots and motion detection as Home Assistant sensors.
+## Lineage
 
-* **Sensors** — Native ESPHome environment pipeline. Light, magnetic field, proximity, battery, Wi‑Fi, storage, memory, uptime. Foreground service keeps updates alive with screen off. Light + proximity fusion for adaptive wake.
+This fork is derived from [knoop7/Ava](https://github.com/knoop7/Ava), which itself is based on the original [brownard/Ava](https://github.com/brownard/Ava).
 
-* **Fleet** — UDP LAN discovery + ADB. Remote screen control, shell, logs, config push. Passcode and authorized deep-link access. One console for every device in the house.
-
-* **Mods** — DexClassLoader runtime loading. Offline ZIP import. Install and use directly: DLNA renderer, AirPlay receiver, Edge TTS (400+ voices), offline STT engine, Zigbee gateway, biometric auth, GPS, OpenClaw on-device AI, camera RTSP/MJPEG to NVR, device packs (Echo Show, Portal, Phicomm R1…). Install, update, or remove without touching the core.
-
-  
----
-
-
-### Start
-
-**1. Install**
-
-Download the latest APK from the [Releases](https://github.com/knoop7/Ava/releases).
-
-**2. Connect**
-
-Install the APK → open Home Assistant → Ava appears in the discovered ESPHome devices → click Add.
-
-**3. Specialty**
-
-Ava pairs beautifully with community-built Home Assistant UI. For ready-made control panels and blueprints, check out the work of **@lone-baggie** — everything installs and works right away:
-
-- [**Home Assistant Blueprints**](https://github.com/lone-baggie/home-assistant-blueprints) — automation blueprints that pair with Ava for quick scene setups.
-- [**HTML Views for Home Assistant**](https://github.com/lone-baggie/HTML-views-for-Home-assistant) — polished HTML dashboard views that connect directly to Ava.
-
-
----
-
-## Lineage 
-
-Special thanks to the original author for contributing the initial concept and design **@brownard**
-Ava Pro is based on the original [brownard/Ava](https://github.com/brownard/Ava) 
-
-
-Powered by [ESPHome](https://esphome.io/) 
-
-
-
+Powered by [ESPHome](https://esphome.io/).

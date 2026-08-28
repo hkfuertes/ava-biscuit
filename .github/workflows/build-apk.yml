@@ -1,0 +1,33 @@
+name: Build APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      - name: Build release APK with debug cert
+        working-directory: android
+        env:
+          AVA_SIGN_RELEASE_WITH_DEBUG_KEY: 'true'
+        run: ./gradlew --no-daemon :app:assembleRelease
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ava-release-debug-signed-apk
+          path: android/app/build/outputs/apk/release/*.apk
