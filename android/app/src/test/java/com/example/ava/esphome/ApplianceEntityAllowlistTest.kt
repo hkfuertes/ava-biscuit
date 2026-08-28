@@ -18,6 +18,7 @@ class ApplianceEntityAllowlistTest {
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("microphone_volume"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("media_player"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_conversation"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("start_assist"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_independent"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_pressed"))

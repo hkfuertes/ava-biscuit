@@ -56,6 +56,8 @@ class VoiceSatellite(
     @Volatile private var pendingStartGeneration = 0
     @Volatile private var pendingStartWakeWordPhrase: String? = null
     @Volatile private var pendingStartWakeWordIndex = 0
+    @Volatile private var lastConversationId = ""
+    @Volatile private var continueConversationRequested = false
     @Volatile private var listeningCueReady = false
     @Volatile private var listeningCueWakeWordPhrase: String? = null
     @Volatile private var listeningCueWakeWordIndex = 0
@@ -67,7 +69,8 @@ class VoiceSatellite(
         player = player,
         state = _state,
         onStopSatellite = { stopVoiceSession() },
-        onTtsFinished = { finishVoiceSession() },
+        onTtsFinished = { finishVoiceResponse() },
+        onIntentEnd = { handleIntentEnd(it) },
         onListeningStarted = { playListeningCue() }
     )
 
@@ -130,13 +133,15 @@ class VoiceSatellite(
         }
     }
 
-    fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0) {
+    fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0, conversationId: String = "") {
         if (audioInput.muted.value) return
+        if (conversationId.isBlank()) lastConversationId = ""
+        continueConversationRequested = false
         val generation = startGeneration.incrementAndGet()
         pendingStartGeneration = generation
         pendingStartWakeWordPhrase = wakeWordPhrase
         pendingStartWakeWordIndex = wakeWordIndex
-        scope.launch { sendMessage(buildStartRequest(wakeWordPhrase)) }
+        scope.launch { sendMessage(buildStartRequest(wakeWordPhrase, conversationId)) }
     }
 
     private fun handleVoiceAssistantResponse(message: VoiceAssistantResponse) {
@@ -160,6 +165,8 @@ class VoiceSatellite(
 
     fun stopVoiceSession() {
         startGeneration.incrementAndGet()
+        continueConversationRequested = false
+        lastConversationId = ""
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
@@ -169,6 +176,19 @@ class VoiceSatellite(
         scope.launch { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) }
     }
 
+    private suspend fun finishVoiceResponse() {
+        val conversationId = lastConversationId
+        val shouldContinue = shouldContinueConversation(
+            enabled = playerSettingsStore.enableContinuousConversation.get(),
+            requested = continueConversationRequested,
+            conversationId = conversationId,
+            muted = audioInput.muted.value
+        )
+        finishVoiceSession()
+        continueConversationRequested = false
+        if (shouldContinue) triggerManualWake(conversationId = conversationId)
+    }
+
     private fun finishVoiceSession() {
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
@@ -176,6 +196,11 @@ class VoiceSatellite(
         clearListeningCue()
         audioInput.isStreaming = false
         _state.value = Connected
+    }
+
+    private fun handleIntentEnd(data: VoiceAssistantIntentEndData) {
+        lastConversationId = data.conversationId
+        continueConversationRequested = data.continueConversation
     }
 
     private fun playListeningCue() {
@@ -267,16 +292,19 @@ class VoiceSatellite(
                 VoiceAssistantFeature.ANNOUNCE.flag or
                 VoiceAssistantFeature.START_CONVERSATION.flag
 
-        internal fun buildStartRequest(wakeWordPhrase: String? = null): VoiceAssistantRequest {
-            return VoiceAssistantRequest.newBuilder()
+        internal fun buildStartRequest(wakeWordPhrase: String? = null, conversationId: String = ""): VoiceAssistantRequest {
+            val request = VoiceAssistantRequest.newBuilder()
                 .setStart(true)
                 .setFlags(0)
                 .setWakeWordPhrase(wakeWordPhrase.orEmpty())
-                .build()
+            if (conversationId.isNotBlank()) request.setConversationId(conversationId)
+            return request.build()
         }
 
         internal fun isAssistRunning(state: EspHomeState) = state == Listening || state == Processing || state == Responding
         internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
+        internal fun shouldContinueConversation(enabled: Boolean, requested: Boolean, conversationId: String, muted: Boolean) =
+            (enabled || requested) && conversationId.isNotBlank() && !muted
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration
     }

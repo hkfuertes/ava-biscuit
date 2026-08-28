@@ -14,6 +14,7 @@ object ApplianceEntityAllowlist {
         "microphone_volume",
         "media_player",
         "play_wake_sound",
+        "continuous_conversation",
         "start_assist",
         "action_button_independent",
         "action_button_pressed",

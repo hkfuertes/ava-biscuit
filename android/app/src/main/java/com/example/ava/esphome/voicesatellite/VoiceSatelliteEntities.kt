@@ -56,6 +56,15 @@ object VoiceSatelliteEntities {
 
         if (playerSettingsStore != null) {
             add(SwitchEntity(
+                key = 39,
+                name = "Continuous Conversation",
+                objectId = "continuous_conversation",
+                icon = "mdi:chat-processing",
+                getState = playerSettingsStore.enableContinuousConversation,
+                entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
+            ) { enabled -> playerSettingsStore.enableContinuousConversation.set(enabled) })
+
+            add(SwitchEntity(
                 key = 40,
                 name = "Action Button Independent",
                 objectId = "action_button_independent",
