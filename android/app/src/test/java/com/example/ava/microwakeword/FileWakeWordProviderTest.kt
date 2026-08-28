@@ -17,7 +17,7 @@ class FileWakeWordProviderTest {
         val provider = FileWakeWordProvider(dir)
         val wakeWord = provider.getWakeWords().single()
 
-        assertEquals("custom", wakeWord.id)
+        assertEquals("external_custom", wakeWord.id)
         assertEquals("Custom Wake (external)", wakeWord.wakeWord.wake_word)
         assertEquals(3, provider.loadWakeWordModel(wakeWord.wakeWord.model).remaining())
     }
@@ -36,10 +36,10 @@ class FileWakeWordProviderTest {
     @Test
     fun compositeProviderKeepsBundledIdsFirstAndFallsBackToFileModels() {
         val bundled = fakeProvider("same", "bundled.tflite", byteArrayOf(1))
-        val downloaded = fakeProvider("same", "sdcard:downloaded.tflite", byteArrayOf(2))
+        val downloaded = fakeProvider("external_same", "sdcard:downloaded.tflite", byteArrayOf(2))
         val composite = CompositeWakeWordProvider(bundled, downloaded)
 
-        assertEquals(listOf("same"), composite.getWakeWords().map { it.id })
+        assertEquals(listOf("same", "external_same"), composite.getWakeWords().map { it.id })
         assertEquals(1, composite.loadWakeWordModel("bundled.tflite").remaining())
         assertEquals(1, composite.loadWakeWordModel("sdcard:downloaded.tflite").remaining())
     }

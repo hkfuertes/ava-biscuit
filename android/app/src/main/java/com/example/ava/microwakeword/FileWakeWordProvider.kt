@@ -11,13 +11,13 @@ class FileWakeWordProvider(private val directory: File) : WakeWordProvider {
         val files = directory.listFiles { file -> file.isFile && file.name.endsWith(".json") } ?: return emptyList()
         return files.sortedBy { it.name }.mapNotNull { file ->
             runCatching {
-                val id = file.name.removeSuffix(".json")
-                if (!isSafeFileName(file.name) || !isSafeFileName(id)) return@mapNotNull null
+                val fileId = file.name.removeSuffix(".json")
+                if (!isSafeFileName(file.name) || !isSafeFileName(fileId)) return@mapNotNull null
                 val wakeWord = json.decodeFromString<WakeWord>(file.readText())
                 if (!isSafeFileName(wakeWord.model)) return@mapNotNull null
                 if (!File(directory, wakeWord.model).isFile) return@mapNotNull null
                 WakeWordWithId(
-                    id,
+                    "$ID_PREFIX$fileId",
                     wakeWord.copy(
                         wake_word = "${wakeWord.wake_word} (external)",
                         model = MODEL_PREFIX + wakeWord.model
@@ -39,6 +39,7 @@ class FileWakeWordProvider(private val directory: File) : WakeWordProvider {
     }
 
     companion object {
+        private const val ID_PREFIX = "external_"
         private const val MODEL_PREFIX = "sdcard:"
         private val SAFE_FILE_NAME = Regex("[A-Za-z0-9._-]+")
 
