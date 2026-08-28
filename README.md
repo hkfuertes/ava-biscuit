@@ -64,7 +64,7 @@ adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
 
-Keep matching `.json` and `.tflite` files together in that flat directory. Restart Ava after pushing files so Home Assistant sees the new wake words.
+Keep matching `.json` and `.tflite` files together in that flat directory. Restart Ava after pushing files so Home Assistant sees the new wake words, shown with `(external)` in the dropdown.
 
 ## Build notes
 

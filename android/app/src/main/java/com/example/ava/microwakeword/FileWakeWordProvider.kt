@@ -16,7 +16,13 @@ class FileWakeWordProvider(private val directory: File) : WakeWordProvider {
                 val wakeWord = json.decodeFromString<WakeWord>(file.readText())
                 if (!isSafeFileName(wakeWord.model)) return@mapNotNull null
                 if (!File(directory, wakeWord.model).isFile) return@mapNotNull null
-                WakeWordWithId(id, wakeWord.copy(model = MODEL_PREFIX + wakeWord.model))
+                WakeWordWithId(
+                    id,
+                    wakeWord.copy(
+                        wake_word = "${wakeWord.wake_word} (external)",
+                        model = MODEL_PREFIX + wakeWord.model
+                    )
+                )
             }.getOrNull()
         }
     }

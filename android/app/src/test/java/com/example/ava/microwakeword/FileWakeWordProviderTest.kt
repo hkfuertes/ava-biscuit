@@ -18,7 +18,7 @@ class FileWakeWordProviderTest {
         val wakeWord = provider.getWakeWords().single()
 
         assertEquals("custom", wakeWord.id)
-        assertEquals("Custom Wake", wakeWord.wakeWord.wake_word)
+        assertEquals("Custom Wake (external)", wakeWord.wakeWord.wake_word)
         assertEquals(3, provider.loadWakeWordModel(wakeWord.wakeWord.model).remaining())
     }
 
