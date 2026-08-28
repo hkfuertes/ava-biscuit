@@ -81,17 +81,6 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
-    fun continuationStopPhrasesAreExactAndAccentSafe() {
-        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "para"))
-        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "Stop."))
-        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "never mind"))
-        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "Olvídalo."))
-        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, " cancelar "))
-        assertEquals(false, VoiceSatellite.shouldStopContinuationOnText(false, "stop"))
-        assertEquals(false, VoiceSatellite.shouldStopContinuationOnText(true, "para la luz"))
-    }
-
-    @Test
     fun watchdogOnlyCoversActiveAssistStates() {
         assertEquals(45_000L, VoiceSatellite.watchdogTimeoutMs(Listening))
         assertEquals(60_000L, VoiceSatellite.watchdogTimeoutMs(Processing))

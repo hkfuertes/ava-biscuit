@@ -32,7 +32,6 @@ import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.text.Normalizer
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
 
@@ -62,8 +61,6 @@ class VoiceSatellite(
     @Volatile private var pendingStartWakeWordIndex = 0
     @Volatile private var lastConversationId = ""
     @Volatile private var continueConversationRequested = false
-    @Volatile private var continuationTurn = false
-    @Volatile private var continuousConversationEnabled = false
     @Volatile private var listeningCueReady = false
     @Volatile private var listeningCueWakeWordPhrase: String? = null
     @Volatile private var listeningCueWakeWordIndex = 0
@@ -87,7 +84,6 @@ class VoiceSatellite(
         onTtsFinished = { finishVoiceResponse() },
         onIntentEnd = { handleIntentEnd(it) },
         onStatus = { assistStatus.updateState(it) },
-        shouldStopOnText = { shouldStopContinuationOnText(continuousConversationEnabled || continuationTurn, it) },
         onListeningStarted = { playListeningCue() }
     )
 
@@ -109,9 +105,6 @@ class VoiceSatellite(
             scheduleAssistWatchdog(it)
         }.launchIn(scope)
         sensors.init()
-        playerSettingsStore.enableContinuousConversation
-            .onEach { continuousConversationEnabled = it }
-            .launchIn(scope)
         startAudioInput()
     }
 
@@ -160,7 +153,6 @@ class VoiceSatellite(
     fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0, conversationId: String = "") {
         if (audioInput.muted.value) return
         if (conversationId.isBlank()) lastConversationId = ""
-        continuationTurn = conversationId.isNotBlank()
         continueConversationRequested = false
         assistStatus.updateState("starting")
         val generation = startGeneration.incrementAndGet()
@@ -192,7 +184,6 @@ class VoiceSatellite(
     fun stopVoiceSession(status: String = "idle") {
         startGeneration.incrementAndGet()
         continueConversationRequested = false
-        continuationTurn = false
         lastConversationId = ""
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
@@ -220,7 +211,6 @@ class VoiceSatellite(
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
-        continuationTurn = false
         clearListeningCue()
         audioInput.isStreaming = false
         assistStatus.updateState(status)
@@ -348,20 +338,11 @@ class VoiceSatellite(
         internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
         internal fun shouldContinueConversation(enabled: Boolean, requested: Boolean, conversationId: String, muted: Boolean) =
             enabled && requested && conversationId.isNotBlank() && !muted
-        internal fun shouldStopContinuationOnText(isContinuationEnabled: Boolean, text: String?) =
-            isContinuationEnabled && normalizeStopPhrase(text) in setOf("para", "cancelar", "olvidalo", "stop", "never mind")
         internal fun watchdogTimeoutMs(state: EspHomeState): Long? = when (state) {
             Listening -> 45_000L
             Processing -> 60_000L
             Responding -> 120_000L
             else -> null
-        }
-        private fun normalizeStopPhrase(text: String?): String {
-            if (text.isNullOrBlank()) return ""
-            val plain = Normalizer.normalize(text.trim().lowercase(), Normalizer.Form.NFD)
-                .replace(Regex("\\p{Mn}+"), "")
-                .replace(Regex("[^\\p{L}\\p{Nd}\\s]+"), "")
-            return plain.replace(Regex("\\s+"), " ").trim()
         }
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration

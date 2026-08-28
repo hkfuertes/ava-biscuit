@@ -20,7 +20,6 @@ class VoiceSatelliteStateMachine(
     private val onTtsFinished: suspend () -> Unit,
     private val onIntentEnd: (VoiceAssistantIntentEndData) -> Unit = {},
     private val onStatus: (String) -> Unit = {},
-    private val shouldStopOnText: (String?) -> Boolean = { false },
     private val onListeningStarted: (() -> Unit)? = null,
 ) {
     private var currentTtsText = ""
@@ -70,12 +69,6 @@ class VoiceSatelliteStateMachine(
                 val sttText = voiceEvent.dataList.firstOrNull { it.name == "text" }?.value
                 Log.d(TAG, "STT_END received, hasText=${!sttText.isNullOrBlank()}")
                 audioInput.isStreaming = false
-
-                if (shouldStopOnText(sttText)) {
-                    Log.i(TAG, "Continuation stop phrase received")
-                    scope.launch { onStopSatellite("idle") }
-                    return
-                }
 
                 if (isPipelineTextError(sttText)) {
                     Log.w(TAG, "STT returned error, stopping session")
