@@ -57,6 +57,12 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
+    fun buttonStartsStaySilentWhileWakeWordsCanPlayWakeSound() {
+        assertEquals(false, VoiceSatellite.shouldPlayWakeSoundFor(null))
+        assertTrue(VoiceSatellite.shouldPlayWakeSoundFor("okay nabu"))
+    }
+
+    @Test
     fun physicalActionButtonMapsOnlyCmHelpKey() {
         assertTrue(VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_HELP))
         assertEquals(false, VoiceSatelliteService.isActionButtonKeyCode(KeyEvent.KEYCODE_VOLUME_UP))

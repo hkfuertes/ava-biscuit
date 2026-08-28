@@ -184,7 +184,12 @@ class VoiceSatellite(
         val wakeWordIndex = listeningCueWakeWordIndex
         clearListeningCue()
         scope.launch {
-            if (wakeWordPhrase == null) player.playStartListeningSound() else player.playWakeSound(wakeWordIndex)
+            if (shouldPlayWakeSoundFor(wakeWordPhrase)) {
+                player.playWakeSound(wakeWordIndex)
+            } else {
+                // Button/manual starts already show the Biscuit LED, so keep them silent.
+                // player.playStartListeningSound()
+            }
         }
     }
 
@@ -271,6 +276,7 @@ class VoiceSatellite(
         }
 
         internal fun isAssistRunning(state: EspHomeState) = state == Listening || state == Processing || state == Responding
+        internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration
     }

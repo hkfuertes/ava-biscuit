@@ -34,6 +34,7 @@ import kotlinx.coroutines.flow.flattenConcat
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.merge
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.job
 import kotlin.coroutines.CoroutineContext
 
@@ -54,7 +55,7 @@ abstract class EspHomeDevice(
     protected val entities = entities.filter(ApplianceEntityAllowlist::isAllowed).toMutableList()
     protected val _state = MutableStateFlow<EspHomeState>(Disconnected)
     val state = _state.asStateFlow()
-    protected val isSubscribedToEntityState = MutableStateFlow(false)
+    protected val entityStateSubscription = MutableStateFlow(0)
 
     protected val scope = CoroutineScope(
         coroutineContext + Job(coroutineContext.job) + CoroutineName("${this.javaClass.simpleName} Scope")
@@ -67,20 +68,13 @@ abstract class EspHomeDevice(
         }
         if (!entities.contains(entity)) {
             entities.add(entity)
-            
-            if (isSubscribedToEntityState.value) {
-                isSubscribedToEntityState.value = false
-                isSubscribedToEntityState.value = true
-            }
+            restartEntityStateSubscription()
         }
     }
 
     fun removeEntity(entity: Entity) {
         if (entities.remove(entity)) {
-            if (isSubscribedToEntityState.value) {
-                isSubscribedToEntityState.value = false
-                isSubscribedToEntityState.value = true
-            }
+            restartEntityStateSubscription()
         }
     }
 
@@ -112,9 +106,9 @@ abstract class EspHomeDevice(
         }
         .launchIn(scope)
 
-    fun listenForEntityStateChanges() = isSubscribedToEntityState
-        .flatMapLatest { subscribed ->
-            if (!subscribed)
+    fun listenForEntityStateChanges() = entityStateSubscription
+        .flatMapLatest { generation ->
+            if (generation == 0)
                 emptyFlow()
             else
                 entities
@@ -146,8 +140,8 @@ abstract class EspHomeDevice(
 
             is PingRequest -> sendMessage(pingResponse { })
 
-            is SubscribeHomeAssistantStatesRequest -> isSubscribedToEntityState.value = true
-            is SubscribeStatesRequest -> isSubscribedToEntityState.value = true
+            is SubscribeHomeAssistantStatesRequest -> startEntityStateSubscription()
+            is SubscribeStatesRequest -> startEntityStateSubscription()
 
             is ListEntitiesRequest -> {
                 entities.map { it.handleMessage(message) }.asFlow().flattenConcat()
@@ -166,12 +160,22 @@ abstract class EspHomeDevice(
         server.sendMessage(message)
     }
 
+    private fun restartEntityStateSubscription() {
+        if (entityStateSubscription.value > 0) {
+            entityStateSubscription.update { if (it == Int.MAX_VALUE) 1 else it + 1 }
+        }
+    }
+
+    private fun startEntityStateSubscription() {
+        entityStateSubscription.update { if (it == Int.MAX_VALUE) 1 else it + 1 }
+    }
+
     protected open suspend fun onConnected() {
         _state.value = Connected
     }
 
     protected open suspend fun onDisconnected() {
-        isSubscribedToEntityState.value = false
+        entityStateSubscription.value = 0
         _state.value = Disconnected
     }
 
