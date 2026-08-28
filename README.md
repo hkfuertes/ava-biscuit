@@ -50,7 +50,7 @@ cd android
 
 ## GitHub Actions
 
-There is currently no GitHub Actions pipeline in this repository. `.github/workflows/` does not exist, so GitHub runs no CI/CD jobs on push or pull request.
+The `Build APK` workflow is manual-only (`workflow_dispatch`). It builds a release APK signed with the Android debug certificate and uploads it as the `ava-release-debug-signed-apk` artifact.
 
 ## Lineage
 

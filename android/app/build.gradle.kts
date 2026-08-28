@@ -28,6 +28,7 @@ android {
     }
 
     val releaseKey = file(System.getProperty("user.home") + "/ava-key.jks")
+    val signReleaseWithDebugKey = System.getenv("AVA_SIGN_RELEASE_WITH_DEBUG_KEY") == "true"
     signingConfigs {
         if (releaseKey.exists()) {
             create("release") {
@@ -51,8 +52,12 @@ android {
             // ponytail: prune real inputs; skip R8 until release-size pressure is proven.
             isMinifyEnabled = false
             isShrinkResources = false
-            // ponytail: CI/dev boxes without the private key still produce an inspectable unsigned release APK.
-            if (releaseKey.exists()) signingConfig = signingConfigs.getByName("release")
+            // ponytail: CI builds a release APK with the debug cert; local release key still wins otherwise.
+            signingConfig = when {
+                signReleaseWithDebugKey -> signingConfigs.getByName("debug")
+                releaseKey.exists() -> signingConfigs.getByName("release")
+                else -> null
+            }
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
