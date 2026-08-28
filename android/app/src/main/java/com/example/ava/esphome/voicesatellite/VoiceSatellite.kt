@@ -9,6 +9,7 @@ import com.example.ava.esphome.EspHomeDevice
 import com.example.ava.esphome.EspHomeState
 import com.example.ava.esphome.Stopped
 import com.example.ava.esphome.entities.ButtonEntity
+import com.example.ava.esphome.entities.TextSensorEntity
 import com.example.ava.settings.PlayerSettingsStore
 import com.example.ava.settings.VoiceSatelliteSettingsStore
 import com.example.esphomeproto.api.DeviceInfoResponse
@@ -25,10 +26,13 @@ import com.example.esphomeproto.api.VoiceAssistantResponse
 import com.example.esphomeproto.api.VoiceAssistantSetConfiguration
 import com.example.esphomeproto.api.VoiceAssistantWakeWord
 import com.google.protobuf.MessageLite
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import java.text.Normalizer
 import java.util.concurrent.atomic.AtomicInteger
 import kotlin.coroutines.CoroutineContext
 
@@ -58,23 +62,36 @@ class VoiceSatellite(
     @Volatile private var pendingStartWakeWordIndex = 0
     @Volatile private var lastConversationId = ""
     @Volatile private var continueConversationRequested = false
+    @Volatile private var continuationTurn = false
     @Volatile private var listeningCueReady = false
     @Volatile private var listeningCueWakeWordPhrase: String? = null
     @Volatile private var listeningCueWakeWordIndex = 0
     private val sensors = VoiceSatelliteSensors(context, scope, this)
     private val ring = BiscuitRingController(context)
+    private val assistStatus = TextSensorEntity(
+        key = 43,
+        name = "Assist Status",
+        objectId = "assist_status",
+        icon = "mdi:assistant",
+        initialState = "idle",
+        entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_DIAGNOSTIC
+    )
+    private var watchdogJob: Job? = null
     private val stateMachine = VoiceSatelliteStateMachine(
         scope = scope,
         audioInput = audioInput,
         player = player,
         state = _state,
-        onStopSatellite = { stopVoiceSession() },
+        onStopSatellite = { status -> stopVoiceSession(status) },
         onTtsFinished = { finishVoiceResponse() },
         onIntentEnd = { handleIntentEnd(it) },
+        onStatus = { assistStatus.updateState(it) },
+        shouldStopOnText = { shouldStopContinuationOnText(continuationTurn, it) },
         onListeningStarted = { playListeningCue() }
     )
 
     init {
+        addEntity(assistStatus)
         addEntity(ButtonEntity(
             key = 42,
             name = "Start/Stop Assist",
@@ -86,7 +103,10 @@ class VoiceSatellite(
     override fun start() {
         super.start()
         ring.start()
-        state.onEach { ring.show(it) }.launchIn(scope)
+        state.onEach {
+            ring.show(it)
+            scheduleAssistWatchdog(it)
+        }.launchIn(scope)
         sensors.init()
         startAudioInput()
     }
@@ -136,7 +156,9 @@ class VoiceSatellite(
     fun triggerManualWake(wakeWordPhrase: String? = null, wakeWordIndex: Int = 0, conversationId: String = "") {
         if (audioInput.muted.value) return
         if (conversationId.isBlank()) lastConversationId = ""
+        continuationTurn = conversationId.isNotBlank()
         continueConversationRequested = false
+        assistStatus.updateState("starting")
         val generation = startGeneration.incrementAndGet()
         pendingStartGeneration = generation
         pendingStartWakeWordPhrase = wakeWordPhrase
@@ -147,7 +169,7 @@ class VoiceSatellite(
     private fun handleVoiceAssistantResponse(message: VoiceAssistantResponse) {
         if (message.error) {
             Log.e(TAG, "Voice assistant start failed")
-            stopVoiceSession()
+            stopVoiceSession("pipeline-error")
             return
         }
         val generation = pendingStartGeneration
@@ -163,16 +185,17 @@ class VoiceSatellite(
         pendingStartWakeWordIndex = 0
     }
 
-    fun stopVoiceSession() {
+    fun stopVoiceSession(status: String = "idle") {
         startGeneration.incrementAndGet()
         continueConversationRequested = false
+        continuationTurn = false
         lastConversationId = ""
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
         clearListeningCue()
         player.ttsPlayer.stop()
-        finishVoiceSession()
+        finishVoiceSession(status)
         scope.launch { sendMessage(VoiceAssistantAudio.newBuilder().setEnd(true).build()) }
     }
 
@@ -184,17 +207,19 @@ class VoiceSatellite(
             conversationId = conversationId,
             muted = audioInput.muted.value
         )
-        finishVoiceSession()
+        finishVoiceSession("idle")
         continueConversationRequested = false
         if (shouldContinue) triggerManualWake(conversationId = conversationId)
     }
 
-    private fun finishVoiceSession() {
+    private fun finishVoiceSession(status: String = "idle") {
         pendingStartGeneration = 0
         pendingStartWakeWordPhrase = null
         pendingStartWakeWordIndex = 0
+        continuationTurn = false
         clearListeningCue()
         audioInput.isStreaming = false
+        assistStatus.updateState(status)
         _state.value = Connected
     }
 
@@ -222,6 +247,19 @@ class VoiceSatellite(
         listeningCueReady = false
         listeningCueWakeWordPhrase = null
         listeningCueWakeWordIndex = 0
+    }
+
+    private fun scheduleAssistWatchdog(newState: EspHomeState) {
+        watchdogJob?.cancel()
+        val timeout = watchdogTimeoutMs(newState) ?: return
+        watchdogJob = scope.launch {
+            delay(timeout)
+            // ponytail: close the real session; LED follows state, no fake ring timing.
+            if (state.value == newState) {
+                Log.w(TAG, "Assist watchdog timed out in state=$newState")
+                stopVoiceSession("watchdog-timeout")
+            }
+        }
     }
 
     private fun startAudioInput() {
@@ -276,6 +314,7 @@ class VoiceSatellite(
 
     override fun close() {
         sensors.stop()
+        watchdogJob?.cancel()
         ring.close()
         audioInput.isStreaming = false
         player.close()
@@ -305,6 +344,21 @@ class VoiceSatellite(
         internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
         internal fun shouldContinueConversation(enabled: Boolean, requested: Boolean, conversationId: String, muted: Boolean) =
             enabled && requested && conversationId.isNotBlank() && !muted
+        internal fun shouldStopContinuationOnText(isContinuationTurn: Boolean, text: String?) =
+            isContinuationTurn && normalizeStopPhrase(text) in setOf("para", "cancelar", "olvidalo")
+        internal fun watchdogTimeoutMs(state: EspHomeState): Long? = when (state) {
+            Listening -> 45_000L
+            Processing -> 60_000L
+            Responding -> 120_000L
+            else -> null
+        }
+        private fun normalizeStopPhrase(text: String?): String {
+            if (text.isNullOrBlank()) return ""
+            val plain = Normalizer.normalize(text.trim().lowercase(), Normalizer.Form.NFD)
+                .replace(Regex("\\p{Mn}+"), "")
+                .replace(Regex("[^\\p{L}\\p{Nd}\\s]+"), "")
+            return plain.replace(Regex("\\s+"), " ").trim()
+        }
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration
     }

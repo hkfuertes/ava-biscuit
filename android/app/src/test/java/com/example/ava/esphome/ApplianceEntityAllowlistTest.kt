@@ -3,6 +3,7 @@ package com.example.ava.esphome
 import com.example.ava.esphome.entities.ButtonEntity
 import com.example.ava.esphome.entities.SensorEntity
 import com.example.ava.esphome.entities.SwitchEntity
+import com.example.ava.esphome.entities.TextSensorEntity
 import com.example.esphomeproto.api.DeviceInfoResponse
 import com.example.esphomeproto.api.EntityCategory
 import kotlinx.coroutines.flow.flowOf
@@ -19,6 +20,7 @@ class ApplianceEntityAllowlistTest {
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("media_player"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_conversation"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("assist_status"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("start_assist"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_independent"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_pressed"))
@@ -46,8 +48,14 @@ class ApplianceEntityAllowlistTest {
             objectId = "start_assist",
             press = {}
         )
+        val assistStatus = TextSensorEntity(
+            key = 43,
+            name = "Assist Status",
+            objectId = "assist_status"
+        )
 
         assertTrue(ApplianceEntityAllowlist.isAllowed(startAssist))
+        assertTrue(ApplianceEntityAllowlist.isAllowed(assistStatus))
         assertFalse(ApplianceEntityAllowlist.isAllowed(screenToggle))
         assertFalse(ApplianceEntityAllowlist.isAllowed(magneticSensor))
 

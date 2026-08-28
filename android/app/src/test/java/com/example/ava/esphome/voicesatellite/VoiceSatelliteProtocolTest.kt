@@ -81,6 +81,29 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
+    fun continuationStopPhrasesAreExactAndAccentSafe() {
+        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "para"))
+        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, "Olvídalo."))
+        assertTrue(VoiceSatellite.shouldStopContinuationOnText(true, " cancelar "))
+        assertEquals(false, VoiceSatellite.shouldStopContinuationOnText(false, "para"))
+        assertEquals(false, VoiceSatellite.shouldStopContinuationOnText(true, "para la luz"))
+    }
+
+    @Test
+    fun watchdogOnlyCoversActiveAssistStates() {
+        assertEquals(45_000L, VoiceSatellite.watchdogTimeoutMs(Listening))
+        assertEquals(60_000L, VoiceSatellite.watchdogTimeoutMs(Processing))
+        assertEquals(120_000L, VoiceSatellite.watchdogTimeoutMs(Responding))
+        assertEquals(null, VoiceSatellite.watchdogTimeoutMs(Connected))
+    }
+
+    @Test
+    fun pipelineErrorStatusKeepsNoTextReadable() {
+        assertEquals("stt-no-text", VoiceSatelliteStateMachine.statusForPipelineError("stt-no-text-recognized"))
+        assertEquals("pipeline-error", VoiceSatelliteStateMachine.statusForPipelineError("wake-engine-missing"))
+    }
+
+    @Test
     fun buttonPressStopsOnlyWhileAssistIsRunning() {
         assertTrue(VoiceSatellite.isAssistRunning(Listening))
         assertTrue(VoiceSatellite.isAssistRunning(Processing))

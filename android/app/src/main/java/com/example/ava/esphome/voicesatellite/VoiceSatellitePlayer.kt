@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
 import com.example.ava.players.AudioPlayer
+import com.example.ava.players.ExternalSoundResolver
 import com.example.ava.players.TtsPlayer
 import com.example.ava.settings.SettingState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -60,27 +61,29 @@ class VoiceSatellitePlayer(
         val enabled = enableWakeSound.get()
         val sound = if (wakeWordIndex == 1) wakeSound2.get() else wakeSound.get()
         Log.d(TAG, "playWakeSound: enabled=$enabled, wakeWordIndex=$wakeWordIndex, sound=$sound")
-        if (enabled) wakeSoundPlayer.play(sound, onCompletion) else onCompletion()
+        if (enabled) wakeSoundPlayer.play(resolveSound(sound), onCompletion) else onCompletion()
     }
 
     fun playStartListeningSound(onCompletion: () -> Unit = {}) {
-        wakeSoundPlayer.play(START_LISTENING_SOUND, onCompletion)
+        wakeSoundPlayer.play(resolveSound(START_LISTENING_SOUND), onCompletion)
     }
 
     suspend fun playTimerFinishedSound(onCompletion: () -> Unit = {}) {
-        ttsPlayer.playSound(timerFinishedSound.get(), onCompletion)
+        ttsPlayer.playSound(resolveSound(timerFinishedSound.get()), onCompletion)
     }
 
     suspend fun playStopSound(onCompletion: () -> Unit = {}) {
         val enabled = enableStopSound.get()
         val sound = stopSound.get()
         Log.d(TAG, "playStopSound: enabled=$enabled, sound=$sound")
-        if (enabled) wakeSoundPlayer.play(sound, onCompletion) else onCompletion()
+        if (enabled) wakeSoundPlayer.play(resolveSound(sound), onCompletion) else onCompletion()
     }
 
     suspend fun playContinuousPromptSound(onCompletion: () -> Unit = {}) {
-        wakeSoundPlayer.play(continuousPromptSound.get(), onCompletion)
+        wakeSoundPlayer.play(resolveSound(continuousPromptSound.get()), onCompletion)
     }
+
+    private fun resolveSound(soundUrl: String) = ExternalSoundResolver.resolve(soundUrl) ?: soundUrl
 
     override fun close() {
         ttsPlayer.close()
