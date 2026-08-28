@@ -61,7 +61,7 @@ object VoiceSatelliteEntities {
                 objectId = "action_button_independent",
                 icon = "mdi:gesture-tap-button",
                 getState = playerSettingsStore.actionButtonIndependent,
-                entityCategory = EntityCategory.ENTITY_CATEGORY_NONE
+                entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
             ) { enabled ->
                 playerSettingsStore.actionButtonIndependent.set(enabled)
                 actionButtonBridge.setIndependent(enabled)
