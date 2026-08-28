@@ -72,10 +72,10 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
-    fun continuousConversationUsesEitherSettingOrHaRequest() {
-        assertTrue(VoiceSatellite.shouldContinueConversation(true, false, "conversation-1", muted = false))
-        assertTrue(VoiceSatellite.shouldContinueConversation(false, true, "conversation-1", muted = false))
-        assertEquals(false, VoiceSatellite.shouldContinueConversation(false, false, "conversation-1", muted = false))
+    fun continuousConversationNeedsSettingHaRequestConversationAndUnmutedMic() {
+        assertTrue(VoiceSatellite.shouldContinueConversation(true, true, "conversation-1", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(false, true, "conversation-1", muted = false))
+        assertEquals(false, VoiceSatellite.shouldContinueConversation(true, false, "conversation-1", muted = false))
         assertEquals(false, VoiceSatellite.shouldContinueConversation(true, true, "", muted = false))
         assertEquals(false, VoiceSatellite.shouldContinueConversation(true, true, "conversation-1", muted = true))
     }

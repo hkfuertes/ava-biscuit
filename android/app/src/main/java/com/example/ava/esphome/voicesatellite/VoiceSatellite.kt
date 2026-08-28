@@ -304,7 +304,7 @@ class VoiceSatellite(
         internal fun isAssistRunning(state: EspHomeState) = state == Listening || state == Processing || state == Responding
         internal fun shouldPlayWakeSoundFor(wakeWordPhrase: String?) = wakeWordPhrase != null
         internal fun shouldContinueConversation(enabled: Boolean, requested: Boolean, conversationId: String, muted: Boolean) =
-            (enabled || requested) && conversationId.isNotBlank() && !muted
+            enabled && requested && conversationId.isNotBlank() && !muted
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration
     }
