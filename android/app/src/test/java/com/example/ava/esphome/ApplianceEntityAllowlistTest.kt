@@ -1,6 +1,7 @@
 package com.example.ava.esphome
 
 import com.example.ava.esphome.entities.ButtonEntity
+import com.example.ava.esphome.entities.SelectEntity
 import com.example.ava.esphome.entities.SensorEntity
 import com.example.ava.esphome.entities.SwitchEntity
 import com.example.ava.esphome.entities.TextSensorEntity
@@ -18,7 +19,12 @@ class ApplianceEntityAllowlistTest {
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("mute_microphone"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("microphone_volume"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("media_player"))
-        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
+        assertFalse(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("wake_sound"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("wake_sound_2"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("stop_sound"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("timer_finished_sound"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_prompt_sound"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_conversation"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("assist_status"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("start_assist"))
@@ -53,9 +59,18 @@ class ApplianceEntityAllowlistTest {
             name = "Assist Status",
             objectId = "assist_status"
         )
+        val wakeSound = SelectEntity(
+            key = 44,
+            name = "Wake Sound",
+            objectId = "wake_sound",
+            options = { listOf("Wake Word Triggered") },
+            getState = flowOf("Wake Word Triggered"),
+            setState = { true }
+        )
 
         assertTrue(ApplianceEntityAllowlist.isAllowed(startAssist))
         assertTrue(ApplianceEntityAllowlist.isAllowed(assistStatus))
+        assertTrue(ApplianceEntityAllowlist.isAllowed(wakeSound))
         assertFalse(ApplianceEntityAllowlist.isAllowed(screenToggle))
         assertFalse(ApplianceEntityAllowlist.isAllowed(magneticSensor))
 

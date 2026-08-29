@@ -5,6 +5,7 @@ import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
 import com.example.ava.players.AudioPlayer
 import com.example.ava.players.ExternalSoundResolver
+import com.example.ava.players.SoundOptions
 import com.example.ava.players.TtsPlayer
 import com.example.ava.settings.SettingState
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -59,28 +60,42 @@ class VoiceSatellitePlayer(
 
     suspend fun playWakeSound(wakeWordIndex: Int = 0, onCompletion: () -> Unit = {}) {
         val enabled = enableWakeSound.get()
-        val sound = if (wakeWordIndex == 1) wakeSound2.get() else wakeSound.get()
+        val sound = if (enabled) selectedWakeSound(wakeWordIndex) else SoundOptions.NO_SOUND_URI
         Log.d(TAG, "playWakeSound: enabled=$enabled, wakeWordIndex=$wakeWordIndex, sound=$sound")
-        if (enabled) wakeSoundPlayer.play(resolveSound(sound), onCompletion) else onCompletion()
+        playSound(sound, onCompletion)
     }
 
     fun playStartListeningSound(onCompletion: () -> Unit = {}) {
-        wakeSoundPlayer.play(resolveSound(START_LISTENING_SOUND), onCompletion)
+        playSound(START_LISTENING_SOUND, onCompletion)
     }
 
     suspend fun playTimerFinishedSound(onCompletion: () -> Unit = {}) {
-        ttsPlayer.playSound(resolveSound(timerFinishedSound.get()), onCompletion)
+        playTtsSound(timerFinishedSound.get(), onCompletion)
     }
 
     suspend fun playStopSound(onCompletion: () -> Unit = {}) {
         val enabled = enableStopSound.get()
-        val sound = stopSound.get()
+        val sound = if (enabled) stopSound.get() else SoundOptions.NO_SOUND_URI
         Log.d(TAG, "playStopSound: enabled=$enabled, sound=$sound")
-        if (enabled) wakeSoundPlayer.play(resolveSound(sound), onCompletion) else onCompletion()
+        playSound(sound, onCompletion)
     }
 
     suspend fun playContinuousPromptSound(onCompletion: () -> Unit = {}) {
-        wakeSoundPlayer.play(resolveSound(continuousPromptSound.get()), onCompletion)
+        playSound(continuousPromptSound.get(), onCompletion)
+    }
+
+    fun previewSound(soundUrl: String) {
+        playSound(soundUrl)
+    }
+
+    private suspend fun selectedWakeSound(wakeWordIndex: Int) = if (wakeWordIndex == 1) wakeSound2.get() else wakeSound.get()
+
+    private fun playSound(soundUrl: String, onCompletion: () -> Unit = {}) {
+        if (SoundOptions.isNoSound(soundUrl)) onCompletion() else wakeSoundPlayer.play(resolveSound(soundUrl), onCompletion)
+    }
+
+    private fun playTtsSound(soundUrl: String, onCompletion: () -> Unit = {}) {
+        if (SoundOptions.isNoSound(soundUrl)) onCompletion() else ttsPlayer.playSound(resolveSound(soundUrl), onCompletion)
     }
 
     private fun resolveSound(soundUrl: String) = ExternalSoundResolver.resolve(soundUrl) ?: soundUrl

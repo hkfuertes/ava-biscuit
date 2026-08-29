@@ -14,7 +14,7 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
   - media player
   - microphone mute switch
   - microphone volume number
-  - wake sound switch
+  - sound selection dropdowns with `No Sound` (Configuration entities)
   - continuous conversation switch (Configuration entity)
   - action button independent-mode switch (Configuration entity)
   - action button pressed binary sensor
@@ -71,19 +71,33 @@ Keep matching `.json` and `.tflite` files together in that flat directory. Resta
 
 ## Sound file staging
 
-Bundled WAV sounds ship inside the APK. Ava also checks `/sdcard/sounds` for same-name `.wav` overrides before falling back to bundled sounds:
+Bundled sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds.
+
+Bundled defaults:
+
+- No Sound (disables that sound)
+- Alexa (`alexa.mp3`)
+- Bubble (`bubble.mp3`)
+- Continuous Prompt (`continuous_prompt.wav`)
+- Ding (`ding.mp3`)
+- Home Assistant (`home_assistant.mp3`)
+- Start Listening Button (`start_listening_button.wav`)
+- Timer Finished (`timer_finished.wav`)
+- Wake Word Triggered (`wake_word_triggered.wav`)
+- Stop Sound (`stop_sound.wav`)
+- Stop Word (`stop_word.mp3`)
+
+Changing a sound in Home Assistant previews the selected sound immediately. The dropdowns also include extra flat `.wav` or `.mp3` files from `/sdcard/sounds`:
 
 ```sh
 adb shell mkdir -p /sdcard/sounds
 adb push wake_word_triggered.wav /sdcard/sounds/
-adb push stop_sound.wav /sdcard/sounds/
-adb push timer_finished.wav /sdcard/sounds/
-adb push continuous_prompt.wav /sdcard/sounds/
+adb push ding.mp3 /sdcard/sounds/
 adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
 
-Only flat `.wav` filenames are used. Other formats and nested paths are ignored.
+Restart Ava after adding files so Home Assistant sees the new options. External sounds are shown with `(external)`. Only flat `.wav` and `.mp3` filenames are used; other formats and nested paths are ignored.
 
 ## Build notes
 
@@ -105,6 +119,6 @@ The `Build APK` workflow is manual-only (`workflow_dispatch`). It builds a relea
 
 This fork is derived from [knoop7/Ava](https://github.com/knoop7/Ava), which itself is based on the original [brownard/Ava](https://github.com/brownard/Ava).
 
-Thanks to [View Assist Companion App](https://github.com/msp1974/ViewAssistCompanionApp) for useful reference implementations around Assist satellite behavior, custom files, and continuous conversation.
+Thanks to [View Assist Companion App](https://github.com/msp1974/ViewAssistCompanionApp) for useful reference implementations around Assist satellite behavior, custom files, continuous conversation, bundled wake sounds, and the bundled English `Stop` MicroWakeWord.
 
 Powered by [ESPHome](https://esphome.io/).
