@@ -27,6 +27,7 @@ class ApplianceEntityAllowlistTest {
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_prompt_sound"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("continuous_conversation"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("assist_status"))
+        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("timer"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("start_assist"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_independent"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("action_button_pressed"))
@@ -59,6 +60,11 @@ class ApplianceEntityAllowlistTest {
             name = "Assist Status",
             objectId = "assist_status"
         )
+        val timer = TextSensorEntity(
+            key = 49,
+            name = "Timer",
+            objectId = "timer"
+        )
         val wakeSound = SelectEntity(
             key = 44,
             name = "Wake Sound",
@@ -70,6 +76,7 @@ class ApplianceEntityAllowlistTest {
 
         assertTrue(ApplianceEntityAllowlist.isAllowed(startAssist))
         assertTrue(ApplianceEntityAllowlist.isAllowed(assistStatus))
+        assertTrue(ApplianceEntityAllowlist.isAllowed(timer))
         assertTrue(ApplianceEntityAllowlist.isAllowed(wakeSound))
         assertFalse(ApplianceEntityAllowlist.isAllowed(screenToggle))
         assertFalse(ApplianceEntityAllowlist.isAllowed(magneticSensor))

@@ -22,6 +22,7 @@ object ApplianceEntityAllowlist {
         "continuous_prompt_sound",
         "continuous_conversation",
         "assist_status",
+        "timer",
         "start_assist",
         "action_button_independent",
         "action_button_pressed",

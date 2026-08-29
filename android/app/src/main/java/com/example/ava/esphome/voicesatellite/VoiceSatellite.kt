@@ -77,6 +77,14 @@ class VoiceSatellite(
         initialState = "idle",
         entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_DIAGNOSTIC
     )
+    private val timerSensor = TextSensorEntity(
+        key = 49,
+        name = "Timer",
+        objectId = "timer",
+        icon = "mdi:timer-outline",
+        initialState = NO_TIMER_STATUS,
+        entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_DIAGNOSTIC
+    )
     private var watchdogJob: Job? = null
     private val timerFeedbackGeneration = AtomicInteger()
     private var timerCountdownJob: Job? = null
@@ -94,6 +102,7 @@ class VoiceSatellite(
 
     init {
         addEntity(assistStatus)
+        addEntity(timerSensor)
         addEntity(ButtonEntity(
             key = 42,
             name = "Start/Stop Assist",
@@ -234,7 +243,7 @@ class VoiceSatellite(
             VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_STARTED,
             VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_UPDATED -> startTimerFeedback(message, generation)
             VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_CANCELLED -> restoreTimerFeedback()
-            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_FINISHED -> finishTimerFeedback(generation)
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_FINISHED -> finishTimerFeedback(message, generation)
             else -> Unit
         }
     }
@@ -249,7 +258,7 @@ class VoiceSatellite(
             var remainingMs = initialRemainingMs
             while (timerFeedbackGeneration.get() == generation && remainingMs > 0) {
                 if (!isAssistRunning(state.value)) {
-                    assistStatus.updateState(timerStatus(remainingMs))
+                    timerSensor.updateState(timerStatus(remainingMs, totalMs))
                     ring.showTimerProgress(remainingMs, totalMs)
                 }
                 delay(1000)
@@ -258,14 +267,14 @@ class VoiceSatellite(
         }
     }
 
-    private fun finishTimerFeedback(generation: Int) {
+    private fun finishTimerFeedback(message: VoiceAssistantTimerEventResponse, generation: Int) {
         timerCountdownJob?.cancel()
         timerCountdownJob = null
         if (isAssistRunning(state.value)) {
             Log.i(TAG, "Timer finished while Assist is running; keeping Assist audio and ring active")
             return
         }
-        assistStatus.updateState("timer-finished")
+        timerSensor.updateState(timerStatus(0L, secondsToMillis(message.totalSeconds)))
         scope.launch {
             player.playTimerFinishedSound {
                 if (timerFeedbackGeneration.get() == generation) restoreTimerFeedback()
@@ -276,6 +285,7 @@ class VoiceSatellite(
     private fun restoreTimerFeedback() {
         timerCountdownJob?.cancel()
         timerCountdownJob = null
+        timerSensor.updateState(NO_TIMER_STATUS)
         if (!isAssistRunning(state.value)) ring.clearTimerProgress()
         ring.show(state.value)
         assistStatus.updateState(statusForState(state.value))
@@ -369,6 +379,7 @@ class VoiceSatellite(
         sensors.stop()
         watchdogJob?.cancel()
         timerCountdownJob?.cancel()
+        ring.clearTimerProgress()
         ring.close()
         audioInput.isStreaming = false
         player.close()
@@ -407,7 +418,16 @@ class VoiceSatellite(
         }
         internal fun secondsToMillis(seconds: Int) = seconds.coerceAtLeast(0).toLong() * 1000L
         internal fun remainingSeconds(remainingMs: Long) = ((remainingMs.coerceAtLeast(0) + 999L) / 1000L).toInt()
-        internal fun timerStatus(remainingMs: Long) = "timer-${remainingSeconds(remainingMs)}s"
+        internal const val NO_TIMER_STATUS = "N/A"
+        internal fun timerStatus(remainingMs: Long, totalMs: Long) =
+            if (totalMs <= 0) NO_TIMER_STATUS else "${formatTimerDuration(remainingSeconds(remainingMs))}/${formatTimerDuration(remainingSeconds(totalMs))}"
+        internal fun formatTimerDuration(seconds: Int): String {
+            val safeSeconds = seconds.coerceAtLeast(0)
+            if (safeSeconds < 60) return "${safeSeconds}s"
+            val minutes = safeSeconds / 60
+            val rest = safeSeconds % 60
+            return if (rest == 0) "${minutes}m" else "${minutes}m${rest.toString().padStart(2, '0')}s"
+        }
         internal fun statusForState(state: EspHomeState): String = when (state) {
             Listening -> "listening"
             Processing -> "processing"

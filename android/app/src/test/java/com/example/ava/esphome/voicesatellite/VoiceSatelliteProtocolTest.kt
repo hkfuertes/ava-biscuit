@@ -153,9 +153,15 @@ class VoiceSatelliteProtocolTest {
     }
 
     @Test
-    fun timerStatusIsShortAndRestoresAssistStateNames() {
-        assertEquals("timer-0s", VoiceSatellite.timerStatus(-1L))
-        assertEquals("timer-180s", VoiceSatellite.timerStatus(180_000L))
+    fun timerSensorShowsRemainingOverTotal() {
+        assertEquals("30s/45s", VoiceSatellite.timerStatus(30_000L, 45_000L))
+        assertEquals("3m/4m", VoiceSatellite.timerStatus(180_000L, 240_000L))
+        assertEquals("1m30s/2m", VoiceSatellite.timerStatus(90_000L, 120_000L))
+        assertEquals("N/A", VoiceSatellite.timerStatus(0L, 0L))
+    }
+
+    @Test
+    fun assistStatusRestoresAssistStateNames() {
         assertEquals("listening", VoiceSatellite.statusForState(Listening))
         assertEquals("processing", VoiceSatellite.statusForState(Processing))
         assertEquals("tts", VoiceSatellite.statusForState(Responding))
