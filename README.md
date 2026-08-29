@@ -103,12 +103,12 @@ Restart Ava after adding files so Home Assistant sees the new options. External 
 
 Home Assistant owns timer creation, countdown, and cancellation. Ava only reacts to ESPHome `VoiceAssistantTimerEventResponse` updates:
 
-- Ava exposes a separate diagnostic `timer` text sensor, shown as `remaining/total` like `3m/4m` or `30s/45s`; no active timer is `N/A`.
+- Ava exposes a separate `timer` text sensor, shown as `remaining/total` like `3m/4m` or `30s/45s`; no active timer is `off`.
 - `assist_status` remains only for Assist state, not timer progress.
 - `STARTED` / `UPDATED`: Ava sends `com.amazon.biscuit.service.COUNTDOWN_PROGRESS` to the Biscuit system service every second with `remainingMs` and `totalMs`.
 - The ROM renders the breathing countdown ring from those values.
-- `FINISHED`: Ava plays the selected Timer Finished sound, then sends `com.amazon.biscuit.service.COUNTDOWN_CLEAR` and returns `timer` to `N/A`.
-- `CANCELLED`: Ava sends `COUNTDOWN_CLEAR` and returns `timer` to `N/A`.
+- `FINISHED`: Ava publishes `timer=success`, plays the selected Timer Finished sound, sends `com.amazon.biscuit.service.COUNTDOWN_CLEAR`, then returns `timer` to `off`.
+- `CANCELLED`: Ava publishes `timer=cancelled`, sends `COUNTDOWN_CLEAR`, then returns `timer` to `off`.
 - If Assist is already listening/processing/responding, Ava keeps Assist audio and ring state instead of interrupting TTS.
 
 ## Build notes

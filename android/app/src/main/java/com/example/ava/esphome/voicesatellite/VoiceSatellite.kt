@@ -82,8 +82,8 @@ class VoiceSatellite(
         name = "Timer",
         objectId = "timer",
         icon = "mdi:timer-outline",
-        initialState = NO_TIMER_STATUS,
-        entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_DIAGNOSTIC
+        initialState = TIMER_OFF_STATUS,
+        entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_NONE
     )
     private var watchdogJob: Job? = null
     private val timerFeedbackGeneration = AtomicInteger()
@@ -242,8 +242,8 @@ class VoiceSatellite(
         when (message.eventType) {
             VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_STARTED,
             VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_UPDATED -> startTimerFeedback(message, generation)
-            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_CANCELLED -> restoreTimerFeedback()
-            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_FINISHED -> finishTimerFeedback(message, generation)
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_CANCELLED -> cancelTimerFeedback(generation)
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_FINISHED -> finishTimerFeedback(generation)
             else -> Unit
         }
     }
@@ -267,28 +267,49 @@ class VoiceSatellite(
         }
     }
 
-    private fun finishTimerFeedback(message: VoiceAssistantTimerEventResponse, generation: Int) {
-        timerCountdownJob?.cancel()
-        timerCountdownJob = null
+    private fun cancelTimerFeedback(generation: Int) {
+        stopTimerCountdown()
+        timerSensor.updateState(TIMER_CANCELLED_STATUS)
+        restoreTimerRing()
+        scheduleTimerOff(generation)
+    }
+
+    private fun finishTimerFeedback(generation: Int) {
+        stopTimerCountdown()
+        timerSensor.updateState(TIMER_SUCCESS_STATUS)
         if (isAssistRunning(state.value)) {
             Log.i(TAG, "Timer finished while Assist is running; keeping Assist audio and ring active")
+            ring.clearTimerProgress()
+            scheduleTimerOff(generation)
             return
         }
-        timerSensor.updateState(timerStatus(0L, secondsToMillis(message.totalSeconds)))
         scope.launch {
             player.playTimerFinishedSound {
-                if (timerFeedbackGeneration.get() == generation) restoreTimerFeedback()
+                if (timerFeedbackGeneration.get() == generation) {
+                    restoreTimerRing()
+                    scheduleTimerOff(generation)
+                }
             }
         }
     }
 
-    private fun restoreTimerFeedback() {
+    private fun restoreTimerRing() {
+        ring.clearTimerProgress()
+        if (!isAssistRunning(state.value)) ring.show(state.value)
+        assistStatus.updateState(statusForState(state.value))
+    }
+
+    private fun scheduleTimerOff(generation: Int) {
+        timerCountdownJob?.cancel()
+        timerCountdownJob = scope.launch {
+            delay(TIMER_TERMINAL_STATUS_MS)
+            if (timerFeedbackGeneration.get() == generation) timerSensor.updateState(TIMER_OFF_STATUS)
+        }
+    }
+
+    private fun stopTimerCountdown() {
         timerCountdownJob?.cancel()
         timerCountdownJob = null
-        timerSensor.updateState(NO_TIMER_STATUS)
-        if (!isAssistRunning(state.value)) ring.clearTimerProgress()
-        ring.show(state.value)
-        assistStatus.updateState(statusForState(state.value))
     }
 
     private fun playListeningCue() {
@@ -418,9 +439,12 @@ class VoiceSatellite(
         }
         internal fun secondsToMillis(seconds: Int) = seconds.coerceAtLeast(0).toLong() * 1000L
         internal fun remainingSeconds(remainingMs: Long) = ((remainingMs.coerceAtLeast(0) + 999L) / 1000L).toInt()
-        internal const val NO_TIMER_STATUS = "N/A"
+        internal const val TIMER_OFF_STATUS = "off"
+        internal const val TIMER_SUCCESS_STATUS = "success"
+        internal const val TIMER_CANCELLED_STATUS = "cancelled"
+        internal const val TIMER_TERMINAL_STATUS_MS = 1_000L
         internal fun timerStatus(remainingMs: Long, totalMs: Long) =
-            if (totalMs <= 0) NO_TIMER_STATUS else "${formatTimerDuration(remainingSeconds(remainingMs))}/${formatTimerDuration(remainingSeconds(totalMs))}"
+            if (totalMs <= 0) TIMER_OFF_STATUS else "${formatTimerDuration(remainingSeconds(remainingMs))}/${formatTimerDuration(remainingSeconds(totalMs))}"
         internal fun formatTimerDuration(seconds: Int): String {
             val safeSeconds = seconds.coerceAtLeast(0)
             if (safeSeconds < 60) return "${safeSeconds}s"
