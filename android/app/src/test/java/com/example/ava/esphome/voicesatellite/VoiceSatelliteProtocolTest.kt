@@ -21,6 +21,7 @@ class VoiceSatelliteProtocolTest {
     fun featureFlagsIncludeAnnounceSoHomeAssistantFetchesWakeWordConfig() {
         val flags = VoiceSatellite.voiceAssistantFeatureFlags
 
+        assertTrue(flags and VoiceAssistantFeature.TIMERS.flag != 0)
         assertTrue(flags and VoiceAssistantFeature.ANNOUNCE.flag != 0)
         assertTrue(flags and VoiceAssistantFeature.START_CONVERSATION.flag != 0)
     }
@@ -139,6 +140,34 @@ class VoiceSatelliteProtocolTest {
         assertEquals("alexa_thinking", BiscuitRingController.animationFor(Processing))
         assertEquals("solid_blue", BiscuitRingController.animationFor(Responding))
         assertEquals(null, BiscuitRingController.animationFor(Connected))
+    }
+
+    @Test
+    fun timerCountdownUsesRomServiceMilliseconds() {
+        assertTrue(BiscuitRingController.isValidCountdown(180_000L, 240_000L))
+        assertEquals(false, BiscuitRingController.isValidCountdown(240_001L, 240_000L))
+        assertEquals(false, BiscuitRingController.isValidCountdown(1L, 0L))
+        assertEquals(180_000L, VoiceSatellite.secondsToMillis(180))
+        assertEquals(0L, VoiceSatellite.secondsToMillis(-1))
+        assertEquals(180, VoiceSatellite.remainingSeconds(179_001L))
+    }
+
+    @Test
+    fun timerSensorShowsRemainingOverTotal() {
+        assertEquals("30s/45s", VoiceSatellite.timerStatus(30_000L, 45_000L))
+        assertEquals("3m/4m", VoiceSatellite.timerStatus(180_000L, 240_000L))
+        assertEquals("1m30s/2m", VoiceSatellite.timerStatus(90_000L, 120_000L))
+        assertEquals("off", VoiceSatellite.timerStatus(0L, 0L))
+        assertEquals("success", VoiceSatellite.TIMER_SUCCESS_STATUS)
+        assertEquals("cancelled", VoiceSatellite.TIMER_CANCELLED_STATUS)
+    }
+
+    @Test
+    fun assistStatusRestoresAssistStateNames() {
+        assertEquals("listening", VoiceSatellite.statusForState(Listening))
+        assertEquals("processing", VoiceSatellite.statusForState(Processing))
+        assertEquals("tts", VoiceSatellite.statusForState(Responding))
+        assertEquals("idle", VoiceSatellite.statusForState(Connected))
     }
 
     @Test
