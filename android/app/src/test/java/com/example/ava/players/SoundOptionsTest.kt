@@ -12,11 +12,16 @@ class SoundOptionsTest {
         assertEquals(
             listOf(
                 "No Sound",
+                "Alexa",
+                "Bubble",
                 "Continuous Prompt",
+                "Ding",
+                "Home Assistant",
                 "Start Listening Button",
                 "Timer Finished",
                 "Wake Word Triggered",
                 "Stop Sound",
+                "Stop Word",
             ),
             SoundOptions.DEFAULT_BUNDLED_SOUNDS.map { it.label }
         )

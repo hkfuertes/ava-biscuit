@@ -75,12 +75,17 @@ Bundled sounds ship inside the APK. Ava exposes Home Assistant Configuration dro
 
 Bundled defaults:
 
+- No Sound (disables that sound)
+- Alexa (`alexa.mp3`)
+- Bubble (`bubble.mp3`)
 - Continuous Prompt (`continuous_prompt.wav`)
+- Ding (`ding.mp3`)
+- Home Assistant (`home_assistant.mp3`)
 - Start Listening Button (`start_listening_button.wav`)
 - Timer Finished (`timer_finished.wav`)
 - Wake Word Triggered (`wake_word_triggered.wav`)
 - Stop Sound (`stop_sound.wav`)
-- No Sound (disables that sound)
+- Stop Word (`stop_word.mp3`)
 
 Changing a sound in Home Assistant previews the selected sound immediately. The dropdowns also include extra flat `.wav` or `.mp3` files from `/sdcard/sounds`:
 
@@ -114,6 +119,6 @@ The `Build APK` workflow is manual-only (`workflow_dispatch`). It builds a relea
 
 This fork is derived from [knoop7/Ava](https://github.com/knoop7/Ava), which itself is based on the original [brownard/Ava](https://github.com/brownard/Ava).
 
-Thanks to [View Assist Companion App](https://github.com/msp1974/ViewAssistCompanionApp) for useful reference implementations around Assist satellite behavior, custom files, and continuous conversation.
+Thanks to [View Assist Companion App](https://github.com/msp1974/ViewAssistCompanionApp) for useful reference implementations around Assist satellite behavior, custom files, continuous conversation, bundled wake sounds, and the bundled English `Stop` MicroWakeWord.
 
 Powered by [ESPHome](https://esphome.io/).

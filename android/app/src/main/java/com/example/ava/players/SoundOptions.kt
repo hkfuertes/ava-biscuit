@@ -11,11 +11,16 @@ object SoundOptions {
 
     val DEFAULT_BUNDLED_SOUNDS = listOf(
         Option(NO_SOUND_LABEL, NO_SOUND_URI),
+        Option("Alexa", "asset:///sounds/alexa.mp3"),
+        Option("Bubble", "asset:///sounds/bubble.mp3"),
         Option("Continuous Prompt", "asset:///sounds/continuous_prompt.wav"),
+        Option("Ding", "asset:///sounds/ding.mp3"),
+        Option("Home Assistant", "asset:///sounds/home_assistant.mp3"),
         Option("Start Listening Button", "asset:///sounds/start_listening_button.wav"),
         Option("Timer Finished", "asset:///sounds/timer_finished.wav"),
         Option("Wake Word Triggered", "asset:///sounds/wake_word_triggered.wav"),
         Option("Stop Sound", "asset:///stopWords/stop_sound.wav"),
+        Option("Stop Word", "asset:///sounds/stop_word.mp3"),
     )
 
     private val bundledDirs = listOf("sounds", "stopWords")
