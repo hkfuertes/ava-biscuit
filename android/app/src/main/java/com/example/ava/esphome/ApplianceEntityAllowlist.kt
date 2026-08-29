@@ -15,7 +15,6 @@ object ApplianceEntityAllowlist {
         "mute_microphone",
         "microphone_volume",
         "media_player",
-        "play_wake_sound",
         "wake_sound",
         "wake_sound_2",
         "stop_sound",

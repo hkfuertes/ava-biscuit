@@ -11,6 +11,7 @@ import com.example.ava.players.SoundOptions
 import com.example.ava.settings.PlayerSettingsStore
 import com.example.ava.settings.SettingState
 import com.example.esphomeproto.api.EntityCategory
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.map
 
 object VoiceSatelliteEntities {
@@ -49,15 +50,6 @@ object VoiceSatelliteEntities {
 
         add(MediaPlayerEntity(0, context.getString(R.string.entity_media_player), "media_player", player))
 
-        add(SwitchEntity(
-            2,
-            context.getString(R.string.entity_wake_sound),
-            "play_wake_sound",
-            "mdi:bell-ring",
-            player.enableWakeSound,
-            EntityCategory.ENTITY_CATEGORY_NONE
-        ) { player.enableWakeSound.set(it) })
-
         if (playerSettingsStore != null) {
             add(SwitchEntity(
                 key = 39,
@@ -68,11 +60,11 @@ object VoiceSatelliteEntities {
                 entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
             ) { enabled -> playerSettingsStore.enableContinuousConversation.set(enabled) })
 
-            add(soundSelect(context, 44, "Wake Sound", "wake_sound", playerSettingsStore.wakeSound))
-            add(soundSelect(context, 45, "Wake Sound 2", "wake_sound_2", playerSettingsStore.wakeSound2))
-            add(soundSelect(context, 46, "Stop Sound", "stop_sound", playerSettingsStore.stopSound))
-            add(soundSelect(context, 47, "Timer Finished Sound", "timer_finished_sound", playerSettingsStore.timerFinishedSound))
-            add(soundSelect(context, 48, "Continuous Prompt Sound", "continuous_prompt_sound", playerSettingsStore.continuousPromptSound))
+            add(soundSelect(context, player, 44, "Wake Sound", "wake_sound", playerSettingsStore.wakeSound, playerSettingsStore.enableWakeSound))
+            add(soundSelect(context, player, 45, "Wake Sound 2", "wake_sound_2", playerSettingsStore.wakeSound2, playerSettingsStore.enableWakeSound))
+            add(soundSelect(context, player, 46, "Stop Sound", "stop_sound", playerSettingsStore.stopSound, playerSettingsStore.enableStopSound))
+            add(soundSelect(context, player, 47, "Timer Finished Sound", "timer_finished_sound", playerSettingsStore.timerFinishedSound))
+            add(soundSelect(context, player, 48, "Continuous Prompt Sound", "continuous_prompt_sound", playerSettingsStore.continuousPromptSound))
 
             add(SwitchEntity(
                 key = 40,
@@ -97,24 +89,32 @@ object VoiceSatelliteEntities {
 
     private fun soundSelect(
         context: Context,
+        player: VoiceSatellitePlayer,
         key: Int,
         name: String,
         objectId: String,
-        setting: SettingState<String>
+        setting: SettingState<String>,
+        enabledSetting: SettingState<Boolean>? = null
     ) = SelectEntity(
         key = key,
         name = name,
         objectId = objectId,
         icon = "mdi:music-note",
         options = { SoundOptions.labels(context) },
-        getState = setting.map { SoundOptions.labelForUri(context, it) },
+        getState = enabledSetting?.let { enabled ->
+            combine(setting, enabled) { uri, isEnabled ->
+                if (isEnabled) SoundOptions.labelForUri(context, uri) else SoundOptions.NO_SOUND_LABEL
+            }
+        } ?: setting.map { SoundOptions.labelForUri(context, it) },
         entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
     ) { label ->
         val uri = SoundOptions.uriForLabel(context, label)
         if (uri == null) {
             false
         } else {
+            enabledSetting?.set(!SoundOptions.isNoSound(uri))
             setting.set(uri)
+            player.previewSound(uri)
             true
         }
     }

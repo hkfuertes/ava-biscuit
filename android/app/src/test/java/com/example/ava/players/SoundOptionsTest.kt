@@ -11,6 +11,7 @@ class SoundOptionsTest {
     fun exposesDefaultBundledSoundOptions() {
         assertEquals(
             listOf(
+                "No Sound",
                 "Continuous Prompt",
                 "Start Listening Button",
                 "Timer Finished",
@@ -40,6 +41,7 @@ class SoundOptionsTest {
             .distinctBy { it.uri }
             .sortedBy { it.label }
 
+        assertTrue(options.any { it.label == "No Sound" && it.uri == "no-sound" })
         assertTrue(options.any { it.label == "Wake Word Triggered" && it.uri == "asset:///sounds/wake_word_triggered.wav" })
         assertTrue(options.any { it.label == "Wake Word Triggered (external)" && it.uri == "file://${File(dir, "wake_word_triggered.wav").absolutePath}" })
         assertTrue(options.any { it.label == "Custom Chime (external)" })
@@ -48,6 +50,7 @@ class SoundOptionsTest {
 
     @Test
     fun formatsMissingUriLabels() {
+        assertTrue(SoundOptions.isNoSound("no-sound"))
         assertEquals("Timer Finished", SoundOptions.labelForMissingUri("asset:///sounds/timer_finished.wav"))
         assertEquals("Bell (external)", SoundOptions.labelForMissingUri("file:///sdcard/sounds/bell.wav"))
     }

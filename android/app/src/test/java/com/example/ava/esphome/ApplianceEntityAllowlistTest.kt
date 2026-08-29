@@ -19,7 +19,7 @@ class ApplianceEntityAllowlistTest {
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("mute_microphone"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("microphone_volume"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("media_player"))
-        assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
+        assertFalse(ApplianceEntityAllowlist.allowedObjectIds.contains("play_wake_sound"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("wake_sound"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("wake_sound_2"))
         assertTrue(ApplianceEntityAllowlist.allowedObjectIds.contains("stop_sound"))

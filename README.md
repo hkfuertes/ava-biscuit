@@ -14,8 +14,7 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
   - media player
   - microphone mute switch
   - microphone volume number
-  - wake sound switch
-  - sound selection dropdowns (Configuration entities)
+  - sound selection dropdowns with `No Sound` (Configuration entities)
   - continuous conversation switch (Configuration entity)
   - action button independent-mode switch (Configuration entity)
   - action button pressed binary sensor
@@ -81,8 +80,9 @@ Bundled defaults:
 - Timer Finished (`timer_finished.wav`)
 - Wake Word Triggered (`wake_word_triggered.wav`)
 - Stop Sound (`stop_sound.wav`)
+- No Sound (disables that sound)
 
-The dropdowns also include extra flat `.wav` files from `/sdcard/sounds`:
+Changing a sound in Home Assistant previews the selected WAV immediately. The dropdowns also include extra flat `.wav` files from `/sdcard/sounds`:
 
 ```sh
 adb shell mkdir -p /sdcard/sounds
