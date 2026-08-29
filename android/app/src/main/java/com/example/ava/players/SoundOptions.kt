@@ -45,12 +45,12 @@ object SoundOptions {
 
     internal fun bundledOptions(listAssets: (String) -> List<String>) = bundledDirs.flatMap { dir ->
         listAssets(dir)
-            .filter(ExternalSoundResolver::isSafeWavName)
+            .filter(ExternalSoundResolver::isSafeSoundName)
             .map { fileName -> Option(displayName(fileName), "asset:///$dir/$fileName") }
     }
 
     internal fun externalOptions(directory: File) = directory.listFiles()
-        ?.filter { it.isFile && it.canRead() && ExternalSoundResolver.isSafeWavName(it.name) }
+        ?.filter { it.isFile && it.canRead() && ExternalSoundResolver.isSafeSoundName(it.name) }
         ?.map { Option("${displayName(it.name)} (external)", "file://${it.absolutePath}") }
         .orEmpty()
 
@@ -63,7 +63,7 @@ object SoundOptions {
         .joinToString(" ") { word -> word.replaceFirstChar { if (it.isLowerCase()) it.titlecase() else it.toString() } }
 
     internal fun labelForMissingUri(uri: String): String {
-        val fileName = uri.substringAfterLast('/').takeIf(ExternalSoundResolver::isSafeWavName) ?: return uri
+        val fileName = uri.substringAfterLast('/').takeIf(ExternalSoundResolver::isSafeSoundName) ?: return uri
         val suffix = if (uri.startsWith("file://")) " (external)" else ""
         return displayName(fileName) + suffix
     }

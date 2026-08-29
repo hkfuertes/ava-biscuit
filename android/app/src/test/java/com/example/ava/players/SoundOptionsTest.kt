@@ -23,11 +23,11 @@ class SoundOptionsTest {
     }
 
     @Test
-    fun listsBundledAndExternalWavsWithFriendlyLabels() {
+    fun listsBundledAndExternalSoundsWithFriendlyLabels() {
         val dir = Files.createTempDirectory("ava-sounds").toFile()
         File(dir, "wake_word_triggered.wav").writeBytes(byteArrayOf(1))
-        File(dir, "custom-chime.wav").writeBytes(byteArrayOf(1))
-        File(dir, "ignored.mp3").writeBytes(byteArrayOf(1))
+        File(dir, "custom-chime.mp3").writeBytes(byteArrayOf(1))
+        File(dir, "ignored.ogg").writeBytes(byteArrayOf(1))
 
         val bundled = SoundOptions.bundledOptions { path ->
             when (path) {
@@ -44,7 +44,7 @@ class SoundOptionsTest {
         assertTrue(options.any { it.label == "No Sound" && it.uri == "no-sound" })
         assertTrue(options.any { it.label == "Wake Word Triggered" && it.uri == "asset:///sounds/wake_word_triggered.wav" })
         assertTrue(options.any { it.label == "Wake Word Triggered (external)" && it.uri == "file://${File(dir, "wake_word_triggered.wav").absolutePath}" })
-        assertTrue(options.any { it.label == "Custom Chime (external)" })
+        assertTrue(options.any { it.label == "Custom Chime (external)" && it.uri == "file://${File(dir, "custom-chime.mp3").absolutePath}" })
         assertEquals(false, options.any { it.label.contains("ignored", ignoreCase = true) })
     }
 

@@ -71,7 +71,7 @@ Keep matching `.json` and `.tflite` files together in that flat directory. Resta
 
 ## Sound file staging
 
-Bundled WAV sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds.
+Bundled sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds.
 
 Bundled defaults:
 
@@ -82,19 +82,17 @@ Bundled defaults:
 - Stop Sound (`stop_sound.wav`)
 - No Sound (disables that sound)
 
-Changing a sound in Home Assistant previews the selected WAV immediately. The dropdowns also include extra flat `.wav` files from `/sdcard/sounds`:
+Changing a sound in Home Assistant previews the selected sound immediately. The dropdowns also include extra flat `.wav` or `.mp3` files from `/sdcard/sounds`:
 
 ```sh
 adb shell mkdir -p /sdcard/sounds
 adb push wake_word_triggered.wav /sdcard/sounds/
-adb push stop_sound.wav /sdcard/sounds/
-adb push timer_finished.wav /sdcard/sounds/
-adb push continuous_prompt.wav /sdcard/sounds/
+adb push ding.mp3 /sdcard/sounds/
 adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
 
-Restart Ava after adding files so Home Assistant sees the new options. External sounds are shown with `(external)`. Only flat `.wav` filenames are used; other formats and nested paths are ignored.
+Restart Ava after adding files so Home Assistant sees the new options. External sounds are shown with `(external)`. Only flat `.wav` and `.mp3` filenames are used; other formats and nested paths are ignored.
 
 ## Build notes
 
