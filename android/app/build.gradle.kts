@@ -19,9 +19,9 @@ android {
             abiFilters.add("armeabi-v7a")
         }
         versionCode = if (project.ext.has("versionCode"))
-            project.ext.get("versionCode").toString().toInt() else 33
+            project.ext.get("versionCode").toString().toInt() else 34
         versionName = if (project.ext.has("versionName"))
-            project.ext.get("versionName").toString() else "0.3.3"
+            project.ext.get("versionName").toString() else "0.3.4"
         base.archivesName = "Ava-$versionName"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
