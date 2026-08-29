@@ -56,13 +56,13 @@ Then add the discovered ESPHome device in Home Assistant.
 
 ## Wake-word file staging
 
-Bundled wake words ship inside the APK. Ava also reads extra Micro Wake Word files from `/sdcard/wakeWords`; this does not require `adb root`:
+Bundled wake words ship inside the APK. Ava also reads extra Micro Wake Word files from `/sdcard/ava/wakewords`; this does not require `adb root`:
 
 ```sh
-adb shell mkdir -p /sdcard/wakeWords
-adb push my_wake_word.json /sdcard/wakeWords/
-adb push my_wake_word.tflite /sdcard/wakeWords/
-adb shell ls -l /sdcard/wakeWords
+adb shell mkdir -p /sdcard/ava/wakewords
+adb push my_wake_word.json /sdcard/ava/wakewords/
+adb push my_wake_word.tflite /sdcard/ava/wakewords/
+adb shell ls -l /sdcard/ava/wakewords
 adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
@@ -79,7 +79,6 @@ Bundled defaults:
 - Alexa (`alexa.mp3`)
 - Bubble (`bubble.mp3`)
 - Continuous Prompt (`continuous_prompt.wav`)
-- Ding (`ding.mp3`)
 - Home Assistant (`home_assistant.mp3`)
 - Start Listening Button (`start_listening_button.wav`)
 - Timer Finished (`timer_finished.wav`)
@@ -87,12 +86,12 @@ Bundled defaults:
 - Stop Sound (`stop_sound.wav`)
 - Stop Word (`stop_word.mp3`)
 
-Changing a sound in Home Assistant previews the selected sound immediately. The dropdowns also include extra flat `.wav` or `.mp3` files from `/sdcard/sounds`:
+Changing a sound in Home Assistant previews the selected sound immediately. The dropdowns also include extra flat `.wav` or `.mp3` files from `/sdcard/ava/sounds`:
 
 ```sh
-adb shell mkdir -p /sdcard/sounds
-adb push wake_word_triggered.wav /sdcard/sounds/
-adb push ding.mp3 /sdcard/sounds/
+adb shell mkdir -p /sdcard/ava/sounds
+adb push wake_word_triggered.wav /sdcard/ava/sounds/
+adb push bubble.mp3 /sdcard/ava/sounds/
 adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
