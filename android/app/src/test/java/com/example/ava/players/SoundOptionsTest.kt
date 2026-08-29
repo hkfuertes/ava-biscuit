@@ -8,22 +8,20 @@ import java.nio.file.Files
 
 class SoundOptionsTest {
     @Test
-    fun exposesDefaultBundledSoundOptions() {
+    fun buildsBundledSoundOptionsFromAssetFolders() {
         assertEquals(
             listOf(
-                "No Sound",
-                "Alexa",
-                "Bubble",
-                "Continuous Prompt",
-                "Ding",
-                "Home Assistant",
-                "Start Listening Button",
-                "Timer Finished",
-                "Wake Word Triggered",
-                "Stop Sound",
-                "Stop Word",
+                SoundOptions.Option("Alexa", "asset:///sounds/alexa.mp3"),
+                SoundOptions.Option("Wake Word Triggered", "asset:///sounds/wake_word_triggered.wav"),
+                SoundOptions.Option("Stop Sound", "asset:///stopWords/stop_sound.wav"),
             ),
-            SoundOptions.DEFAULT_BUNDLED_SOUNDS.map { it.label }
+            SoundOptions.bundledOptions { path ->
+                when (path) {
+                    "sounds" -> listOf("alexa.mp3", "wake_word_triggered.wav", "ignored.ogg")
+                    "stopWords" -> listOf("stop_sound.wav")
+                    else -> emptyList()
+                }
+            }
         )
     }
 
@@ -42,7 +40,7 @@ class SoundOptionsTest {
             }
         }
         val external = SoundOptions.externalOptions(dir)
-        val options = (SoundOptions.DEFAULT_BUNDLED_SOUNDS + bundled + external)
+        val options = (listOf(SoundOptions.Option(SoundOptions.NO_SOUND_LABEL, SoundOptions.NO_SOUND_URI)) + bundled + external)
             .distinctBy { it.uri }
             .sortedBy { it.label }
 
@@ -57,6 +55,6 @@ class SoundOptionsTest {
     fun formatsMissingUriLabels() {
         assertTrue(SoundOptions.isNoSound("no-sound"))
         assertEquals("Timer Finished", SoundOptions.labelForMissingUri("asset:///sounds/timer_finished.wav"))
-        assertEquals("Bell (external)", SoundOptions.labelForMissingUri("file:///sdcard/sounds/bell.wav"))
+        assertEquals("Bell (external)", SoundOptions.labelForMissingUri("file:///sdcard/ava/sounds/bell.wav"))
     }
 }

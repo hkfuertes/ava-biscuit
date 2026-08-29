@@ -351,7 +351,7 @@ class VoiceSatelliteService : LifecycleService() {
     companion object {
         const val TAG = "VoiceSatelliteService"
         private const val NOTIFICATION_ID = 2
-        private const val SDCARD_WAKE_WORDS_DIR = "/sdcard/wakeWords"
+        private const val SDCARD_WAKE_WORDS_DIR = "/sdcard/ava/wakewords"
         private val actionKeyCodes = setOf(KeyEvent.KEYCODE_HELP)
         private var instance: VoiceSatelliteService? = null
         internal fun isActionButtonKeyCode(keyCode: Int) = keyCode in actionKeyCodes
