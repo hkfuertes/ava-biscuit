@@ -15,6 +15,7 @@ This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit h
   - microphone mute switch
   - microphone volume number
   - wake sound switch
+  - sound selection dropdowns (Configuration entities)
   - continuous conversation switch (Configuration entity)
   - action button independent-mode switch (Configuration entity)
   - action button pressed binary sensor
@@ -71,7 +72,7 @@ Keep matching `.json` and `.tflite` files together in that flat directory. Resta
 
 ## Sound file staging
 
-Bundled WAV sounds ship inside the APK. Ava also checks `/sdcard/sounds` for same-name `.wav` overrides before falling back to bundled sounds:
+Bundled WAV sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds. The dropdowns include bundled WAVs plus extra flat `.wav` files from `/sdcard/sounds`:
 
 ```sh
 adb shell mkdir -p /sdcard/sounds
@@ -83,7 +84,7 @@ adb shell am broadcast -a net.mfuertes.biscuit.ava.ACTION_STOP_SERVICE
 adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.VoiceSatelliteService
 ```
 
-Only flat `.wav` filenames are used. Other formats and nested paths are ignored.
+Restart Ava after adding files so Home Assistant sees the new options. External sounds are shown with `(external)`. Only flat `.wav` filenames are used; other formats and nested paths are ignored.
 
 ## Build notes
 

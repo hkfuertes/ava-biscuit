@@ -5,9 +5,13 @@ import com.example.ava.R
 import com.example.ava.esphome.entities.BinarySensorEntity
 import com.example.ava.esphome.entities.MediaPlayerEntity
 import com.example.ava.esphome.entities.NumberEntity
+import com.example.ava.esphome.entities.SelectEntity
 import com.example.ava.esphome.entities.SwitchEntity
+import com.example.ava.players.SoundOptions
 import com.example.ava.settings.PlayerSettingsStore
+import com.example.ava.settings.SettingState
 import com.example.esphomeproto.api.EntityCategory
+import kotlinx.coroutines.flow.map
 
 object VoiceSatelliteEntities {
     fun buildEntities(
@@ -64,6 +68,12 @@ object VoiceSatelliteEntities {
                 entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
             ) { enabled -> playerSettingsStore.enableContinuousConversation.set(enabled) })
 
+            add(soundSelect(context, 44, "Wake Sound", "wake_sound", playerSettingsStore.wakeSound))
+            add(soundSelect(context, 45, "Wake Sound 2", "wake_sound_2", playerSettingsStore.wakeSound2))
+            add(soundSelect(context, 46, "Stop Sound", "stop_sound", playerSettingsStore.stopSound))
+            add(soundSelect(context, 47, "Timer Finished Sound", "timer_finished_sound", playerSettingsStore.timerFinishedSound))
+            add(soundSelect(context, 48, "Continuous Prompt Sound", "continuous_prompt_sound", playerSettingsStore.continuousPromptSound))
+
             add(SwitchEntity(
                 key = 40,
                 name = "Action Button Independent",
@@ -82,6 +92,30 @@ object VoiceSatelliteEntities {
                 icon = "mdi:gesture-tap-button",
                 getState = actionButtonBridge.pressed
             ))
+        }
+    }
+
+    private fun soundSelect(
+        context: Context,
+        key: Int,
+        name: String,
+        objectId: String,
+        setting: SettingState<String>
+    ) = SelectEntity(
+        key = key,
+        name = name,
+        objectId = objectId,
+        icon = "mdi:music-note",
+        options = { SoundOptions.labels(context) },
+        getState = setting.map { SoundOptions.labelForUri(context, it) },
+        entityCategory = EntityCategory.ENTITY_CATEGORY_CONFIG
+    ) { label ->
+        val uri = SoundOptions.uriForLabel(context, label)
+        if (uri == null) {
+            false
+        } else {
+            setting.set(uri)
+            true
         }
     }
 }
