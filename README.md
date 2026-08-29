@@ -72,7 +72,17 @@ Keep matching `.json` and `.tflite` files together in that flat directory. Resta
 
 ## Sound file staging
 
-Bundled WAV sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds. The dropdowns include bundled WAVs plus extra flat `.wav` files from `/sdcard/sounds`:
+Bundled WAV sounds ship inside the APK. Ava exposes Home Assistant Configuration dropdowns for wake, stop, timer, and continuous-prompt sounds.
+
+Bundled defaults:
+
+- Continuous Prompt (`continuous_prompt.wav`)
+- Start Listening Button (`start_listening_button.wav`)
+- Timer Finished (`timer_finished.wav`)
+- Wake Word Triggered (`wake_word_triggered.wav`)
+- Stop Sound (`stop_sound.wav`)
+
+The dropdowns also include extra flat `.wav` files from `/sdcard/sounds`:
 
 ```sh
 adb shell mkdir -p /sdcard/sounds

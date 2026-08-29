@@ -6,6 +6,14 @@ import java.io.File
 object SoundOptions {
     data class Option(val label: String, val uri: String)
 
+    val DEFAULT_BUNDLED_SOUNDS = listOf(
+        Option("Continuous Prompt", "asset:///sounds/continuous_prompt.wav"),
+        Option("Start Listening Button", "asset:///sounds/start_listening_button.wav"),
+        Option("Timer Finished", "asset:///sounds/timer_finished.wav"),
+        Option("Wake Word Triggered", "asset:///sounds/wake_word_triggered.wav"),
+        Option("Stop Sound", "asset:///stopWords/stop_sound.wav"),
+    )
+
     private val bundledDirs = listOf("sounds", "stopWords")
 
     fun labels(context: Context, directory: File = File(ExternalSoundResolver.DEFAULT_EXTERNAL_SOUND_DIR)) =
@@ -25,7 +33,7 @@ object SoundOptions {
         ?: labelForMissingUri(uri)
 
     fun options(context: Context, directory: File = File(ExternalSoundResolver.DEFAULT_EXTERNAL_SOUND_DIR)) =
-        (bundledOptions { path -> context.assets.list(path)?.toList().orEmpty() } + externalOptions(directory))
+        (DEFAULT_BUNDLED_SOUNDS + bundledOptions { path -> context.assets.list(path)?.toList().orEmpty() } + externalOptions(directory))
             .distinctBy { it.uri }
             .sortedBy { it.label.lowercase() }
 

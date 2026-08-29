@@ -8,6 +8,20 @@ import java.nio.file.Files
 
 class SoundOptionsTest {
     @Test
+    fun exposesDefaultBundledSoundOptions() {
+        assertEquals(
+            listOf(
+                "Continuous Prompt",
+                "Start Listening Button",
+                "Timer Finished",
+                "Wake Word Triggered",
+                "Stop Sound",
+            ),
+            SoundOptions.DEFAULT_BUNDLED_SOUNDS.map { it.label }
+        )
+    }
+
+    @Test
     fun listsBundledAndExternalWavsWithFriendlyLabels() {
         val dir = Files.createTempDirectory("ava-sounds").toFile()
         File(dir, "wake_word_triggered.wav").writeBytes(byteArrayOf(1))
@@ -22,7 +36,9 @@ class SoundOptionsTest {
             }
         }
         val external = SoundOptions.externalOptions(dir)
-        val options = (bundled + external).sortedBy { it.label }
+        val options = (SoundOptions.DEFAULT_BUNDLED_SOUNDS + bundled + external)
+            .distinctBy { it.uri }
+            .sortedBy { it.label }
 
         assertTrue(options.any { it.label == "Wake Word Triggered" && it.uri == "asset:///sounds/wake_word_triggered.wav" })
         assertTrue(options.any { it.label == "Wake Word Triggered (external)" && it.uri == "file://${File(dir, "wake_word_triggered.wav").absolutePath}" })
