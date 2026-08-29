@@ -47,6 +47,18 @@ class BiscuitRingController(context: Context) : AutoCloseable {
         applyDesired()
     }
 
+    fun showTimerProgress(remainingMs: Long, totalMs: Long) {
+        if (!isValidCountdown(remainingMs, totalMs)) return
+        startBiscuitService(COUNTDOWN_PROGRESS) {
+            putExtra(EXTRA_COUNTDOWN_REMAINING_MS, remainingMs)
+            putExtra(EXTRA_COUNTDOWN_TOTAL_MS, totalMs)
+        }
+    }
+
+    fun clearTimerProgress() {
+        startBiscuitService(COUNTDOWN_CLEAR)
+    }
+
     private fun applyDesired() {
         val next = desiredAnimation
         if (applied && appliedAnimation == next) return
@@ -55,6 +67,14 @@ class BiscuitRingController(context: Context) : AutoCloseable {
         if (ok) {
             applied = true
             appliedAnimation = next
+        }
+    }
+
+    private fun startBiscuitService(action: String, configure: Intent.() -> Unit = {}) {
+        runCatching {
+            appContext.startService(Intent(action).setComponent(ComponentName(PACKAGE, SERVICE_CLASS)).apply(configure))
+        }.onFailure {
+            Log.w(TAG, "Biscuit service action failed: $action", it)
         }
     }
 
@@ -70,6 +90,11 @@ class BiscuitRingController(context: Context) : AutoCloseable {
         private const val TAG = "BiscuitRingController"
         private const val PACKAGE = "com.amazon.biscuit.service"
         private const val ACTION_BIND = "com.amazon.biscuit.service.IBiscuitService"
+        private const val SERVICE_CLASS = "com.amazon.biscuit.service.BiscuitService"
+        private const val COUNTDOWN_PROGRESS = "com.amazon.biscuit.service.COUNTDOWN_PROGRESS"
+        private const val COUNTDOWN_CLEAR = "com.amazon.biscuit.service.COUNTDOWN_CLEAR"
+        private const val EXTRA_COUNTDOWN_REMAINING_MS = "com.amazon.biscuit.service.EXTRA_COUNTDOWN_REMAINING_MS"
+        private const val EXTRA_COUNTDOWN_TOTAL_MS = "com.amazon.biscuit.service.EXTRA_COUNTDOWN_TOTAL_MS"
 
         internal fun animationFor(state: EspHomeState): String? = when (state) {
             Listening -> "solid_cyan"
@@ -77,5 +102,7 @@ class BiscuitRingController(context: Context) : AutoCloseable {
             Responding -> "solid_blue"
             else -> null
         }
+
+        internal fun isValidCountdown(remainingMs: Long, totalMs: Long) = totalMs > 0 && remainingMs in 0..totalMs
     }
 }

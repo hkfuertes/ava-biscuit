@@ -2,6 +2,7 @@ package com.example.ava.esphome.voicesatellite
 
 import android.content.Context
 import android.os.Build
+import android.os.SystemClock
 import android.util.Log
 import com.example.ava.esphome.Connected
 import com.example.ava.esphome.Disconnected
@@ -24,6 +25,8 @@ import com.example.esphomeproto.api.VoiceAssistantFeature
 import com.example.esphomeproto.api.VoiceAssistantRequest
 import com.example.esphomeproto.api.VoiceAssistantResponse
 import com.example.esphomeproto.api.VoiceAssistantSetConfiguration
+import com.example.esphomeproto.api.VoiceAssistantTimerEvent
+import com.example.esphomeproto.api.VoiceAssistantTimerEventResponse
 import com.example.esphomeproto.api.VoiceAssistantWakeWord
 import com.google.protobuf.MessageLite
 import kotlinx.coroutines.Job
@@ -75,6 +78,8 @@ class VoiceSatellite(
         entityCategory = com.example.esphomeproto.api.EntityCategory.ENTITY_CATEGORY_DIAGNOSTIC
     )
     private var watchdogJob: Job? = null
+    private val timerFeedbackGeneration = AtomicInteger()
+    private var timerCountdownJob: Job? = null
     private val stateMachine = VoiceSatelliteStateMachine(
         scope = scope,
         audioInput = audioInput,
@@ -127,6 +132,7 @@ class VoiceSatellite(
             is SubscribeVoiceAssistantRequest -> Unit
             is VoiceAssistantResponse -> handleVoiceAssistantResponse(message)
             is VoiceAssistantEventResponse -> stateMachine.handleVoiceEvent(message)
+            is VoiceAssistantTimerEventResponse -> handleTimerEvent(message)
             is VoiceAssistantConfigurationRequest -> sendVoiceAssistantConfiguration()
             is VoiceAssistantSetConfiguration -> audioInput.setActiveWakeWords(message.activeWakeWordsList)
             is VoiceAssistantAnnounceRequest -> playAnnouncement(message)
@@ -222,6 +228,59 @@ class VoiceSatellite(
         continueConversationRequested = data.continueConversation
     }
 
+    private fun handleTimerEvent(message: VoiceAssistantTimerEventResponse) {
+        val generation = timerFeedbackGeneration.incrementAndGet()
+        when (message.eventType) {
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_STARTED,
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_UPDATED -> startTimerFeedback(message, generation)
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_CANCELLED -> restoreTimerFeedback()
+            VoiceAssistantTimerEvent.VOICE_ASSISTANT_TIMER_FINISHED -> finishTimerFeedback(generation)
+            else -> Unit
+        }
+    }
+
+    private fun startTimerFeedback(message: VoiceAssistantTimerEventResponse, generation: Int) {
+        val totalMs = secondsToMillis(message.totalSeconds)
+        val initialRemainingMs = secondsToMillis(message.secondsLeft).coerceAtMost(totalMs)
+        if (!BiscuitRingController.isValidCountdown(initialRemainingMs, totalMs)) return
+        timerCountdownJob?.cancel()
+        val deadlineMs = SystemClock.elapsedRealtime() + initialRemainingMs
+        timerCountdownJob = scope.launch {
+            var remainingMs = initialRemainingMs
+            while (timerFeedbackGeneration.get() == generation && remainingMs > 0) {
+                if (!isAssistRunning(state.value)) {
+                    assistStatus.updateState(timerStatus(remainingMs))
+                    ring.showTimerProgress(remainingMs, totalMs)
+                }
+                delay(1000)
+                remainingMs = (deadlineMs - SystemClock.elapsedRealtime()).coerceAtLeast(0)
+            }
+        }
+    }
+
+    private fun finishTimerFeedback(generation: Int) {
+        timerCountdownJob?.cancel()
+        timerCountdownJob = null
+        if (isAssistRunning(state.value)) {
+            Log.i(TAG, "Timer finished while Assist is running; keeping Assist audio and ring active")
+            return
+        }
+        assistStatus.updateState("timer-finished")
+        scope.launch {
+            player.playTimerFinishedSound {
+                if (timerFeedbackGeneration.get() == generation) restoreTimerFeedback()
+            }
+        }
+    }
+
+    private fun restoreTimerFeedback() {
+        timerCountdownJob?.cancel()
+        timerCountdownJob = null
+        if (!isAssistRunning(state.value)) ring.clearTimerProgress()
+        ring.show(state.value)
+        assistStatus.updateState(statusForState(state.value))
+    }
+
     private fun playListeningCue() {
         if (!listeningCueReady) return
         val wakeWordPhrase = listeningCueWakeWordPhrase
@@ -309,6 +368,7 @@ class VoiceSatellite(
     override fun close() {
         sensors.stop()
         watchdogJob?.cancel()
+        timerCountdownJob?.cancel()
         ring.close()
         audioInput.isStreaming = false
         player.close()
@@ -322,6 +382,7 @@ class VoiceSatellite(
             VoiceAssistantFeature.VOICE_ASSISTANT.flag or
                 VoiceAssistantFeature.SPEAKER.flag or
                 VoiceAssistantFeature.API_AUDIO.flag or
+                VoiceAssistantFeature.TIMERS.flag or
                 VoiceAssistantFeature.ANNOUNCE.flag or
                 VoiceAssistantFeature.START_CONVERSATION.flag
 
@@ -343,6 +404,15 @@ class VoiceSatellite(
             Processing -> 60_000L
             Responding -> 120_000L
             else -> null
+        }
+        internal fun secondsToMillis(seconds: Int) = seconds.coerceAtLeast(0).toLong() * 1000L
+        internal fun remainingSeconds(remainingMs: Long) = ((remainingMs.coerceAtLeast(0) + 999L) / 1000L).toInt()
+        internal fun timerStatus(remainingMs: Long) = "timer-${remainingSeconds(remainingMs)}s"
+        internal fun statusForState(state: EspHomeState): String = when (state) {
+            Listening -> "listening"
+            Processing -> "processing"
+            Responding -> "tts"
+            else -> "idle"
         }
         internal fun shouldAcceptStartResponse(pendingGeneration: Int, currentGeneration: Int) =
             pendingGeneration != 0 && pendingGeneration == currentGeneration

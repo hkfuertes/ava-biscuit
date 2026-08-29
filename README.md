@@ -99,6 +99,16 @@ adb shell am startservice -n net.mfuertes.biscuit.ava/com.example.ava.services.V
 
 Restart Ava after adding files so Home Assistant sees the new options. External sounds are shown with `(external)`. Only flat `.wav` and `.mp3` filenames are used; other formats and nested paths are ignored.
 
+## Timer feedback
+
+Home Assistant owns timer creation, countdown, and cancellation. Ava only reacts to ESPHome `VoiceAssistantTimerEventResponse` updates:
+
+- `STARTED` / `UPDATED`: Ava sends `com.amazon.biscuit.service.COUNTDOWN_PROGRESS` to the Biscuit system service every second with `remainingMs` and `totalMs`.
+- The ROM renders the breathing countdown ring from those values.
+- `FINISHED`: Ava plays the selected Timer Finished sound, then sends `com.amazon.biscuit.service.COUNTDOWN_CLEAR`.
+- `CANCELLED`: Ava sends `COUNTDOWN_CLEAR`.
+- If Assist is already listening/processing/responding, Ava keeps Assist audio and ring state instead of interrupting TTS.
+
 ## Build notes
 
 Known-good local environment:
