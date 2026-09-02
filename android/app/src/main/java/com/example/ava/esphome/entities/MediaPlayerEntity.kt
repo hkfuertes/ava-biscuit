@@ -4,6 +4,7 @@ import androidx.annotation.OptIn
 import androidx.media3.common.util.UnstableApi
 import com.example.ava.esphome.voicesatellite.VoiceSatellitePlayer
 import com.example.ava.players.AudioPlayerState
+import com.example.esphomeproto.api.EntityCategory
 import com.example.esphomeproto.api.ListEntitiesRequest
 import com.example.esphomeproto.api.MediaPlayerCommand
 import com.example.esphomeproto.api.MediaPlayerCommandRequest
@@ -19,8 +20,16 @@ class MediaPlayerEntity(
     val key: Int,
     val name: String,
     val objectId: String,
-    val player: VoiceSatellitePlayer
-) : Entity {
+    val player: VoiceSatellitePlayer,
+    val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE
+) : Entity, PreferenceEntity {
+
+    override val preferenceRow = PreferenceRow(
+        objectId, name, rowCategory(entityCategory, PreferenceRowCategory.CONTROLS),
+        combine(player.mediaPlayer.state, player.muted) { state, muted ->
+            state.name.lowercase().replaceFirstChar { it.uppercase() } + if (muted) " (muted)" else ""
+        }
+    )
 
     override fun handleMessage(message: MessageLite) = flow {
         when (message) {
@@ -29,6 +38,7 @@ class MediaPlayerEntity(
                 name = this@MediaPlayerEntity.name
                 objectId = this@MediaPlayerEntity.objectId
                 supportsPause = true
+                entityCategory = this@MediaPlayerEntity.entityCategory
             })
 
             is MediaPlayerCommandRequest -> {

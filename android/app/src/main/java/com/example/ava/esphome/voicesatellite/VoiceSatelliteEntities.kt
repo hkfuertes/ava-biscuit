@@ -3,6 +3,7 @@ package com.example.ava.esphome.voicesatellite
 import android.content.Context
 import com.example.ava.R
 import com.example.ava.esphome.entities.BinarySensorEntity
+import com.example.ava.esphome.entities.Entity
 import com.example.ava.esphome.entities.MediaPlayerEntity
 import com.example.ava.esphome.entities.NumberEntity
 import com.example.ava.esphome.entities.SelectEntity
@@ -22,7 +23,7 @@ object VoiceSatelliteEntities {
         playerSettingsStore: PlayerSettingsStore? = null,
         actionButtonBridge: BiscuitActionButtonBridge = BiscuitActionButtonBridge.shared,
         onMicrophoneVolumeChanged: ((Float) -> Unit)? = null
-    ) = buildList {
+    ) = buildList<Entity> {
         add(SwitchEntity(
             1,
             context.getString(R.string.entity_mute_microphone),

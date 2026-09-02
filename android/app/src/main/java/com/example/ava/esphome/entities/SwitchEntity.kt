@@ -19,7 +19,9 @@ class SwitchEntity(
     val getState: Flow<Boolean>,
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE,
     val setState: suspend (Boolean) -> Unit
-) : Entity {
+) : Entity, PreferenceEntity {
+    override val preferenceRow = PreferenceRow(objectId, name, rowCategory(entityCategory, PreferenceRowCategory.CONTROLS), getState.map(::formatOnOff))
+
     override fun handleMessage(message: MessageLite) = flow {
         when (message) {
             is ListEntitiesRequest -> emit(listEntitiesSwitchResponse {

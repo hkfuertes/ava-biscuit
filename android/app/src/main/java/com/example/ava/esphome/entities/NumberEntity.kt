@@ -24,7 +24,12 @@ class NumberEntity(
     val setState: suspend (Float) -> Unit,
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE,
     val mode: NumberMode = NumberMode.NUMBER_MODE_BOX
-) : Entity {
+) : Entity, PreferenceEntity {
+    override val preferenceRow = PreferenceRow(
+        objectId, name, rowCategory(entityCategory, PreferenceRowCategory.CONTROLS),
+        getState.map { formatMeasurement(it, unitOfMeasurement) }
+    )
+
     override fun handleMessage(message: MessageLite) = flow {
         when (message) {
             is ListEntitiesRequest -> emit(ListEntitiesNumberResponse.newBuilder()

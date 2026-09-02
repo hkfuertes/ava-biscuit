@@ -20,7 +20,9 @@ class SelectEntity(
     private val getState: Flow<String>,
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE,
     private val setState: suspend (String) -> Boolean
-) : Entity {
+) : Entity, PreferenceEntity {
+    override val preferenceRow = PreferenceRow(objectId, name, rowCategory(entityCategory, PreferenceRowCategory.CONTROLS), getState)
+
     override fun handleMessage(message: MessageLite): Flow<MessageLite> = flow {
         when (message) {
             is ListEntitiesRequest -> emit(listEntitiesSelectResponse {

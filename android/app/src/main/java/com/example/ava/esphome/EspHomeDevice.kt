@@ -78,6 +78,9 @@ abstract class EspHomeDevice(
         }
     }
 
+    /** Read-only snapshot of the allowed entities, for read-only UI mirrors (Settings Activity). */
+    fun snapshotEntities(): List<Entity> = entities.toList()
+
     open fun start() {
         startServer()
         startConnectedChangedListener()

@@ -57,6 +57,8 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -85,6 +87,8 @@ class VoiceSatelliteService : LifecycleService() {
     private val playerSettingsStore by lazy { PlayerSettingsStore(applicationContext.playerSettingsStore) }
 
     internal val _voiceSatellite = MutableStateFlow<VoiceSatellite?>(null)
+    /** Read-only handle for UI mirrors (Settings Activity): non-null once the satellite + its entities exist. */
+    val voiceSatelliteInstance: StateFlow<VoiceSatellite?> = _voiceSatellite.asStateFlow()
     val voiceSatelliteState = _voiceSatellite.flatMapLatest { it?.state ?: flowOf(Stopped) }
 
     class VoiceSatelliteBinder(val service: VoiceSatelliteService) : Binder()

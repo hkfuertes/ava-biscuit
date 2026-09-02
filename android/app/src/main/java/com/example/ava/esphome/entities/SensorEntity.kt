@@ -20,10 +20,15 @@ class SensorEntity(
     val accuracyDecimals: Int = 0,
     val deviceClass: String = "",
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE
-) : Entity {
-    
+) : Entity, PreferenceEntity {
+
     private val _state = MutableStateFlow(0f)
-    
+
+    override val preferenceRow = PreferenceRow(
+        objectId, name, rowCategory(entityCategory, PreferenceRowCategory.SENSORS),
+        _state.map { formatMeasurement(it, unitOfMeasurement) }
+    )
+
     fun updateState(value: Float) {
         _state.value = value
     }

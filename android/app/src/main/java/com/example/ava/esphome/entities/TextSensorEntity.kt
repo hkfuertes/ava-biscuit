@@ -17,8 +17,10 @@ class TextSensorEntity(
     val icon: String = "",
     initialState: String = "",
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE
-) : Entity {
+) : Entity, PreferenceEntity {
     private val state = MutableStateFlow(initialState)
+
+    override val preferenceRow = PreferenceRow(objectId, name, rowCategory(entityCategory, PreferenceRowCategory.SENSORS), state)
 
     fun updateState(value: String) {
         state.value = value

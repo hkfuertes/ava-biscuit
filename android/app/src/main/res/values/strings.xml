@@ -9,6 +9,13 @@
     <string name="entity_media_player">Media Player</string>
     <string name="entity_wake_sound">Wake Sound</string>
 
+    <!-- Settings Activity (read-only HA entity mirror) -->
+    <string name="settings_starting">Starting…</string>
+    <string name="settings_category_configuration">Configuration</string>
+    <string name="settings_category_sensors">Sensors</string>
+    <string name="settings_category_diagnostics">Diagnostics</string>
+    <string name="settings_category_controls">Controls</string>
+
     <!-- Voice satellite state -->
     <string name="satellite_state_stopped">Stopped</string>
     <string name="satellite_state_disconnected">Disconnected</string>

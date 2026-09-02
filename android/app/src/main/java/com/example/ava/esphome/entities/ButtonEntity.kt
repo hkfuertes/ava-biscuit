@@ -17,7 +17,9 @@ class ButtonEntity(
     val icon: String = "",
     val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE,
     val press: suspend () -> Unit
-) : Entity {
+) : Entity, PreferenceEntity {
+    override val preferenceRow = PreferenceRow(objectId, name, rowCategory(entityCategory, PreferenceRowCategory.CONTROLS))
+
     override fun handleMessage(message: MessageLite) = flow {
         when (message) {
             is ListEntitiesRequest -> emit(listEntitiesButtonResponse {

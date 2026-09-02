@@ -1,5 +1,6 @@
 package com.example.ava.esphome.entities
 
+import com.example.esphomeproto.api.EntityCategory
 import com.example.esphomeproto.api.ListEntitiesRequest
 import com.example.esphomeproto.api.listEntitiesBinarySensorResponse
 import com.example.esphomeproto.api.binarySensorStateResponse
@@ -17,8 +18,11 @@ class BinarySensorEntity(
     val icon: String = "",
     val getState: Flow<Boolean>,
     val isStatusBinarySensor: Boolean = false,
-    val disabledByDefault: Boolean = false
-) : Entity {
+    val disabledByDefault: Boolean = false,
+    val entityCategory: EntityCategory = EntityCategory.ENTITY_CATEGORY_NONE
+) : Entity, PreferenceEntity {
+    override val preferenceRow = PreferenceRow(objectId, name, rowCategory(entityCategory, PreferenceRowCategory.SENSORS), getState.map(::formatOnOff))
+
     override fun handleMessage(message: MessageLite) = flow {
         when (message) {
             is ListEntitiesRequest -> emit(listEntitiesBinarySensorResponse {
@@ -33,6 +37,7 @@ class BinarySensorEntity(
                 }
                 isStatusBinarySensor = this@BinarySensorEntity.isStatusBinarySensor
                 disabledByDefault = this@BinarySensorEntity.disabledByDefault
+                entityCategory = this@BinarySensorEntity.entityCategory
             })
         }
     }
