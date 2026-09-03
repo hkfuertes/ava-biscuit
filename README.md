@@ -4,6 +4,20 @@ Headless Home Assistant voice appliance for the Amazon Echo Dot Biscuit running 
 
 This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit hardware. It is meant to run as a background service with no launcher UI.
 
+## Custom CM12 coupling
+
+This app currently depends on Biscuit-specific CM12.1 platform contracts from [hkfuertes/amazon_device_biscuit](https://github.com/hkfuertes/amazon_device_biscuit). It is not a generic Android Assist satellite APK.
+
+Ava depends on ROM-side Biscuit contracts that do not exist on stock Android:
+
+- The ROM framework patches `PhoneWindowManager` to broadcast physical button press/release events as `com.amazon.device.intent.action.BUTTON_PRESSED` and `com.amazon.device.intent.action.BUTTON_RELEASED`.
+- Ava listens only for the Biscuit action/circle button reported as `KEYCODE_HELP` / Android key code `259` / Linux scan code `138`, using extras `com.amazon.device.intent.extra.BUTTON_NAME`, `KEY_CODE`, and `SCAN_CODE`.
+- The ROM provides `com.amazon.biscuit.service.BiscuitService` and its `com.amazon.biscuit.service.IBiscuitService` binder. Ava uses that service to play LED animations such as `solid_cyan`, `alexa_thinking`, and `solid_blue`, and to clear the ring when Assist returns idle.
+- Timer ring feedback uses ROM service intents `com.amazon.biscuit.service.COUNTDOWN_PROGRESS` and `COUNTDOWN_CLEAR` with `EXTRA_COUNTDOWN_REMAINING_MS` and `EXTRA_COUNTDOWN_TOTAL_MS`; the ROM owns the countdown animation rendering.
+- Biscuit mute/volume behavior is aligned with the ROM service and Android system audio state, not an app-local software-only model.
+
+The source of truth for those platform contracts is the [amazon_device_biscuit README](https://github.com/hkfuertes/amazon_device_biscuit/blob/main/README.md) and the tracked Biscuit service/framework sources in that repo.
+
 ## What it does
 
 - Exposes a Home Assistant Assist satellite over the ESPHome native API.
