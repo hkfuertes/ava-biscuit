@@ -1,5 +1,8 @@
 # Ava Biscuit
 
+> [!IMPORTANT]
+> **This project is archived.** Rather than reinvent the wheel, use a more mature project such as [Echolocal](https://github.com/ygelfand/echolocal), a Go implementation. Future work will focus on [a minimal CM12.1 image for Biscuit](https://github.com/hkfuertes/amazon_device_biscuit) to support that approach.
+
 Headless Home Assistant voice appliance for the Amazon Echo Dot Biscuit running CM12.1 / Android 5.1.
 
 This fork turns Ava into a minimal ESPHome-native Assist satellite for Biscuit hardware. It is meant to run as a background service with no launcher UI.
